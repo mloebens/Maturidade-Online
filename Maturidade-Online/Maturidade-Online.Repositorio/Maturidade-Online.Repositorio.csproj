@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201612141838547_adicionar subtopico.Designer.cs">
       <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612141913495_adicionar Usuario.cs" />
+    <Compile Include="Migrations\201612141913495_adicionar Usuario.Designer.cs">
+      <DependentUpon>201612141913495_adicionar Usuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612141838547_adicionar subtopico.resx">
       <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141913495_adicionar Usuario.resx">
+      <DependentUpon>201612141913495_adicionar Usuario.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
