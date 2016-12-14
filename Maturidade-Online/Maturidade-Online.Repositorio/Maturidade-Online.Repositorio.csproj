@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201612141838547_adicionar subtopico.Designer.cs">
       <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612141908193_Adicionar Caracteristica.cs" />
+    <Compile Include="Migrations\201612141908193_Adicionar Caracteristica.Designer.cs">
+      <DependentUpon>201612141908193_Adicionar Caracteristica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs" />
+    <Compile Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.Designer.cs">
+      <DependentUpon>201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +85,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612141838547_adicionar subtopico.resx">
       <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141908193_Adicionar Caracteristica.resx">
+      <DependentUpon>201612141908193_Adicionar Caracteristica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.resx">
+      <DependentUpon>201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
