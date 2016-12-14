@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextoDeDados.cs" />
-    <Compile Include="Migrations\201612141801235_adicionar Pilar.cs" />
-    <Compile Include="Migrations\201612141801235_adicionar Pilar.Designer.cs">
-      <DependentUpon>201612141801235_adicionar Pilar.cs</DependentUpon>
+    <Compile Include="Migrations\201612141834381_adicionar Pilar.cs" />
+    <Compile Include="Migrations\201612141834381_adicionar Pilar.Designer.cs">
+      <DependentUpon>201612141834381_adicionar Pilar.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612141801235_adicionar Pilar.resx">
-      <DependentUpon>201612141801235_adicionar Pilar.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612141834381_adicionar Pilar.resx">
+      <DependentUpon>201612141834381_adicionar Pilar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

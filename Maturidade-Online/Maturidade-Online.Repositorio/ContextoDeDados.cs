@@ -15,7 +15,7 @@ namespace Maturidade_Online.Repositorio
         {
         }
 
-        public DbSet<Pilar> Pilar { get; set; }
+        public DbSet<PilarEntidade> Pilar { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

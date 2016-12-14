@@ -13,7 +13,7 @@ namespace Maturidade_Online.Repositorio.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201612141801235_adicionar Pilar"; }
+            get { return "201612141834381_adicionar Pilar"; }
         }
         
         string IMigrationMetadata.Source
