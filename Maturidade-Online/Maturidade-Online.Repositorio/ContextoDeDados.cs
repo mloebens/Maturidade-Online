@@ -1,4 +1,5 @@
 ﻿using Maturidade_Online.Dominio.Pilar;
+using Maturidade_Online.Dominio.Subtopico;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,6 +17,7 @@ namespace Maturidade_Online.Repositorio
         }
 
         public DbSet<PilarEntidade> Pilar { get; set; }
+        public DbSet<SubtopicoEntidade> Subtopico { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
