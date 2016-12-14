@@ -10,7 +10,7 @@ namespace Maturidade_Online.Tests
     public class PilarServicoTest
     {
         [TestMethod]
-        public void AdicionarPilar()
+        public void PilarServicoAdicionarPilar()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
             PilarEntidade pilar = new PilarEntidade() { Id = 0, Titulo = "teste" };
@@ -22,7 +22,7 @@ namespace Maturidade_Online.Tests
         }
 
         [TestMethod]
-        public void EditarPilar()
+        public void PilarServicoEditarPilar()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
             PilarEntidade pilar = new PilarEntidade() { Id = 10, Titulo = "teste" };
@@ -34,7 +34,7 @@ namespace Maturidade_Online.Tests
         }
 
         [TestMethod]
-        public void ListarPilares()
+        public void PilarServicoListarPilares()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
 
@@ -45,7 +45,7 @@ namespace Maturidade_Online.Tests
 
 
         [TestMethod]
-        public void RemoverPilar()
+        public void PilarServicoRemoverPilar()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
 
