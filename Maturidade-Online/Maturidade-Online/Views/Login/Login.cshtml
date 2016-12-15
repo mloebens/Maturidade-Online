@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Logar", "Login", FormMethod.Post, new { @class = "form-login" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TextBox("email", "", new { @class = "form-control", placeholder = "Digite seu E-mail" })
+    @Html.Password("senha", "", new { @class = "form-control", placeholder = "Senha" })
+
+    @TempData["Email"]
+
+    <div>
+        <button type="submit" id="botao-inscrever">Entrar</button>
+    </div>
+
+}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Maturidade_Online.Filter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace Maturidade_Online.Controllers
 {
     public class HomeController : Controller
     {
+
+        [Autorizador]
         public ActionResult Index()
         {
             return View();
