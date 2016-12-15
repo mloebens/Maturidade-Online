@@ -17,7 +17,7 @@ namespace Maturidade_Online.Dominio.Subtopico
         public string Descricao { get; set; }
         public int Pontuacao { get; set; }
         public int PilarEntidadeId { get; set; }
-        public PilarEntidade MyProperty { get; set; }
+        public PilarEntidade Pilares { get; set; }
         public virtual ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
 
         public SubtopicoEntidade()

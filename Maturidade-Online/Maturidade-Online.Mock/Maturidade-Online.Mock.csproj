@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaracteristicaRepositorioMock.cs" />
     <Compile Include="PilarRepositorioMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubtopicoRepositorioMock.cs" />
     <Compile Include="UsuarioRepositorioMock.cs" />
   </ItemGroup>
   <ItemGroup>

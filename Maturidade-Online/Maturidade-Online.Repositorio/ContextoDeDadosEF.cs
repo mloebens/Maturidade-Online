@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class ContextoDeDados : DbContext
+    public class ContextoDeDadosEF : DbContext
     {
-        public ContextoDeDados() : base("MaturidadeOnlineMaiconCasa")
+        public ContextoDeDadosEF() : base("MaturidadeOnlineMaiconCasa")
         {
         }
 

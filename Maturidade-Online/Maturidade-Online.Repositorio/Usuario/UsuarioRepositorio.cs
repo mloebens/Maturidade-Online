@@ -12,7 +12,7 @@ namespace Maturidade_Online.Repositorio
         
         public UsuarioEntidade BuscarPorEmail(string email)
         {
-            using (var contexto = new ContextoDeDados())
+            using (var contexto = new ContextoDeDadosEF())
             {
                 return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(email));
             }
