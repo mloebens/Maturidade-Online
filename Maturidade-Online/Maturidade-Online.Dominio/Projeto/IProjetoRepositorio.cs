@@ -10,5 +10,6 @@ namespace Maturidade_Online.Dominio.Projeto
 {
     public interface IProjetoRepositorio : IRepositorio<ProjetoEntidade>
     {
+        ProjetoEntidade BuscarPorId(int id);
     }
 }

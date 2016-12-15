@@ -8,8 +8,8 @@ using System.Data.Entity;
 
 namespace Maturidade_Online.Repositorio.Abstrato
 {
-    public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class { 
-        
+    public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class {
+
         public void Criar(T entidade)
         {
             using (var contexto = new ContextoDeDadosEF())
@@ -28,7 +28,7 @@ namespace Maturidade_Online.Repositorio.Abstrato
             }
         }
 
-        public IEnumerable<T> Listar()
+        public virtual IEnumerable<T> Listar()
         {
             using (var contexto = new ContextoDeDadosEF())
             {

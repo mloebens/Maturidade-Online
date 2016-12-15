@@ -15,7 +15,7 @@ namespace Maturidade_Online.Repositorio
 {
     public class ContextoDeDadosEF : DbContext
     {
-        public ContextoDeDadosEF() : base("MaturidadeOnlineMaiconCasa")
+        public ContextoDeDadosEF() : base("MaturidadeOnlineCWI")
         {
         }
 

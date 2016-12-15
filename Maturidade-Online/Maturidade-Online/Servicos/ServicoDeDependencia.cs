@@ -1,7 +1,11 @@
-﻿using Maturidade_Online.Dominio.Subtopico;
+﻿using Maturidade_Online.Dominio.Caracteristica;
+using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Infraestrutura;
 using Maturidade_Online.Repositorio;
+using Maturidade_Online.Repositorio.Caracteristica;
+using Maturidade_Online.Repositorio.Projeto;
 using Maturidade_Online.Repositorio.Subtopico;
 using System;
 using System.Collections.Generic;
@@ -19,7 +23,6 @@ namespace Maturidade_Online.Servicos
                 new UsuarioServico(
                     new UsuarioRepositorio(),
                     new ServicoDeCriptografia());
-
             return usuarioServico;
         }
 
@@ -29,8 +32,23 @@ namespace Maturidade_Online.Servicos
             SubtopicoServico subtopicoServico =
                 new SubtopicoServico(
                     new SubtopicoRepositorioEF());
-
             return subtopicoServico;
+        }
+
+        public static CaracteristicaServico MontarCaracteristicaServico()
+        {
+            CaracteristicaServico caracteristicaServico =
+                new CaracteristicaServico(
+                    new CaracteristicaRepositorioEF());
+            return caracteristicaServico;
+        }
+
+         public static ProjetoServico MontarProjetoServico()
+        {
+            ProjetoServico projetoServico =
+                new ProjetoServico(
+                    new ProjetoRepositorioEF());
+            return projetoServico;
         }
     }
 }

@@ -15,26 +15,31 @@ namespace Maturidade_Online.Dominio.Projeto
             this.projetoRepositorio = projetoRepositorio;
         }
 
+        public ProjetoEntidade BuscarPorId(ProjetoEntidade projeto)
+        {
+            return projetoRepositorio.BuscarPorId(projeto.Id);
+        }
+
         public IEnumerable<ProjetoEntidade> Listar()
         {
             return projetoRepositorio.Listar();
         }
 
-        public void Persistir(ProjetoEntidade pilar)
+        public void Persistir(ProjetoEntidade projeto)
         {
-            if (pilar.Id == 0)
+            if (projeto.Id == 0)
             {
-                projetoRepositorio.Criar(pilar);
+                projetoRepositorio.Criar(projeto);
             }
             else
             {
-                projetoRepositorio.Editar(pilar);
+                projetoRepositorio.Editar(projeto);
             }
         }
 
-        public void Remover(ProjetoEntidade pilar)
+        public void Remover(ProjetoEntidade projeto)
         {
-            projetoRepositorio.Remover(pilar);
+            projetoRepositorio.Remover(projeto);
         }
     }
 }

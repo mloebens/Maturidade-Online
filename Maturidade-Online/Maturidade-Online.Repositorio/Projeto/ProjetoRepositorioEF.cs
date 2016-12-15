@@ -10,5 +10,15 @@ namespace Maturidade_Online.Repositorio.Projeto
 {
     public class ProjetoRepositorioEF : RepositorioAbstratoEF<ProjetoEntidade>, IProjetoRepositorio
     {
+        public ProjetoEntidade BuscarPorId(int id)
+        {
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                return contexto.Projeto
+                    .Include("caracteristicas")
+                    .Include("subtopicos")
+                 .FirstOrDefault();
+            }
+        }
     }
 }

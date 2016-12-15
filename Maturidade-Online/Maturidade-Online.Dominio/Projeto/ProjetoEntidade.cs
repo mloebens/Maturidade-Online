@@ -13,6 +13,7 @@ namespace Maturidade_Online.Dominio.Projeto
     public class ProjetoEntidade
     {
         public int Id { get; set; }
+        public string Nome { get; set; }
         public ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
         public virtual ICollection<SubtopicoEntidade> Subtopicos { get; set; }
 

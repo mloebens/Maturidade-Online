@@ -9,6 +9,17 @@ namespace Maturidade_Online.Tests.Projeto
     [TestClass]
     public class ProjetoServicoTest
     {
+
+        [TestMethod]
+        public void ProjetoServicoBuscarProjetoPorId()
+        {
+            ProjetoServico projetoServico = ServicoDeDependencia.CriarProjetoServico();
+            ProjetoEntidade projeto = new ProjetoEntidade() { Id = 1 };
+            var projetoEncontrado = projetoServico.BuscarPorId(projeto);
+
+            Assert.IsNotNull(projetoEncontrado);
+        }
+
         [TestMethod]
         public void ProjetoServicoAdicionarProjeto()
         {

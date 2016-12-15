@@ -2,7 +2,6 @@
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Infraestrutura;
 using Maturidade_Online.Dominio.Caracteristica;
-using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Mock;
 using System;
