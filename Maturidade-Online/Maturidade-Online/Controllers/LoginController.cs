@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Maturidade_Online.Controllers
 {
@@ -39,6 +40,14 @@ namespace Maturidade_Online.Controllers
 
             TempData["Email"] = "Usuário ou senha inválidos!";
             return RedirectToAction("Login");
+        }
+
+        public ActionResult Deslogar()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+
+            return RedirectToAction("Login", "Login");
         }
 
 
