@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caracteristica\CaracteristicaEntidade.cs" />
+    <Compile Include="Caracteristica\ICaracteristicaRepositorio.cs" />
+    <Compile Include="Caracteristica\CaracteristicaServico.cs" />
     <Compile Include="Infraestrutura\IServicoDeCriptografia.cs" />
     <Compile Include="Pilar\IPilarRepositorio.cs" />
     <Compile Include="Abstrato\IRepositorio.cs" />

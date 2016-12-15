@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Pilar;
+﻿using Maturidade_Online.Dominio.Caracteristica;
+using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Mock;
 using System;
@@ -23,6 +24,13 @@ namespace Maturidade_Online.Tests.Core
         {
             return new SubtopicoServico(
                     new SubtopicoRepositorioMock()
+                );
+        }
+
+        public static CaracteristicaServico CriarCaracteristicaServico()
+        {
+            return new CaracteristicaServico(
+                    new CaracteristicaRepositorioMock()
                 );
         }
     }
