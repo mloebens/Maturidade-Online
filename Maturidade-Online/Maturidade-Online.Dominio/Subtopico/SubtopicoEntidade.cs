@@ -1,5 +1,6 @@
 ﻿using Maturidade_Online.Dominio.Caracteristica;
 using Maturidade_Online.Dominio.Pilar;
+using Maturidade_Online.Dominio.Projeto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,9 +21,12 @@ namespace Maturidade_Online.Dominio.Subtopico
         public PilarEntidade Pilares { get; set; }
         public virtual ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
 
+        public virtual ICollection<ProjetoEntidade> Projetos { get; set; }
+
         public SubtopicoEntidade()
         {
             this.Caracteristicas = new HashSet<CaracteristicaEntidade>();
+            this.Projetos = new HashSet<ProjetoEntidade>();
         }
     }
 }

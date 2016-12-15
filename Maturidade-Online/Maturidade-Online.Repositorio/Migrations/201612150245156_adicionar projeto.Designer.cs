@@ -7,13 +7,13 @@ namespace Maturidade_Online.Repositorio.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class adicionarUsuario : IMigrationMetadata
+    public sealed partial class adicionarprojeto : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(adicionarUsuario));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(adicionarprojeto));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612141913495_adicionar Usuario"; }
+            get { return "201612150245156_adicionar projeto"; }
         }
         
         string IMigrationMetadata.Source

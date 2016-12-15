@@ -23,6 +23,20 @@ namespace Maturidade_Online.Tests.Core
                 );
         }
 
+        public static CaracteristicaServico CriarCaracteristicaServico()
+        {
+            return new CaracteristicaServico(
+                    new CaracteristicaRepositorioMock()
+                );
+        }
+
+        public static SubtopicoServico CriarSubtopicoServico()
+        {
+            return new SubtopicoServico(
+                    new SubtopicoRepositorioMock()
+                );
+        }
+
         public static UsuarioServico CriarUsuarioServico()
         {
             return new UsuarioServico(
