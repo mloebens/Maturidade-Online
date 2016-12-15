@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Maturidade_Online.Dominio.Usuario;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,10 +26,11 @@ namespace Maturidade_Online.Dominio.Projeto
             return projetoRepositorio.Listar();
         }
 
-        public void Persistir(ProjetoEntidade projeto)
+        public void Persistir(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
         {
             if (projeto.Id == 0)
             {
+                projeto.Usuario = usuarioLogado;
                 projetoRepositorio.Criar(projeto);
             }
             else

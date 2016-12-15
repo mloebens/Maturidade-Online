@@ -19,7 +19,7 @@ namespace Maturidade_Online.Repositorio.Abstrato
             }
         }
 
-        public void Editar(T entidade)
+        public virtual void Editar(T entidade)
         {
             using (var contexto = new ContextoDeDadosEF())
             {

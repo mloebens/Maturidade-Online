@@ -20,11 +20,16 @@ namespace Maturidade_Online.Repositorio.Migrations
 
         protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDadosEF context)
         {
+
+            UsuarioEntidade usuario1 = new UsuarioEntidade { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            UsuarioEntidade usuario2 = new UsuarioEntidade { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            UsuarioEntidade usuario3 = new UsuarioEntidade { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = Permissao.USUARIO, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+
             context.Usuario.AddOrUpdate(
                 p => p.Nome,
-                new UsuarioEntidade { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" },
-                new UsuarioEntidade { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" },
-                new UsuarioEntidade { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = Permissao.USUARIO, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" }
+                usuario1,
+                usuario2,
+                usuario3
                 );
 
             context.Pilar.AddOrUpdate(
@@ -109,7 +114,8 @@ namespace Maturidade_Online.Repositorio.Migrations
                 Id = 1,
                 Nome = "Projeto1",
                 Caracteristicas = projeto1Caracteristicas,
-                Subtopicos = projeto1subtopicos
+                Subtopicos = projeto1subtopicos,
+                Usuario = usuario1
             };
 
             context.Projeto.AddOrUpdate(

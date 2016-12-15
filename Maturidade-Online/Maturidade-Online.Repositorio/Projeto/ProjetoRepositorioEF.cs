@@ -42,5 +42,12 @@ namespace Maturidade_Online.Repositorio.Projeto
                 contexto.SaveChanges();
             }
         }
+
+        public override void Editar(ProjetoEntidade projeto)
+        {
+            ProjetoRepositorio repositorio = new ProjetoRepositorio();
+            repositorio.AlterarVinculos(projeto);
+            base.Editar(projeto);
+        }
     }
 }

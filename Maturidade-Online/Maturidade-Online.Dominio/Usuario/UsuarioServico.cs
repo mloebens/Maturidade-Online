@@ -32,5 +32,10 @@ namespace Maturidade_Online.Dominio.Usuario
             return null;
         }
 
+        public UsuarioEntidade BuscarPorEmail(string email)
+        {
+            return this.usuarioRepositorio.BuscarPorEmail(email);
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Tests.Core;
 using Maturidade_Online.Dominio.Projeto;
 using System.Collections.Generic;
+using Maturidade_Online.Dominio.Usuario;
 
 namespace Maturidade_Online.Tests.Projeto
 {
@@ -24,9 +25,11 @@ namespace Maturidade_Online.Tests.Projeto
         public void ProjetoServicoAdicionarProjeto()
         {
             ProjetoServico projetoServico = ServicoDeDependencia.CriarProjetoServico();
+            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
             ProjetoEntidade projeto = new ProjetoEntidade() { Id = 0 };
             int quantidadeDeProjetoes = ((IList<ProjetoEntidade>)projetoServico.Listar()).Count;
-            projetoServico.Persistir(projeto);
+            var usuarioLogado = usuarioServico.BuscarPorEmail("testes@cwi.com");
+            projetoServico.Persistir(projeto, usuarioLogado);
 
             Assert.AreEqual(quantidadeDeProjetoes + 1, ((IList<ProjetoEntidade>)projetoServico.Listar()).Count);
         }
@@ -35,9 +38,11 @@ namespace Maturidade_Online.Tests.Projeto
         public void ProjetoServicoEditarProjeto()
         {
             ProjetoServico projetoServico = ServicoDeDependencia.CriarProjetoServico();
+            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
             ProjetoEntidade projeto = new ProjetoEntidade() { Id = 10 };
             int quantidadeDeProjetoes = ((IList<ProjetoEntidade>)projetoServico.Listar()).Count;
-            projetoServico.Persistir(projeto);
+            var usuarioLogado = usuarioServico.BuscarPorEmail("testes@cwi.com");
+            projetoServico.Persistir(projeto, usuarioLogado);
 
             Assert.AreEqual(quantidadeDeProjetoes, ((IList<ProjetoEntidade>)projetoServico.Listar()).Count);
         }

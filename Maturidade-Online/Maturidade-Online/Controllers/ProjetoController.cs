@@ -28,7 +28,7 @@ namespace Maturidade_Online.Controllers
 
             if (id.HasValue && id.Value > 0)
             {
-                
+
                 var projeto = new ProjetoEntidade() { Id = id.Value };
                 var projetoDaBase = projetoServico.BuscarPorId(projeto);
                 if (projetoDaBase != null)
@@ -42,34 +42,18 @@ namespace Maturidade_Online.Controllers
             return View("Projeto", projetoModel);
         }
 
-        //public ActionResult Salvar(ProjetoModel projetoModel)
-        public ActionResult Salvar()
+        public ActionResult Salvar(ProjetoModel projetoModel)
         {
-            //Injeção - Somente para teste
-
-            var caracteristicas = new List<CaracteristicaEntidade>()
+            if (ModelState.IsValid)
             {
-                new CaracteristicaEntidade() { Id = 2 }
-            };
+                var projeto = Mapper.Map<ProjetoModel, ProjetoEntidade>(projetoModel);
+                var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
 
-            var subtopicos = new List<SubtopicoEntidade>()
-            {
-                new SubtopicoEntidade() { Id = 4 }
-            };
-
-
-            var projetoModelInjetado = new ProjetoModel()
-            {
-                Nome = "Projeto2",
-                caracteristicas = caracteristicas,
-                subtopicos = subtopicos
-
-            };
-
-            //Injeção
-
-            var projeto = Mapper.Map<ProjetoModel, ProjetoEntidade>(projetoModelInjetado);
-            projetoServico.Persistir(projeto);
+                var usuarioAutenticadoEmail = ServicoDeAutenticacao.UsuarioLogado.Login;
+                var usuarioLogado = usuarioService.BuscarPorEmail(usuarioAutenticadoEmail);
+                
+                projetoServico.Persistir(projeto, usuarioLogado);
+            }
 
             return View("Projeto");
         }
