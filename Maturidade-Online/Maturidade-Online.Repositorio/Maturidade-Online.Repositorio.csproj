@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextoDeDados.cs" />
+    <Compile Include="Abstrato\RepositorioAbstratoEF.cs" />
+    <Compile Include="ContextoDeDadosEF.cs" />
     <Compile Include="Migrations\201612141834381_adicionar Pilar.cs" />
     <Compile Include="Migrations\201612141834381_adicionar Pilar.Designer.cs">
       <DependentUpon>201612141834381_adicionar Pilar.cs</DependentUpon>
@@ -71,6 +72,7 @@
       <DependentUpon>201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Pilar\PilarRepositorioEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
