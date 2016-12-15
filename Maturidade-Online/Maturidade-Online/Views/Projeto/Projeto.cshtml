@@ -1,0 +1,41 @@
+﻿@model  Maturidade_Online.Models.ProjetoModel
+Maturidade -Online.Web.Moels.ProjetoModel
+@{
+    ViewBag.Title = "Manter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manter</h2>
+
+
+@using (Html.BeginForm("Salvar", "Projeto", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
+{
+
+
+
+    @Html.AntiForgeryToken()
+
+
+    @Html.TextBox("nome", "", new { @class = "form-control", placeholder = "Nome do Projeto" })
+    @Html.TextBox("email", "", new { @class = "form-control", placeholder = "Digite seu E-mail" })
+    <select class="js-example-basic-multiple js-states form-control" multiple>
+        @foreach(var categiria in Model)
+            <option value="AL">Alabama</option>
+        <option value="WY">Wyoming</option>
+    </select>
+
+
+}
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".js-example-basic-multiple").select2();
+        });
+    </script>
+}
+
+
+
