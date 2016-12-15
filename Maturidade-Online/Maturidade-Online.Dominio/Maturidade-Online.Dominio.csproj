@@ -49,8 +49,10 @@
     <Compile Include="Pilar\PilarServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subtopico\SubtopicoEntidade.cs" />
+    <Compile Include="Usuario\IUsuarioRepositorio.cs" />
     <Compile Include="Usuario\Permissao.cs" />
     <Compile Include="Usuario\UsuarioEntidade.cs" />
+    <Compile Include="Usuario\UsuarioServico.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
