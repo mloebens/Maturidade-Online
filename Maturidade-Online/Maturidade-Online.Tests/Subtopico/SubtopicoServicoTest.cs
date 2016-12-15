@@ -4,7 +4,7 @@ using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
 
-namespace Maturidade_Online.Tests
+namespace Maturidade_Online.Tests.Subtopico
 {
     [TestClass]
     public class SubtopicoServicoTest

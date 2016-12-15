@@ -4,7 +4,7 @@ using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
 
-namespace Maturidade_Online.Tests
+namespace Maturidade_Online.Tests.Pilar
 {
     [TestClass]
     public class PilarServicoTest
