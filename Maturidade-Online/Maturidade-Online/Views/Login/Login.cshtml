@@ -1,22 +1,40 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>Login</h2>
-
-@using (Html.BeginForm("Logar", "Login", FormMethod.Post, new { @class = "form-login" }))
+@using (Html.BeginForm("Logar", "Login", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
 {
     @Html.AntiForgeryToken()
 
-    @Html.TextBox("email", "", new { @class = "form-control", placeholder = "Digite seu E-mail" })
-    @Html.Password("senha", "", new { @class = "form-control", placeholder = "Senha" })
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Entrar no Sistema</div>
+            </div>
 
-    @TempData["Email"]
+            <div class="panel-body">
 
-    <div>
-        <button type="submit" id="botao-inscrever">Entrar</button>
+                <div class="input-group col-md-12">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    @Html.TextBox("email", "", new { @class = "form-control", placeholder = "Digite seu E-mail" })
+                </div>
+
+                <div class="input-group col-md-12 div-margin-top">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    @Html.Password("senha", "", new { @class = "form-control", placeholder = "Senha" })
+                </div>
+
+                @TempData["Email"]
+
+                <div class="div-margin-top">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-sm btn-success btn-block" value="Logar" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-
 }
