@@ -1,4 +1,5 @@
 ﻿using Maturidade_Online.Dominio.Pilar;
+using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Mock;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace Maturidade_Online.Tests.Core
         {
             return new PilarServico(
                     new PilarRepositorioMock()
+                );
+        }
+
+        public static SubtopicoServico CriarSubtopicoServico()
+        {
+            return new SubtopicoServico(
+                    new SubtopicoRepositorioMock()
                 );
         }
     }
