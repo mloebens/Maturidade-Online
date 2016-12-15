@@ -15,6 +15,7 @@ namespace Maturidade_Online.Controllers
 {
     public class ProjetoController : Controller
     {
+        private ProjetoServico projetoServico = ServicoDeDependencia.MontarProjetoServico();
 
         //[Autorizador]
         public ActionResult Manter(int? id)
@@ -23,13 +24,11 @@ namespace Maturidade_Online.Controllers
             var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico();
             var caracteristicas = caracteristicaServico.Listar();
             var subtopicos = subtopicosServico.Listar();
+            var projetoModel = new ProjetoModel();
 
-            ProjetoModel projetoModel = new ProjetoModel();
-
-
-            if (id.HasValue)
+            if (id.HasValue && id.Value > 0)
             {
-                var projetoServico = ServicoDeDependencia.MontarProjetoServico();
+                
                 var projeto = new ProjetoEntidade() { Id = id.Value };
                 var projetoDaBase = projetoServico.BuscarPorId(projeto);
                 if (projetoDaBase != null)
@@ -40,8 +39,39 @@ namespace Maturidade_Online.Controllers
             projetoModel.listaDeCaracteristicas = caracteristicas;
             projetoModel.listaDeSubtopicos = subtopicos;
 
-
             return View("Projeto", projetoModel);
+        }
+
+        //public ActionResult Salvar(ProjetoModel projetoModel)
+        public ActionResult Salvar()
+        {
+            //Injeção - Somente para teste
+
+            var caracteristicas = new List<CaracteristicaEntidade>()
+            {
+                new CaracteristicaEntidade() { Id = 2 }
+            };
+
+            var subtopicos = new List<SubtopicoEntidade>()
+            {
+                new SubtopicoEntidade() { Id = 4 }
+            };
+
+
+            var projetoModelInjetado = new ProjetoModel()
+            {
+                Nome = "Projeto2",
+                caracteristicas = caracteristicas,
+                subtopicos = subtopicos
+
+            };
+
+            //Injeção
+
+            var projeto = Mapper.Map<ProjetoModel, ProjetoEntidade>(projetoModelInjetado);
+            projetoServico.Persistir(projeto);
+
+            return View("Projeto");
         }
     }
 }

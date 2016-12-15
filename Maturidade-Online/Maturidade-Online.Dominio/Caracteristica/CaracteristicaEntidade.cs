@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Subtopico;
+﻿using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio.Subtopico;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,10 +15,12 @@ namespace Maturidade_Online.Dominio.Caracteristica
         public int Id { get; set; }
         public string Nome { get; set; }
         public virtual ICollection<SubtopicoEntidade> Subtopicos { get; set; }
+        public virtual ICollection<ProjetoEntidade> Projetos { get; set; }
 
         public CaracteristicaEntidade()
         {
             this.Subtopicos = new HashSet<SubtopicoEntidade>();
+            this.Projetos = new HashSet<ProjetoEntidade>();
         }
     }
 }

@@ -49,6 +49,16 @@ namespace Maturidade_Online.Repositorio
                     c.ToTable("ProjetoSubtopico");
                 });
 
+            modelBuilder.Entity<ProjetoEntidade>()
+               .HasMany(p => p.Caracteristicas)
+               .WithMany(s => s.Projetos)
+               .Map(c =>
+               {
+                   c.MapLeftKey("ProjetoId");
+                   c.MapRightKey("CaracteristicaId");
+                   c.ToTable("ProjetoCaracteristica");
+               });
+
             base.OnModelCreating(modelBuilder);
         }
     }

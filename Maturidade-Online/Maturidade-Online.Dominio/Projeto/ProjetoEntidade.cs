@@ -14,12 +14,13 @@ namespace Maturidade_Online.Dominio.Projeto
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
+        public virtual ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
         public virtual ICollection<SubtopicoEntidade> Subtopicos { get; set; }
 
         public ProjetoEntidade()
         {
             this.Subtopicos = new HashSet<SubtopicoEntidade>();
+            this.Caracteristicas = new HashSet<CaracteristicaEntidade>();
         }
     }
 }

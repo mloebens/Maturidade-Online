@@ -10,7 +10,7 @@ namespace Maturidade_Online.Repositorio.Abstrato
 {
     public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class {
 
-        public void Criar(T entidade)
+        public virtual void Criar(T entidade)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
