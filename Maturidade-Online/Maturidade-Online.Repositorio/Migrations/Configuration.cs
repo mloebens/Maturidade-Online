@@ -8,14 +8,14 @@ namespace Maturidade_Online.Repositorio.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Maturidade_Online.Repositorio.ContextoDeDados>
+    internal sealed class Configuration : DbMigrationsConfiguration<Maturidade_Online.Repositorio.ContextoDeDadosEF>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDados context)
+        protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDadosEF context)
         {
 
             context.Usuario.AddOrUpdate(

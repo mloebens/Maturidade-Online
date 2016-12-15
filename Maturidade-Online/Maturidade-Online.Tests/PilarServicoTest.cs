@@ -37,9 +37,6 @@ namespace Maturidade_Online.Tests
         public void PilarServicoListarPilares()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-
-            pilarServico.Listar();
-
             Assert.AreEqual(3, ((IList<PilarEntidade>)pilarServico.Listar()).Count);
         }
 
@@ -48,7 +45,6 @@ namespace Maturidade_Online.Tests
         public void PilarServicoRemoverPilar()
         {
             PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-
             pilarServico.Remover(new PilarEntidade() { Id = 2, Titulo = "Qualidade" });
 
             Assert.AreEqual(2, ((IList<PilarEntidade>)pilarServico.Listar()).Count);

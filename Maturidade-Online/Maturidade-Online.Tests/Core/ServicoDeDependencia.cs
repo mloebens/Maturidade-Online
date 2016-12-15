@@ -1,6 +1,9 @@
 ﻿using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Infraestrutura;
+﻿using Maturidade_Online.Dominio.Caracteristica;
+using Maturidade_Online.Dominio.Pilar;
+using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Mock;
 using System;
 using System.Collections.Generic;
@@ -17,14 +20,6 @@ namespace Maturidade_Online.Tests.Core
         {
             return new PilarServico(
                     new PilarRepositorioMock()
-                );
-        }
-
-        public static UsuarioServico CriarUsuarioServico()
-        {
-            return new UsuarioServico(
-                    new UsuarioRepositorioMock(),
-                    new ServicoDeCriptografia()
                 );
         }
     }
