@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio.Pilar
 {
-    public class PilarRepositorioEF : RepositorioAbstratoEF<PilarEntidade>
+    public class PilarRepositorioEF : RepositorioAbstratoEF<PilarEntidade>, IPilarRepositorio
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio.Subtopico
 {
-    public class SubtopicoRepositorioEF : RepositorioAbstratoEF<SubtopicoEntidade>
+    public class SubtopicoRepositorioEF : RepositorioAbstratoEF<SubtopicoEntidade>, ISubtopicoRepositorio
     {
     }
 }
