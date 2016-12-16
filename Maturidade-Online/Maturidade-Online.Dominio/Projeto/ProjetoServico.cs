@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Projeto
+namespace Maturidade_Online.Dominio
 {
     public class ProjetoServico
     {
@@ -18,17 +18,17 @@ namespace Maturidade_Online.Dominio.Projeto
             this.usuarioRepositorio = usuarioRepositorio;
         }
 
-        public ProjetoEntidade BuscarPorId(ProjetoEntidade projeto)
+        public Projeto BuscarPorId(Projeto projeto)
         {
             return projetoRepositorio.BuscarPorId(projeto);
         }
 
-        public IEnumerable<ProjetoEntidade> Listar()
+        public IEnumerable<Projeto> Listar()
         {
             return projetoRepositorio.Listar();
         }
 
-        public void Persistir(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
+        public void Persistir(Projeto projeto, UsuarioEntidade usuarioLogado)
         {
            
             if (projeto.Id == 0)
@@ -44,13 +44,13 @@ namespace Maturidade_Online.Dominio.Projeto
             }
         }
 
-        public void Remover(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
+        public void Remover(Projeto projeto, UsuarioEntidade usuarioLogado)
         {
             this.verificarPermissao(projeto, usuarioLogado);
             projetoRepositorio.Remover(projeto);
         }
 
-        private void verificarPermissao(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
+        private void verificarPermissao(Projeto projeto, UsuarioEntidade usuarioLogado)
         {
             var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
             var projetoDaBase = projetoRepositorio.BuscarPorId(projeto);

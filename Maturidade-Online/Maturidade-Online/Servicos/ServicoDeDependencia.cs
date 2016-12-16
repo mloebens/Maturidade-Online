@@ -1,11 +1,10 @@
 ﻿using Maturidade_Online.Dominio.Caracteristica;
-using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Infraestrutura;
 using Maturidade_Online.Repositorio;
 using Maturidade_Online.Repositorio.Caracteristica;
-using Maturidade_Online.Repositorio.Projeto;
 using Maturidade_Online.Repositorio.Subtopico;
 using System;
 using System.Collections.Generic;

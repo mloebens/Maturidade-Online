@@ -40,20 +40,20 @@ namespace Maturidade_Online.Repositorio.Migrations
                 .Index(t => t.ProjetoId)
                 .Index(t => t.SubtopicoId);
             
-            AddColumn("dbo.Caracteristica", "ProjetoEntidade_Id", c => c.Int());
-            CreateIndex("dbo.Caracteristica", "ProjetoEntidade_Id");
-            AddForeignKey("dbo.Caracteristica", "ProjetoEntidade_Id", "dbo.Projeto", "Id");
+            AddColumn("dbo.Caracteristica", "Projeto_Id", c => c.Int());
+            CreateIndex("dbo.Caracteristica", "Projeto_Id");
+            AddForeignKey("dbo.Caracteristica", "Projeto_Id", "dbo.Projeto", "Id");
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.ProjetoSubtopico", "SubtopicoId", "dbo.Subtopico");
             DropForeignKey("dbo.ProjetoSubtopico", "ProjetoId", "dbo.Projeto");
-            DropForeignKey("dbo.Caracteristica", "ProjetoEntidade_Id", "dbo.Projeto");
+            DropForeignKey("dbo.Caracteristica", "Projeto_Id", "dbo.Projeto");
             DropIndex("dbo.ProjetoSubtopico", new[] { "SubtopicoId" });
             DropIndex("dbo.ProjetoSubtopico", new[] { "ProjetoId" });
-            DropIndex("dbo.Caracteristica", new[] { "ProjetoEntidade_Id" });
-            DropColumn("dbo.Caracteristica", "ProjetoEntidade_Id");
+            DropIndex("dbo.Caracteristica", new[] { "Projeto_Id" });
+            DropColumn("dbo.Caracteristica", "Projeto_Id");
             DropTable("dbo.ProjetoSubtopico");
             DropTable("dbo.Usuario");
             DropTable("dbo.Projeto");

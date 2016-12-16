@@ -14,7 +14,7 @@ namespace Maturidade_Online.Repositorio
 
         public ContextoDeDados()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["MaturidadeOnlineMaiconCasa"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["MaturidadeOnlineCWI"].ConnectionString;
         }
 
         protected SqlConnection Conexao()

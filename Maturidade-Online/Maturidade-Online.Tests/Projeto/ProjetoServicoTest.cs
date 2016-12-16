@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio;
 using System.Collections.Generic;
 using Maturidade_Online.Dominio.Usuario;
 using FakeItEasy;
 
-namespace Maturidade_Online.Tests.Projeto
+namespace Maturidade_Online.Tests
 {
     [TestClass]
     public class ProjetoServicoTest
@@ -17,7 +17,7 @@ namespace Maturidade_Online.Tests.Projeto
             var repositorio = A.Fake<IProjetoRepositorio>();
             var usuarioRepositorio = A.Fake<IUsuarioRepositorio>();
             var servico = A.Fake<ProjetoServico>((x => x.WithArgumentsForConstructor(() => new ProjetoServico(repositorio, usuarioRepositorio))));
-            var projeto = A.Fake<ProjetoEntidade>();
+            var projeto = A.Fake<Projeto>();
 
             var projetoEncontrado = servico.BuscarPorId(projeto);
 
@@ -30,7 +30,7 @@ namespace Maturidade_Online.Tests.Projeto
             var repositorio = A.Fake<IProjetoRepositorio>();
             var usuarioRepositorio = A.Fake<IUsuarioRepositorio>();
             var servico = A.Fake<ProjetoServico>((x => x.WithArgumentsForConstructor(() => new ProjetoServico(repositorio, usuarioRepositorio))));
-            var projeto = A.Fake<ProjetoEntidade>();
+            var projeto = A.Fake<Projeto>();
             var usuario = A.Fake<UsuarioEntidade>();
 
             servico.Persistir(projeto, usuario);
@@ -44,7 +44,7 @@ namespace Maturidade_Online.Tests.Projeto
             var repositorio = A.Fake<IProjetoRepositorio>();
             var usuarioRepositorio = A.Fake<IUsuarioRepositorio>();
             var servico = A.Fake<ProjetoServico>((x => x.WithArgumentsForConstructor(() => new ProjetoServico(repositorio, usuarioRepositorio))));
-            var projeto = A.Fake<ProjetoEntidade>();
+            var projeto = A.Fake<Projeto>();
 
             servico.Listar();
 

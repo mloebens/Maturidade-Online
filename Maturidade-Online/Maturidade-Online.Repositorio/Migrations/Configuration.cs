@@ -2,7 +2,7 @@ namespace Maturidade_Online.Repositorio.Migrations
 {
     using Dominio.Caracteristica;
     using Dominio.Pilar;
-    using Dominio.Projeto;
+    using Dominio;
     using Dominio.Subtopico;
     using Dominio.Usuario;
     using System;
@@ -109,7 +109,7 @@ namespace Maturidade_Online.Repositorio.Migrations
             var projeto1Caracteristicas = new List<CaracteristicaEntidade>() { caracteristica1, caracteristica2 };
             var projeto1subtopicos = new List<SubtopicoEntidade>() { subtopico1, subtopico2, subtopico3, subtopico4 };
 
-            ProjetoEntidade projeto1 = new ProjetoEntidade()
+            Projeto projeto1 = new Projeto()
             {
                 Id = 1,
                 Nome = "Projeto1",

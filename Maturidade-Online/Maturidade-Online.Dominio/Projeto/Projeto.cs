@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Projeto
+namespace Maturidade_Online.Dominio
 {
     [Table("Projeto")]
-    public class ProjetoEntidade
+    public class Projeto
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -20,7 +20,7 @@ namespace Maturidade_Online.Dominio.Projeto
         public int UsuarioId { get; set; }
         public UsuarioEntidade Usuario { get; set; }
 
-        public ProjetoEntidade()
+        public Projeto()
         {
             this.Subtopicos = new HashSet<SubtopicoEntidade>();
             this.Caracteristicas = new HashSet<CaracteristicaEntidade>();

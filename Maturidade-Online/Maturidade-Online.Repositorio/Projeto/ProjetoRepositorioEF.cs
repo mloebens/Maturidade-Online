@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Projeto;
+﻿using Maturidade_Online.Dominio;
 using Maturidade_Online.Repositorio.Abstrato;
 using System;
 using System.Collections.Generic;
@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Repositorio.Projeto
+namespace Maturidade_Online.Repositorio
 {
-    public class ProjetoRepositorioEF : RepositorioAbstratoEF<ProjetoEntidade>, IProjetoRepositorio
+    public class ProjetoRepositorioEF : RepositorioAbstratoEF<Projeto>, IProjetoRepositorio
     {
-        public ProjetoEntidade BuscarPorId(ProjetoEntidade projeto)
+        public Projeto BuscarPorId(Projeto projeto)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
@@ -22,7 +22,7 @@ namespace Maturidade_Online.Repositorio.Projeto
             }
         }
 
-        public override void Criar(ProjetoEntidade projeto)
+        public override void Criar(Projeto projeto)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
@@ -38,12 +38,12 @@ namespace Maturidade_Online.Repositorio.Projeto
                     contexto.Subtopico.Attach(subtopico);
                 }
 
-                contexto.Entry<ProjetoEntidade>(projeto).State = EntityState.Added;
+                contexto.Entry<Projeto>(projeto).State = EntityState.Added;
                 contexto.SaveChanges();
             }
         }
 
-        public override void Editar(ProjetoEntidade projeto)
+        public override void Editar(Projeto projeto)
         {
             ProjetoRepositorio repositorio = new ProjetoRepositorio();
             repositorio.AlterarVinculos(projeto);

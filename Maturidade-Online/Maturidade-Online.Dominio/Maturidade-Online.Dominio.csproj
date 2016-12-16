@@ -50,7 +50,7 @@
     <Compile Include="Pilar\PilarEntidade.cs" />
     <Compile Include="Pilar\PilarServico.cs" />
     <Compile Include="Projeto\IProjetoRepositorio.cs" />
-    <Compile Include="Projeto\ProjetoEntidade.cs" />
+    <Compile Include="Projeto\Projeto.cs" />
     <Compile Include="Projeto\ProjetoServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subtopico\ISubtopicoRepositorio.cs" />

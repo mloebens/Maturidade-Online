@@ -1,6 +1,6 @@
 ﻿using Maturidade_Online.Dominio.Caracteristica;
 using Maturidade_Online.Dominio.Pilar;
-using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;
 using System;
@@ -15,7 +15,7 @@ namespace Maturidade_Online.Repositorio
 {
     public class ContextoDeDadosEF : DbContext
     {
-        public ContextoDeDadosEF() : base("MaturidadeOnlineMaiconCasa")
+        public ContextoDeDadosEF() : base("MaturidadeOnlineCWI")
         {
         }
 
@@ -23,7 +23,7 @@ namespace Maturidade_Online.Repositorio
         public DbSet<SubtopicoEntidade> Subtopico { get; set; }
         public DbSet<UsuarioEntidade> Usuario { get; set; }
         public DbSet<CaracteristicaEntidade> Caracteristica { get; set; }
-        public DbSet<ProjetoEntidade> Projeto { get; set; }
+        public DbSet<Projeto> Projeto { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,7 +39,7 @@ namespace Maturidade_Online.Repositorio
                     c.ToTable("CaracteristicaSubtopico");
                 });
 
-            modelBuilder.Entity<ProjetoEntidade>()
+            modelBuilder.Entity<Projeto>()
                 .HasMany(p => p.Subtopicos)
                 .WithMany(s => s.Projetos)
                 .Map(c =>
@@ -49,7 +49,7 @@ namespace Maturidade_Online.Repositorio
                     c.ToTable("ProjetoSubtopico");
                 });
 
-            modelBuilder.Entity<ProjetoEntidade>()
+            modelBuilder.Entity<Projeto>()
                .HasMany(p => p.Caracteristicas)
                .WithMany(s => s.Projetos)
                .Map(c =>

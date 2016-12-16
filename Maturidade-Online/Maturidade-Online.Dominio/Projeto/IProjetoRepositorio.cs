@@ -1,15 +1,15 @@
 ﻿using Maturidade_Online.Dominio.Abstrato;
-using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Projeto
+namespace Maturidade_Online.Dominio
 {
-    public interface IProjetoRepositorio : IRepositorio<ProjetoEntidade>
+    public interface IProjetoRepositorio : IRepositorio<Projeto>
     {
-        ProjetoEntidade BuscarPorId(ProjetoEntidade projeto);
+        Projeto BuscarPorId(Projeto projeto);
     }
 }

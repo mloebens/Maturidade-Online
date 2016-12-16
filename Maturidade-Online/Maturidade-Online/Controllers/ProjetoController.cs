@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio.Caracteristica;
-using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Filter;
@@ -30,11 +30,11 @@ namespace Maturidade_Online.Controllers
             if (id.HasValue && id.Value > 0)
             {
 
-                var projeto = new ProjetoEntidade() { Id = id.Value };
+                var projeto = new Projeto() { Id = id.Value };
                 var projetoDaBase = projetoServico.BuscarPorId(projeto);
                 if (projetoDaBase != null)
                 {
-                    projetoModel = Mapper.Map<ProjetoEntidade, ProjetoModel>(projetoDaBase);
+                    projetoModel = Mapper.Map<Projeto, ProjetoModel>(projetoDaBase);
                 }
             }
             projetoModel.listaDeCaracteristicas = caracteristicas;
@@ -47,7 +47,7 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                var projeto = Mapper.Map<ProjetoModel, ProjetoEntidade>(projetoModel);
+                var projeto = Mapper.Map<ProjetoModel, Projeto>(projetoModel);
                 var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
                 var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
                 try
@@ -67,7 +67,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Excluir(int id)
         {
             var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
-            var projeto = new ProjetoEntidade() { Id = id };
+            var projeto = new Projeto() { Id = id };
             var projetoDaBase = projetoServico.BuscarPorId(projeto);
 
             try
