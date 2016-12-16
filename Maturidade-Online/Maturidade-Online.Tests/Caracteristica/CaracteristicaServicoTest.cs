@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Dominio.Caracteristica;
-using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
+using FakeItEasy;
 
 namespace Maturidade_Online.Tests.Caracteristica
 {
@@ -12,41 +12,49 @@ namespace Maturidade_Online.Tests.Caracteristica
         [TestMethod]
         public void CaracteristicaServicoAdicionarCaracteristica()
         {
-            CaracteristicaServico caracteristicaServico = ServicoDeDependencia.CriarCaracteristicaServico();
-            CaracteristicaEntidade caracteristica = new CaracteristicaEntidade() { Id = 0, Nome = "teste" };
-            int quantidadeDeCaracteristicaes = ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count;
-            caracteristicaServico.Persistir(caracteristica);
+            var repositorio = A.Fake<ICaracteristicaRepositorio>();
+            var servico = new CaracteristicaServico(repositorio);
+            var caracteristica = A.Fake<CaracteristicaEntidade>();
+            caracteristica.Id = 0;
+            servico.Persistir(caracteristica);
 
-            Assert.AreEqual(quantidadeDeCaracteristicaes + 1, ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count);
+            A.CallTo(() => repositorio.Criar(caracteristica)).MustHaveHappened();
         }
 
         [TestMethod]
         public void CaracteristicaServicoEditarCaracteristica()
         {
-            CaracteristicaServico caracteristicaServico = ServicoDeDependencia.CriarCaracteristicaServico();
-            CaracteristicaEntidade caracteristica = new CaracteristicaEntidade() { Id = 10, Nome = "Teste 4", };
-            int quantidadeDeCaracteristicaes = ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count;
-            caracteristicaServico.Persistir(caracteristica);
+            var repositorio = A.Fake<ICaracteristicaRepositorio>();
+            var servico = new CaracteristicaServico(repositorio);
+            var caracteristica = A.Fake<CaracteristicaEntidade>();
+            caracteristica.Id = 1;
 
-            Assert.AreEqual(quantidadeDeCaracteristicaes, ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count);
+            servico.Persistir(caracteristica);
+
+            A.CallTo(() => repositorio.Editar(caracteristica)).MustHaveHappened();
         }
 
         [TestMethod]
         public void CaracteristicaServicoListarCaracteristicaes()
         {
-            CaracteristicaServico caracteristicaServico = ServicoDeDependencia.CriarCaracteristicaServico();
-            Assert.AreEqual(3, ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count);
+            var repositorio = A.Fake<ICaracteristicaRepositorio>();
+            var servico = new CaracteristicaServico(repositorio);
+
+            servico.Listar();
+            A.CallTo(() => repositorio.Listar()).MustHaveHappened();
         }
 
 
         [TestMethod]
         public void CaracteristicaServicoRemoverCaracteristica()
         {
-            CaracteristicaServico caracteristicaServico = ServicoDeDependencia.CriarCaracteristicaServico();
+            var repositorio = A.Fake<ICaracteristicaRepositorio>();
+            var servico = new CaracteristicaServico(repositorio);
+            var subtopico = A.Fake<CaracteristicaEntidade>();
+            subtopico.Id = 1;
+            servico.Remover(subtopico);
 
-            caracteristicaServico.Remover(new CaracteristicaEntidade() { Id = 1, Nome = "Teste 1" });
-
-            Assert.AreEqual(2, ((IList<CaracteristicaEntidade>)caracteristicaServico.Listar()).Count);
+            A.CallTo(() => repositorio.Remover(subtopico)).MustHaveHappened();
         }
     }
 }

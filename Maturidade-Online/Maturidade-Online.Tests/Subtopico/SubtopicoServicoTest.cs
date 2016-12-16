@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Dominio.Subtopico;
-using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
+using FakeItEasy;
 
 namespace Maturidade_Online.Tests.Subtopico
 {
@@ -12,40 +12,48 @@ namespace Maturidade_Online.Tests.Subtopico
         [TestMethod]
         public void SubtopicoServicoAdicionarSubtopico()
         {
-            SubtopicoServico subtopicoServico = ServicoDeDependencia.CriarSubtopicoServico();
-            SubtopicoEntidade subtopico = new SubtopicoEntidade() { Id = 0, Nome = "teste" };
-            int quantidadeDeSubtopicoes = ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count;
+            var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
+            var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
+            var subtopico = A.Fake<SubtopicoEntidade>();
+            subtopico.Id = 0;
             subtopicoServico.Persistir(subtopico);
-
-            Assert.AreEqual(quantidadeDeSubtopicoes + 1, ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count);
+            
+            A.CallTo(() => subtopicoRepositorio.Criar(subtopico)).MustHaveHappened();
         }
 
         [TestMethod]
         public void SubtopicoServicoEditarSubtopico()
         {
-            SubtopicoServico subtopicoServico = ServicoDeDependencia.CriarSubtopicoServico();
-            SubtopicoEntidade subtopico = new SubtopicoEntidade() { Id = 10, Nome = "Teste 3", Descricao = "bla bla", Pontuacao = 20  };
-            int quantidadeDeSubtopicoes = ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count;
+            var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
+            var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
+            var subtopico = A.Fake<SubtopicoEntidade>();
+            subtopico.Id = 1;
             subtopicoServico.Persistir(subtopico);
 
-            Assert.AreEqual(quantidadeDeSubtopicoes, ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count);
+            A.CallTo(() => subtopicoRepositorio.Editar(subtopico)).MustHaveHappened();
         }
 
         [TestMethod]
         public void SubtopicoServicoListarSubtopicoes()
         {
-            SubtopicoServico subtopicoServico = ServicoDeDependencia.CriarSubtopicoServico();
-            Assert.AreEqual(3, ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count);
+            var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
+            var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
+
+            subtopicoServico.Listar();
+            A.CallTo(() => subtopicoRepositorio.Listar()).MustHaveHappened();
         }
 
 
         [TestMethod]
         public void SubtopicoServicoRemoverSubtopico()
         {
-            SubtopicoServico subtopicoServico = ServicoDeDependencia.CriarSubtopicoServico();
-            subtopicoServico.Remover(new SubtopicoEntidade() { Id = 1, Nome = "Teste 1", Descricao = "bla bla", PilarEntidadeId = 1, Pontuacao = 20 });
+            var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
+            var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
+            var subtopico = A.Fake<SubtopicoEntidade>();
+            subtopico.Id = 1;
+            subtopicoServico.Remover(subtopico);
 
-            Assert.AreEqual(2, ((IList<SubtopicoEntidade>)subtopicoServico.Listar()).Count);
+            A.CallTo(() => subtopicoRepositorio.Remover(subtopico)).MustHaveHappened();
         }
     }
 }

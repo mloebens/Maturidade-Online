@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Caracteristica\CaracteristicaServicoTest.cs" />
-    <Compile Include="Core\ServicoDeDependencia.cs" />
     <Compile Include="Pilar\PilarServicoTest.cs" />
     <Compile Include="Projeto\ProjetoServicoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,10 +70,6 @@
     <ProjectReference Include="..\Maturidade-Online.Infraestrutura\Maturidade-Online.Infraestrutura.csproj">
       <Project>{a12e3267-7801-4a2c-877d-9a594a5799d7}</Project>
       <Name>Maturidade-Online.Infraestrutura</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Maturidade-Online.Mock\Maturidade-Online.Mock.csproj">
-      <Project>{275d2126-d96d-430c-a6d5-d3686a0712a4}</Project>
-      <Name>Maturidade-Online.Mock</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

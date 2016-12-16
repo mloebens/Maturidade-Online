@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maturidade-Online.Infraestr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maturidade-Online.Dominio", "Maturidade-Online.Dominio\Maturidade-Online.Dominio.csproj", "{F639CCE9-99F1-4944-AA89-8675C6A5940D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maturidade-Online.Mock", "Maturidade-Online.Mock\Maturidade-Online.Mock.csproj", "{275D2126-D96D-430C-A6D5-D3686A0712A4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{F639CCE9-99F1-4944-AA89-8675C6A5940D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F639CCE9-99F1-4944-AA89-8675C6A5940D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F639CCE9-99F1-4944-AA89-8675C6A5940D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{275D2126-D96D-430C-A6D5-D3686A0712A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{275D2126-D96D-430C-A6D5-D3686A0712A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{275D2126-D96D-430C-A6D5-D3686A0712A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{275D2126-D96D-430C-A6D5-D3686A0712A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

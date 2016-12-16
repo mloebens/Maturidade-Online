@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Tests.Core;
 using Maturidade_Online.Dominio.Usuario;
-using Maturidade_Online.Mock;
 using FakeItEasy;
 using Maturidade_Online.Dominio.Infraestrutura;
 using Maturidade_Online.Infraestrutura;

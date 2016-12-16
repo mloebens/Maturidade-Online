@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Dominio.Pilar;
-using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
 using FakeItEasy;
 

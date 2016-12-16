@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Tests.Core;
 using Maturidade_Online.Dominio.Projeto;
 using System.Collections.Generic;
 using Maturidade_Online.Dominio.Usuario;
