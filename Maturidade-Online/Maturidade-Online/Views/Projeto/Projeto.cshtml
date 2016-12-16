@@ -10,7 +10,7 @@
 
 
     @Html.AntiForgeryToken()
-
+    @Html.HiddenFor(model => model.Id)
     <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info panel-manter">
             <div class="panel-heading">
@@ -27,17 +27,18 @@
             <div class="col-md-12 login-item">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
-                    <select id="listaDeCaracteristicas" name="listaDeCaracteristicas" class="js-example-basic-multiple js-states form-control" multiple>
-                        @foreach (var caracteristica in Model.listaDeCaracteristicas)
+
+
+                    <select id="opcoes" name="@Html.NameFor(m => m.Caracteristicas)" class="js-example-basic-multiple js-states form-control" multiple>
+                        @foreach (var caracteristica in Model.ListaDeCaracteristicas)
                         {
                             <option value="@caracteristica.Id">@caracteristica.Nome</option>
                         }
                     </select>
+
+
                 </div>
             </div>
-
-            @*@Html.DropDownListFor(model => model.listaDeCaracteristicas, "",  new { @class = "js-example-basic-multiple js-states"})
-            *@
 
             <div class="col-sm-12">
                 <input type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
@@ -45,38 +46,45 @@
 
         </div>
     </div>
+
+    <div class="row">
+        <div id="container-subtopicos-dados" class="col-md-8 col-lg-offset-2"></div>
+    </div>
 }
 
-<div class="row">
-    <div class="col-md-8 col-lg-offset-2">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Pilar</th>
-                    <th>Subtópico</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                @foreach (var subtopico in Model.listaDeSubtopicos)
-            {
-                    <tr>
-                        <td>@subtopico.Pilares.Titulo</td>
-                        <td>@subtopico.Nome</td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-    </div>
-</div>
 
 
-    @section scripts {
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(".js-example-basic-multiple").select2();
-            });
-        </script>
-    }
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#opcoes").select2();
+        });
+
+        var $listagemSubtopicos = $('#container-subtopicos-dados');
+
+        $("#opcoes").change(function() {
+
+            console.log('ola');
+            let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id))
+            console.log('idsCaracteristicas', idsCaracteristicas);
+            const urlGet = '@Url.Action("PesquisarSubtopicos", "Projeto")';
+            jQuery.ajaxSettings.traditional = true;
+            $.get(urlGet, { idsCaracteristicas })
+                .done(response => {
+                    console.log('response', response);
+                    $listagemSubtopicos.html(response);
+                });
+            //let idCaracteristica = parseInt($(this).select2('data')[0].id);
+            //console.log('idCaracteristica', idCaracteristica);
+            //console.log('this', $(this).select2('data')[0].text);
+            //console.log('subTopicos', $listagemSubtopicos)
+            //$listagemSubtopicos.show();
+
+        })
+
+
+
+    </script>
+}
 
