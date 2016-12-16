@@ -264,6 +264,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Projeto\Projeto.cshtml" />
+    <Content Include="Views\Shared\_Subtopicos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
