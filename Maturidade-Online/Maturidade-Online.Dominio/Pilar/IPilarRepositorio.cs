@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Pilar
+namespace Maturidade_Online.Dominio
 {
-    public interface IPilarRepositorio : IRepositorio<PilarEntidade>
+    public interface IPilarRepositorio : IRepositorio<Pilar>
     {
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Dominio.Subtopico;
+using Maturidade_Online.Dominio;
 using System.Collections.Generic;
 using FakeItEasy;
 
-namespace Maturidade_Online.Tests.Subtopico
+namespace Maturidade_Online.Tests
 {
     [TestClass]
     public class SubtopicoServicoTest
@@ -14,7 +14,7 @@ namespace Maturidade_Online.Tests.Subtopico
         {
             var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
             var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
-            var subtopico = A.Fake<SubtopicoEntidade>();
+            var subtopico = A.Fake<Subtopico>();
             subtopico.Id = 0;
             subtopicoServico.Persistir(subtopico);
             
@@ -26,7 +26,7 @@ namespace Maturidade_Online.Tests.Subtopico
         {
             var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
             var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
-            var subtopico = A.Fake<SubtopicoEntidade>();
+            var subtopico = A.Fake<Subtopico>();
             subtopico.Id = 1;
             subtopicoServico.Persistir(subtopico);
 
@@ -49,7 +49,7 @@ namespace Maturidade_Online.Tests.Subtopico
         {
             var subtopicoRepositorio = A.Fake<ISubtopicoRepositorio>();
             var subtopicoServico = new SubtopicoServico(subtopicoRepositorio);
-            var subtopico = A.Fake<SubtopicoEntidade>();
+            var subtopico = A.Fake<Subtopico>();
             subtopico.Id = 1;
             subtopicoServico.Remover(subtopico);
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Pilar
+namespace Maturidade_Online.Dominio
 {
     public class PilarServico
     {
@@ -15,12 +15,12 @@ namespace Maturidade_Online.Dominio.Pilar
             this.pilarRepositorio = pilarRepositorio;
         }
 
-        public IEnumerable<PilarEntidade> Listar()
+        public IEnumerable<Pilar> Listar()
         {
             return pilarRepositorio.Listar();
         }
 
-        public void Persistir(PilarEntidade pilar)
+        public void Persistir(Pilar pilar)
         {
             if(pilar.Id == 0)
             {
@@ -32,7 +32,7 @@ namespace Maturidade_Online.Dominio.Pilar
             }
         }
        
-        public void Remover(PilarEntidade pilar)
+        public void Remover(Pilar pilar)
         {
             pilarRepositorio.Remover(pilar);
         }

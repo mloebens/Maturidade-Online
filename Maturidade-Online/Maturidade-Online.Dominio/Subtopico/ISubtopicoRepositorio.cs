@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Subtopico
+namespace Maturidade_Online.Dominio
 {
-    public interface ISubtopicoRepositorio : IRepositorio<SubtopicoEntidade>
+    public interface ISubtopicoRepositorio : IRepositorio<Subtopico>
     {
     }
 }

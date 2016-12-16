@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Usuario
+namespace Maturidade_Online.Dominio
 {
-    [Table("Usuario")]
-    public class UsuarioEntidade
+    public class Usuario
     {
 
         public int Id { get; set; }

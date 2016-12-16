@@ -1,5 +1,4 @@
-﻿using Maturidade_Online.Dominio.Usuario;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +27,7 @@ namespace Maturidade_Online.Dominio
             return projetoRepositorio.Listar();
         }
 
-        public void Persistir(Projeto projeto, UsuarioEntidade usuarioLogado)
+        public void Persistir(Projeto projeto, Usuario usuarioLogado)
         {
            
             if (projeto.Id == 0)
@@ -44,13 +43,13 @@ namespace Maturidade_Online.Dominio
             }
         }
 
-        public void Remover(Projeto projeto, UsuarioEntidade usuarioLogado)
+        public void Remover(Projeto projeto, Usuario usuarioLogado)
         {
             this.verificarPermissao(projeto, usuarioLogado);
             projetoRepositorio.Remover(projeto);
         }
 
-        private void verificarPermissao(Projeto projeto, UsuarioEntidade usuarioLogado)
+        private void verificarPermissao(Projeto projeto, Usuario usuarioLogado)
         {
             var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
             var projetoDaBase = projetoRepositorio.BuscarPorId(projeto);

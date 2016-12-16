@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Subtopico;
+﻿using Maturidade_Online.Dominio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,17 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Maturidade_Online.Repositorio.Subtopico
+namespace Maturidade_Online.Repositorio
 {
     public class SubtopicoRepositorio : ContextoDeDados
     {
-        public void AlterarVinculos(SubtopicoEntidade subtopico)
+        public void AlterarVinculos(Subtopico subtopico)
         { 
             this.removerVinculos(subtopico);
             this.adicionarVinculos(subtopico);
         }
 
-        private void adicionarVinculos(SubtopicoEntidade subtopico)
+        private void adicionarVinculos(Subtopico subtopico)
         {
             foreach (var caracteristica in subtopico.Caracteristicas)
             {
@@ -72,7 +72,7 @@ namespace Maturidade_Online.Repositorio.Subtopico
 
         }
 
-        private void removerVinculos(SubtopicoEntidade subtopico)
+        private void removerVinculos(Subtopico subtopico)
         {
             var tabelas = new[] { "ProjetoSubtopico", "CaracteristicaSubtopico" };
             foreach (var tabela in tabelas)

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Usuario
+namespace Maturidade_Online.Dominio
 {
     public class UsuarioServico
     {
@@ -19,9 +19,9 @@ namespace Maturidade_Online.Dominio.Usuario
             this.servicoCriptografia = servicoCriptografia;
         }
 
-        public UsuarioEntidade BuscarPorAutenticacao(UsuarioEntidade usuario)
+        public Usuario BuscarPorAutenticacao(Usuario usuario)
         {
-            UsuarioEntidade usuarioEncontrado = this.usuarioRepositorio.BuscarPorEmail(usuario);
+            Usuario usuarioEncontrado = this.usuarioRepositorio.BuscarPorEmail(usuario);
             string senhaCriptografada = this.servicoCriptografia.Criptografar(usuario.Senha);
 
             if(usuarioEncontrado != null && usuarioEncontrado.Senha.Equals(senhaCriptografada))
@@ -32,7 +32,7 @@ namespace Maturidade_Online.Dominio.Usuario
             return null;
         }
 
-        public UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario)
+        public Usuario BuscarPorEmail(Usuario usuario)
         {
             return this.usuarioRepositorio.BuscarPorEmail(usuario);
         }

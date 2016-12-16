@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Usuario;
+﻿using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace Maturidade_Online.Repositorio
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         
-        public UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario)
+        public Usuario BuscarPorEmail(Usuario usuario)
         {
             using (var contexto = new ContextoDeDadosEF())
             {

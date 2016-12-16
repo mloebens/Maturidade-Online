@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Usuario
+namespace Maturidade_Online.Dominio
 {
     public interface IUsuarioRepositorio
     {
 
-        UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario);
+        Usuario BuscarPorEmail(Usuario usuario);
 
     }
 }

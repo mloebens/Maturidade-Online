@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Dominio.Pilar;
+using Maturidade_Online.Dominio;
 using System.Collections.Generic;
 using FakeItEasy;
 
-namespace Maturidade_Online.Tests.Pilar
+namespace Maturidade_Online.Tests
 {
     [TestClass]
     public class PilarServicoTest
@@ -15,7 +15,7 @@ namespace Maturidade_Online.Tests.Pilar
             var repositorioFake = A.Fake<IPilarRepositorio>();
 
             var servico = new PilarServico(repositorioFake);
-            var pilar = A.Fake<PilarEntidade>();
+            var pilar = A.Fake<Pilar>();
 
             servico.Persistir(pilar);
 
@@ -29,7 +29,7 @@ namespace Maturidade_Online.Tests.Pilar
             var repositorioFake = A.Fake<IPilarRepositorio>();
 
             var servico = new PilarServico(repositorioFake);
-            var pilar = new PilarEntidade() { Id = 1 };
+            var pilar = new Pilar() { Id = 1 };
 
             servico.Persistir(pilar);
 
@@ -56,7 +56,7 @@ namespace Maturidade_Online.Tests.Pilar
             var repositorioFake = A.Fake<IPilarRepositorio>();
 
             var servico = new PilarServico(repositorioFake);
-            var pilar = A.Fake<PilarEntidade>();
+            var pilar = A.Fake<Pilar>();
 
             servico.Remover(pilar);
 

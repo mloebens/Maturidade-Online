@@ -1,4 +1,4 @@
-﻿namespace Maturidade_Online.Dominio.Usuario
+﻿namespace Maturidade_Online.Dominio
 {
     public enum Permissao
     {

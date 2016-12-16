@@ -1,5 +1,5 @@
 ﻿using Maturidade_Online.Dominio;
-using Maturidade_Online.Dominio.Subtopico;
+using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,9 +22,9 @@ namespace Maturidade_Online.Models
         public IEnumerable<Caracteristica> caracteristicas { get; set; }
 
         [Required]
-        public IEnumerable<SubtopicoEntidade> subtopicos { get; set; }
+        public IEnumerable<Subtopico> subtopicos { get; set; }
 
         public IEnumerable<Caracteristica> listaDeCaracteristicas { get; set; }
-        public IEnumerable<SubtopicoEntidade> listaDeSubtopicos { get; set; }
+        public IEnumerable<Subtopico> listaDeSubtopicos { get; set; }
     }
 }

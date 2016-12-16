@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Maturidade_Online.Dominio.Usuario;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Models;
 using Maturidade_Online.Servicos;
 using System;
@@ -32,9 +32,9 @@ namespace Maturidade_Online.Controllers
             {
                 UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico();
 
-                var usuario = Mapper.Map<UsuarioModel, UsuarioEntidade>(usuarioModel);
+                var usuario = Mapper.Map<UsuarioModel, Usuario>(usuarioModel);
 
-                UsuarioEntidade usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(usuario);
+                Usuario usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(usuario);
 
                 if (usuarioEncontrado != null)
                 {

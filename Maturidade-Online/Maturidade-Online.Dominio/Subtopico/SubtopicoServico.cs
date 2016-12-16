@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Subtopico
+namespace Maturidade_Online.Dominio
 {
     public class SubtopicoServico
     {
@@ -15,12 +15,12 @@ namespace Maturidade_Online.Dominio.Subtopico
             this.subtopicoRepositorio = subtopicoRepositorio;
         }
 
-        public IEnumerable<SubtopicoEntidade> Listar()
+        public IEnumerable<Subtopico> Listar()
         {
             return subtopicoRepositorio.Listar();
         }
 
-        public void Persistir(SubtopicoEntidade pilar)
+        public void Persistir(Subtopico pilar)
         {
             if (pilar.Id == 0)
             {
@@ -32,7 +32,7 @@ namespace Maturidade_Online.Dominio.Subtopico
             }
         }
 
-        public void Remover(SubtopicoEntidade pilar)
+        public void Remover(Subtopico pilar)
         {
             subtopicoRepositorio.Remover(pilar);
         }

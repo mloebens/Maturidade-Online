@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio;
-using Maturidade_Online.Dominio.Subtopico;
-using Maturidade_Online.Dominio.Usuario;
+using Maturidade_Online.Dominio;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
 using Maturidade_Online.Servicos;
@@ -49,7 +49,7 @@ namespace Maturidade_Online.Controllers
             {
                 var projeto = Mapper.Map<ProjetoModel, Projeto>(projetoModel);
                 var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
-                var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+                var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
                 try
                 {
                     projetoServico.Persistir(projeto, usuarioAutenticado);
@@ -66,7 +66,7 @@ namespace Maturidade_Online.Controllers
 
         public ActionResult Excluir(int id)
         {
-            var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+            var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
             var projeto = new Projeto() { Id = id };
             var projetoDaBase = projetoServico.BuscarPorId(projeto);
 

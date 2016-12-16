@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Dominio;
 using System.Collections.Generic;
-using Maturidade_Online.Dominio.Usuario;
 using FakeItEasy;
 
 namespace Maturidade_Online.Tests
@@ -31,7 +30,7 @@ namespace Maturidade_Online.Tests
             var usuarioRepositorio = A.Fake<IUsuarioRepositorio>();
             var servico = A.Fake<ProjetoServico>((x => x.WithArgumentsForConstructor(() => new ProjetoServico(repositorio, usuarioRepositorio))));
             var projeto = A.Fake<Projeto>();
-            var usuario = A.Fake<UsuarioEntidade>();
+            var usuario = A.Fake<Usuario>();
 
             servico.Persistir(projeto, usuario);
 

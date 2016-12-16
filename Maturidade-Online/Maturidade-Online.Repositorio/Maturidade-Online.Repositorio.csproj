@@ -56,38 +56,9 @@
     <Compile Include="Caracteristica\CaracteristicaRepositorio.cs" />
     <Compile Include="ContextoDeDados.cs" />
     <Compile Include="ContextoDeDadosEF.cs" />
-    <Compile Include="Migrations\201612141834381_adicionar Pilar.cs" />
-    <Compile Include="Migrations\201612141834381_adicionar Pilar.Designer.cs">
-      <DependentUpon>201612141834381_adicionar Pilar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612141838547_adicionar subtopico.cs" />
-    <Compile Include="Migrations\201612141838547_adicionar subtopico.Designer.cs">
-      <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612141908193_Adicionar Caracteristica.cs" />
-    <Compile Include="Migrations\201612141908193_Adicionar Caracteristica.Designer.cs">
-      <DependentUpon>201612141908193_Adicionar Caracteristica.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs" />
-    <Compile Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.Designer.cs">
-      <DependentUpon>201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612150245156_adicionar projeto.cs" />
-    <Compile Include="Migrations\201612150245156_adicionar projeto.Designer.cs">
-      <DependentUpon>201612150245156_adicionar projeto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612151703563_adicionar nome à tabela projeto.cs" />
-    <Compile Include="Migrations\201612151703563_adicionar nome à tabela projeto.Designer.cs">
-      <DependentUpon>201612151703563_adicionar nome à tabela projeto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612151858414_alterar relacionamento projeto\caracteristica para many to many.cs" />
-    <Compile Include="Migrations\201612151921516_alterar relacionamento projeto caracteristica.cs" />
-    <Compile Include="Migrations\201612151921516_alterar relacionamento projeto caracteristica.Designer.cs">
-      <DependentUpon>201612151921516_alterar relacionamento projeto caracteristica.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612160017123_adicionar usuario ao projeto.cs" />
-    <Compile Include="Migrations\201612160017123_adicionar usuario ao projeto.Designer.cs">
-      <DependentUpon>201612160017123_adicionar usuario ao projeto.cs</DependentUpon>
+    <Compile Include="Migrations\201612161933295_gerar tabelas do projeto.cs" />
+    <Compile Include="Migrations\201612161933295_gerar tabelas do projeto.Designer.cs">
+      <DependentUpon>201612161933295_gerar tabelas do projeto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -112,29 +83,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612141834381_adicionar Pilar.resx">
-      <DependentUpon>201612141834381_adicionar Pilar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612141838547_adicionar subtopico.resx">
-      <DependentUpon>201612141838547_adicionar subtopico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612141908193_Adicionar Caracteristica.resx">
-      <DependentUpon>201612141908193_Adicionar Caracteristica.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.resx">
-      <DependentUpon>201612141918546_alterar nome da table de relacionamento entre caracteristica e subtopico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612150245156_adicionar projeto.resx">
-      <DependentUpon>201612150245156_adicionar projeto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612151703563_adicionar nome à tabela projeto.resx">
-      <DependentUpon>201612151703563_adicionar nome à tabela projeto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612151921516_alterar relacionamento projeto caracteristica.resx">
-      <DependentUpon>201612151921516_alterar relacionamento projeto caracteristica.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612160017123_adicionar usuario ao projeto.resx">
-      <DependentUpon>201612160017123_adicionar usuario ao projeto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612161933295_gerar tabelas do projeto.resx">
+      <DependentUpon>201612161933295_gerar tabelas do projeto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

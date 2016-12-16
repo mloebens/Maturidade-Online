@@ -1,9 +1,6 @@
 namespace Maturidade_Online.Repositorio.Migrations
 {
-    using Dominio.Pilar;
     using Dominio;
-    using Dominio.Subtopico;
-    using Dominio.Usuario;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -20,9 +17,9 @@ namespace Maturidade_Online.Repositorio.Migrations
         protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDadosEF context)
         {
 
-            UsuarioEntidade usuario1 = new UsuarioEntidade { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
-            UsuarioEntidade usuario2 = new UsuarioEntidade { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
-            UsuarioEntidade usuario3 = new UsuarioEntidade { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = Permissao.USUARIO, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Usuario usuario1 = new Usuario { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Usuario usuario2 = new Usuario { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Usuario usuario3 = new Usuario { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = Permissao.USUARIO, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
 
             context.Usuario.AddOrUpdate(
                 p => p.Nome,
@@ -33,45 +30,45 @@ namespace Maturidade_Online.Repositorio.Migrations
 
             context.Pilar.AddOrUpdate(
                     p => p.Titulo,
-                    new PilarEntidade { Id = 1, Titulo = "Infraestrutura" },
-                    new PilarEntidade { Id = 2, Titulo = "Gestão" },
-                    new PilarEntidade { Id = 3, Titulo = "Qualidade" }
+                    new Pilar { Id = 1, Titulo = "Infraestrutura" },
+                    new Pilar { Id = 2, Titulo = "Gestão" },
+                    new Pilar { Id = 3, Titulo = "Qualidade" }
                 );
 
 
-            SubtopicoEntidade subtopico1 = new SubtopicoEntidade
+            Subtopico subtopico1 = new Subtopico
             {
                 Id = 1,
                 Nome = "subtopico1",
                 Descricao = "Nenhuma",
                 Pontuacao = 3,
-                PilarEntidadeId = 1
+                PilarId = 1
             };
-            SubtopicoEntidade subtopico2 = new SubtopicoEntidade
+            Subtopico subtopico2 = new Subtopico
             {
                 Id = 2,
                 Nome = "subtopico2",
                 Descricao = "Nenhuma",
                 Pontuacao = 5,
-                PilarEntidadeId = 1
+                PilarId = 1
             };
 
-            SubtopicoEntidade subtopico3 = new SubtopicoEntidade
+            Subtopico subtopico3 = new Subtopico
             {
                 Id = 3,
                 Nome = "subtopico3",
                 Descricao = "Nenhuma",
                 Pontuacao = 3,
-                PilarEntidadeId = 2
+                PilarId = 2
             };
 
-            SubtopicoEntidade subtopico4 = new SubtopicoEntidade
+            Subtopico subtopico4 = new Subtopico
             {
                 Id = 4,
                 Nome = "subtopico4",
                 Descricao = "Nenhuma",
                 Pontuacao = 5,
-                PilarEntidadeId = 3
+                PilarId = 3
             };
 
             context.Subtopico.AddOrUpdate(
@@ -82,8 +79,8 @@ namespace Maturidade_Online.Repositorio.Migrations
                 subtopico4
             );
 
-            var caracteristica1subtopico = new List<SubtopicoEntidade>() { subtopico1, subtopico2 };
-            var caracteristica2subtopico = new List<SubtopicoEntidade>() { subtopico3, subtopico4 };
+            var caracteristica1subtopico = new List<Subtopico>() { subtopico1, subtopico2 };
+            var caracteristica2subtopico = new List<Subtopico>() { subtopico3, subtopico4 };
 
             Caracteristica caracteristica1 = new Caracteristica()
             {
@@ -106,7 +103,7 @@ namespace Maturidade_Online.Repositorio.Migrations
             );
 
             var projeto1Caracteristicas = new List<Caracteristica>() { caracteristica1, caracteristica2 };
-            var projeto1subtopicos = new List<SubtopicoEntidade>() { subtopico1, subtopico2, subtopico3, subtopico4 };
+            var projeto1subtopicos = new List<Subtopico>() { subtopico1, subtopico2, subtopico3, subtopico4 };
 
             Projeto projeto1 = new Projeto()
             {

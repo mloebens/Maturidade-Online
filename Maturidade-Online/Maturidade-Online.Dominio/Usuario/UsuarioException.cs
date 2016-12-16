@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Usuario
+namespace Maturidade_Online.Dominio
 {
     public class UsuarioException : Exception
     {

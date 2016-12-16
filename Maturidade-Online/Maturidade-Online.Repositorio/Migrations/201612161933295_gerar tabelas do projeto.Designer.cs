@@ -7,13 +7,13 @@ namespace Maturidade_Online.Repositorio.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class adicionarPilar : IMigrationMetadata
+    public sealed partial class gerartabelasdoprojeto : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(adicionarPilar));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(gerartabelasdoprojeto));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612141834381_adicionar Pilar"; }
+            get { return "201612161933295_gerar tabelas do projeto"; }
         }
         
         string IMigrationMetadata.Source
