@@ -23,11 +23,21 @@ textarea {
     max-width: 280px;
 }
 
-.div-margin-top{
-    margin-top: 30px;
+/* Login */
+
+div.login-item {
+    margin: 15px auto;
 }
 
-/* Login */
+.login-erro {
+    padding: 9px 5px 1px 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.login-erro ul {
+    list-style-type: square;
+}
 
 #panel-login {
     border-color: black;
@@ -45,4 +55,6 @@ textarea {
     font-weight: bold;
     color: white;
 }
+
+
 
