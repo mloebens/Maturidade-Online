@@ -1,12 +1,8 @@
 ﻿@model  Maturidade_Online.Models.ProjetoModel
-Maturidade -Online.Web.Moels.ProjetoModel
 @{
     ViewBag.Title = "Manter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Manter</h2>
-
 
 @using (Html.BeginForm("Salvar", "Projeto", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
 {
@@ -15,27 +11,72 @@ Maturidade -Online.Web.Moels.ProjetoModel
 
     @Html.AntiForgeryToken()
 
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info panel-manter">
+            <div class="panel-heading">
+                <div class="panel-title text-center">Projetos</div>
+            </div>
 
-    @Html.TextBox("nome", "", new { @class = "form-control", placeholder = "Nome do Projeto" })
-    @Html.TextBox("email", "", new { @class = "form-control", placeholder = "Digite seu E-mail" })
-    <select class="js-example-basic-multiple js-states form-control" multiple>
-        @foreach(var categiria in Model)
-            <option value="AL">Alabama</option>
-        <option value="WY">Wyoming</option>
-    </select>
+            <div class="col-md-12 login-item">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                    @Html.TextBox("nome", "", new { @class = "form-control", placeholder = "Nome do Projeto" })
+                </div>
+            </div>
 
+            <div class="col-md-12 login-item">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
+                    <select id="listaDeCaracteristicas" name="listaDeCaracteristicas" class="js-example-basic-multiple js-states form-control" multiple>
+                        @foreach (var caracteristica in Model.listaDeCaracteristicas)
+                        {
+                            <option value="@caracteristica.Id">@caracteristica.Nome</option>
+                        }
+                    </select>
+                </div>
+            </div>
 
+            @*@Html.DropDownListFor(model => model.listaDeCaracteristicas, "",  new { @class = "js-example-basic-multiple js-states"})
+            *@
+
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
+            </div>
+
+        </div>
+    </div>
 }
 
+<div class="row">
+    <div class="col-md-8 col-lg-offset-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Pilar</th>
+                    <th>Subtópico</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var subtopico in Model.listaDeSubtopicos)
+            {
+                    <tr>
+                        <td>@subtopico.Pilares.Titulo</td>
+                        <td>@subtopico.Nome</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
 
 
-@section scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".js-example-basic-multiple").select2();
-        });
-    </script>
-}
-
-
+    @section scripts {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".js-example-basic-multiple").select2();
+            });
+        </script>
+    }
 
