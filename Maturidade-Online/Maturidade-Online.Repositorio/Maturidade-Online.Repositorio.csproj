@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Abstrato\RepositorioAbstratoEF.cs" />
     <Compile Include="Caracteristica\CaracteristicaRepositorioEF.cs" />
+    <Compile Include="Caracteristica\CaracteristicaRepositorio.cs" />
     <Compile Include="ContextoDeDados.cs" />
     <Compile Include="ContextoDeDadosEF.cs" />
     <Compile Include="Migrations\201612141834381_adicionar Pilar.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Projeto\ProjetoRepositorioEF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subtopico\SubtopicoRepositorioEF.cs" />
+    <Compile Include="Subtopico\SubtopicoRepositorio.cs" />
     <Compile Include="Usuario\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>

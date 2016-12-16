@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Projeto;
+﻿using Maturidade_Online.Dominio.Subtopico;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,20 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
-namespace Maturidade_Online.Repositorio.Projeto
+namespace Maturidade_Online.Repositorio.Subtopico
 {
-    public class ProjetoRepositorio : ContextoDeDados
+    public class SubtopicoRepositorio : ContextoDeDados
     {
-        public void AlterarVinculos(ProjetoEntidade projeto)
-        {
-
-            this.removerVinculos(projeto);
-            this.adicionarVinculos(projeto);
+        public void AlterarVinculos(SubtopicoEntidade subtopico)
+        { 
+            this.removerVinculos(subtopico);
+            this.adicionarVinculos(subtopico);
         }
 
-        private void adicionarVinculos(ProjetoEntidade projeto)
+        private void adicionarVinculos(SubtopicoEntidade subtopico)
         {
-            foreach (var caracteristica in projeto.Caracteristicas)
+            foreach (var caracteristica in subtopico.Caracteristicas)
             {
                 using (var transaction = new TransactionScope(TransactionScopeOption.Required))
                 using (var connection = Conexao())
@@ -31,9 +30,9 @@ namespace Maturidade_Online.Repositorio.Projeto
                     var sql = new StringBuilder();
                     var parameters = new List<SqlParameter>();
 
-                    sql.Append($"INSERT INTO ProjetoCaracteristica(ProjetoId, CaracteristicaId) VALUES(");
-                    sql.Append($"@param_ProjetoId,@param_CaracteristicaId)");
-                    parameters.Add(new SqlParameter("@param_ProjetoId", projeto.Id));
+                    sql.Append($"INSERT INTO SubtopicoCaracteristica(SubtopicoId, CaracteristicaId) VALUES(");
+                    sql.Append($"@param_SubtopicoId,@param_CaracteristicaId)");
+                    parameters.Add(new SqlParameter("@param_SubtopicoId", subtopico.Id));
                     parameters.Add(new SqlParameter("@param_CaracteristicaId", caracteristica.Id));
 
                     var command = new SqlCommand(sql.ToString(), connection);
@@ -46,7 +45,7 @@ namespace Maturidade_Online.Repositorio.Projeto
                 }
             }
 
-            foreach (var subtopico in projeto.Subtopicos)
+            foreach (var projeto in subtopico.Projetos)
             {
                 using (var transaction = new TransactionScope(TransactionScopeOption.Required))
                 using (var connection = Conexao())
@@ -56,10 +55,10 @@ namespace Maturidade_Online.Repositorio.Projeto
                     var sql = new StringBuilder();
                     var parameters = new List<SqlParameter>();
 
-                    sql.Append($"INSERT INTO ProjetoSubtopico(ProjetoId, SubtopicoId) VALUES(");
+                    sql.Append($"INSERT INTO SubtopicoSubtopico(ProjetoId, SubtopicoId) VALUES(");
                     sql.Append($"@param_ProjetoId,@param_SubtopicoId)");
-                    parameters.Add(new SqlParameter("@param_ProjetoId", projeto.Id));
                     parameters.Add(new SqlParameter("@param_SubtopicoId", subtopico.Id));
+                    parameters.Add(new SqlParameter("@param_ProjetoId", projeto.Id));
 
                     var command = new SqlCommand(sql.ToString(), connection);
                     foreach (SqlParameter param in parameters)
@@ -73,9 +72,9 @@ namespace Maturidade_Online.Repositorio.Projeto
 
         }
 
-        private void removerVinculos(ProjetoEntidade projeto)
+        private void removerVinculos(SubtopicoEntidade subtopico)
         {
-            var tabelas = new[] { "ProjetoSubtopico", "ProjetoCaracteristica" };
+            var tabelas = new[] { "ProjetoSubtopico", "CaracteristicaSubtopico" };
             foreach (var tabela in tabelas)
             {
                 using (var transaction = new TransactionScope(TransactionScopeOption.Required))
@@ -83,9 +82,9 @@ namespace Maturidade_Online.Repositorio.Projeto
                 {
                     connection.Open();
 
-                    string sql = $"DELETE FROM {tabela} WHERE ProjetoId = @param_idProjeto";
+                    string sql = $"DELETE FROM {tabela} WHERE SubtopicoId = @param_idSubtopico";
                     var command = new SqlCommand(sql, connection);
-                    command.Parameters.Add(new SqlParameter("@param_idProjeto", $"{projeto.Id}"));
+                    command.Parameters.Add(new SqlParameter("@param_idSubtopico", $"{subtopico.Id}"));
                     command.ExecuteNonQuery();
                     transaction.Complete();
                 }

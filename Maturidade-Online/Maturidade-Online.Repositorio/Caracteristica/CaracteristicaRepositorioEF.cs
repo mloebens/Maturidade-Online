@@ -18,5 +18,12 @@ namespace Maturidade_Online.Repositorio.Caracteristica
                 return contexto.Caracteristica.Include("Subtopicos").ToList();
             }
         }
+
+        public override void Editar(CaracteristicaEntidade caracteristica)
+        {
+            CaracteristicaRepositorio repositorio = new CaracteristicaRepositorio();
+            repositorio.AlterarVinculos(caracteristica);
+            base.Editar(caracteristica);
+        }
     }
 }

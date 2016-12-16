@@ -18,5 +18,13 @@ namespace Maturidade_Online.Repositorio.Subtopico
                 return contexto.Subtopico.Include("Pilares").ToList();
             }
         }
+
+
+        public override void Editar(SubtopicoEntidade subtopico)
+        {
+            SubtopicoRepositorio repositorio = new SubtopicoRepositorio();
+            repositorio.AlterarVinculos(subtopico);
+            base.Editar(subtopico);
+        }
     }
 }
