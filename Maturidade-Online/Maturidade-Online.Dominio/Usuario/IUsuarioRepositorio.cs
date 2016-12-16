@@ -10,7 +10,7 @@ namespace Maturidade_Online.Dominio.Usuario
     public interface IUsuarioRepositorio
     {
 
-        UsuarioEntidade BuscarPorEmail(string email);
+        UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario);
 
     }
 }

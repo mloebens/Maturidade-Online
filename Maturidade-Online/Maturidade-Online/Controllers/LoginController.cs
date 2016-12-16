@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Usuario;
+﻿using AutoMapper;
+using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Models;
 using Maturidade_Online.Servicos;
 using System;
@@ -25,21 +26,29 @@ namespace Maturidade_Online.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Logar(string email, string senha)
+        public ActionResult Logar(UsuarioModel usuarioModel)
         {
-            UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico();
-
-            UsuarioEntidade usuario = usuarioServico.BuscarPorAutenticacao(email, senha);
-
-            if (usuario != null)
+            if (ModelState.IsValid)
             {
-                ServicoDeAutenticacao.Autenticar(new UsuarioModel(
-                    usuario.Email));
-                return RedirectToAction("Index", "Home");
+                UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico();
+
+                var usuario = Mapper.Map<UsuarioModel, UsuarioEntidade>(usuarioModel);
+
+                UsuarioEntidade usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(usuario);
+
+                if (usuarioEncontrado != null)
+                {
+                    ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(
+                        usuario.Email));
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Usuário ou Senha inválida.");
+
             }
 
-            TempData["Email"] = "Usuário ou senha inválidos!";
-            return RedirectToAction("Login");
+            return View("Login");
+
+
         }
 
         public ActionResult Deslogar()

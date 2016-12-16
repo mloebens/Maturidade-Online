@@ -16,13 +16,6 @@ namespace Maturidade_Online.Tests.Core
     public class ServicoDeDependencia
     {
 
-        public static PilarServico CriarPilarServico()
-        {
-            return new PilarServico(
-                    new PilarRepositorioMock()
-                );
-        }
-
         public static CaracteristicaServico CriarCaracteristicaServico()
         {
             return new CaracteristicaServico(
@@ -34,22 +27,6 @@ namespace Maturidade_Online.Tests.Core
         {
             return new SubtopicoServico(
                     new SubtopicoRepositorioMock()
-                );
-        }
-
-        public static ProjetoServico CriarProjetoServico()
-        {
-            return new ProjetoServico(
-                    new ProjetoRepositorioMock(),
-                    new UsuarioRepositorioMock()
-                );
-        }
-
-        public static UsuarioServico CriarUsuarioServico()
-        {
-            return new UsuarioServico(
-                    new UsuarioRepositorioMock(),
-                    new ServicoDeCriptografia()
                 );
         }
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio.Projeto;
+using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace Maturidade_Online
             {
                 cfg.CreateMap<ProjetoModel, ProjetoEntidade>();
                 cfg.CreateMap<ProjetoEntidade, ProjetoModel>();
+                cfg.CreateMap<UsuarioModel, UsuarioEntidade>();
             });
 
         }

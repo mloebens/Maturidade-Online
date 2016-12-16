@@ -49,11 +49,10 @@ namespace Maturidade_Online.Controllers
             {
                 var projeto = Mapper.Map<ProjetoModel, ProjetoEntidade>(projetoModel);
                 var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
-
-                var usuarioAutenticadoEmail = ServicoDeAutenticacao.UsuarioLogado.Login;
+                var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
                 try
                 {
-                    projetoServico.Persistir(projeto, usuarioAutenticadoEmail);
+                    projetoServico.Persistir(projeto, usuarioAutenticado);
                 }
                 catch (UsuarioException e)
                 {
@@ -67,14 +66,13 @@ namespace Maturidade_Online.Controllers
 
         public ActionResult Excluir(int id)
         {
-            var usuarioAutenticadoEmail = ServicoDeAutenticacao.UsuarioLogado.Login;
-
+            var usuarioAutenticado = new UsuarioEntidade() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
             var projeto = new ProjetoEntidade() { Id = id };
             var projetoDaBase = projetoServico.BuscarPorId(projeto);
 
             try
             {
-                projetoServico.Remover(projetoDaBase, usuarioAutenticadoEmail);
+                projetoServico.Remover(projetoDaBase, usuarioAutenticado);
             }
             catch (UsuarioException e)
             {

@@ -11,14 +11,14 @@ namespace Maturidade_Online.Repositorio.Projeto
 {
     public class ProjetoRepositorioEF : RepositorioAbstratoEF<ProjetoEntidade>, IProjetoRepositorio
     {
-        public ProjetoEntidade BuscarPorId(int id)
+        public ProjetoEntidade BuscarPorId(ProjetoEntidade projeto)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
                 return contexto.Projeto
                     .Include("caracteristicas")
                     .Include("subtopicos")
-                 .FirstOrDefault(p => p.Id == id);
+                 .FirstOrDefault(p => p.Id == projeto.Id);
             }
         }
 

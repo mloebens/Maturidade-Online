@@ -3,6 +3,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Tests.Core;
 using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Mock;
+using FakeItEasy;
+using Maturidade_Online.Dominio.Infraestrutura;
+using Maturidade_Online.Infraestrutura;
+using System.Collections.Generic;
 
 namespace Maturidade_Online.Tests.UsuarioTest
 {
@@ -10,51 +14,61 @@ namespace Maturidade_Online.Tests.UsuarioTest
     public class UsuarioServicoTest
     {
         [TestMethod]
-        public void BuscarPorUsuarioLoginFuncionando()
+        public void UsuarioBuscarPorAutenticacao()
         {
 
-            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
-            UsuarioRepositorioMock usuarioRepositorio = new UsuarioRepositorioMock();
+            var repositorio = A.Fake<IUsuarioRepositorio>();
+            var usuario = A.Fake<UsuarioEntidade>();
+            var criptografia = new ServicoDeCriptografia();
+            var servico = new UsuarioServico(repositorio, criptografia);
 
-            string email = "carlos@cwi.com.br";
-            string senha = "crescer";
+            usuario.Email = "teste@cwi.com.br";
+            usuario.Senha = "teste";
 
-            UsuarioEntidade usuarioMockado = usuarioRepositorio.BuscarPorEmail(email);
-            UsuarioEntidade usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(email, senha);
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).Returns(new UsuarioEntidade {Email = "teste@cwi.com.br", Senha = "698dc19d489c4e4db73e28a713eab07b" } );
 
-            Assert.AreEqual(usuarioMockado.Id, usuarioEncontrado.Id);
-            Assert.AreEqual(usuarioMockado.Permissao, usuarioEncontrado.Permissao);
+            var usuarioLogado = servico.BuscarPorAutenticacao(usuario);
+
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).MustHaveHappened();
+            Assert.IsNotNull(usuarioLogado);
         }
 
         [TestMethod]
-        public void BuscarPorUsuarioLoginRejeitado()
+        public void BuscarPorUsuarioAutenticadoFalhando()
         {
+            var repositorio = A.Fake<IUsuarioRepositorio>();
+            var usuario = A.Fake<UsuarioEntidade>();
+            var criptografia = new ServicoDeCriptografia();
+            var servico = new UsuarioServico(repositorio, criptografia);
 
-            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
+            usuario.Email = "teste@cwi.com.br";
+            usuario.Senha = "teste1";
 
-            string email = "carlos@cwi.com.br";
-            string senha = "teste";
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).Returns(new UsuarioEntidade { Email = "teste@cwi.com.br", Senha = "698dc19d489c4e4db73e28a713eab07b" });
 
-            UsuarioEntidade usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(email, senha);
+            var usuarioLogado = servico.BuscarPorAutenticacao(usuario);
 
-            Assert.IsNull(usuarioEncontrado);
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).MustHaveHappened();
+            Assert.IsNull(usuarioLogado);
 
         }
 
         [TestMethod]
-        public void BuscarPorEmail()
+        public void UsuarioBuscarPorEmail()
         {
-            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
-            UsuarioRepositorioMock usuarioRepositorio = new UsuarioRepositorioMock();
+            var repositorio = A.Fake<IUsuarioRepositorio>();
+            var usuario = A.Fake<UsuarioEntidade>();
+            var criptografia = new ServicoDeCriptografia();
+            var servico = new UsuarioServico(repositorio, criptografia);
 
-            string email = "carlos@cwi.com.br";
-            UsuarioEntidade usuarioMockado = usuarioRepositorio.BuscarPorEmail(email);
+            usuario.Email = "teste@cwi.com.br";
 
-            Assert.IsNotNull(usuarioMockado);
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).Returns(new UsuarioEntidade { Email = "teste@cwi.com.br" });
 
+            var usuarioLogado = servico.BuscarPorEmail(usuario);
+
+            A.CallTo(() => repositorio.BuscarPorEmail(usuario)).MustHaveHappened();
+            Assert.IsNotNull(usuarioLogado);
         }
-
-
     }
-
 }

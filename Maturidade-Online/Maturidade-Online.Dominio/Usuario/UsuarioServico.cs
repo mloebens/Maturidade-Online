@@ -19,10 +19,10 @@ namespace Maturidade_Online.Dominio.Usuario
             this.servicoCriptografia = servicoCriptografia;
         }
 
-        public UsuarioEntidade BuscarPorAutenticacao(string email, string senha)
+        public UsuarioEntidade BuscarPorAutenticacao(UsuarioEntidade usuario)
         {
-            UsuarioEntidade usuarioEncontrado = this.usuarioRepositorio.BuscarPorEmail(email);
-            string senhaCriptografada = this.servicoCriptografia.Criptografar(senha);
+            UsuarioEntidade usuarioEncontrado = this.usuarioRepositorio.BuscarPorEmail(usuario);
+            string senhaCriptografada = this.servicoCriptografia.Criptografar(usuario.Senha);
 
             if(usuarioEncontrado != null && usuarioEncontrado.Senha.Equals(senhaCriptografada))
             {
@@ -32,9 +32,9 @@ namespace Maturidade_Online.Dominio.Usuario
             return null;
         }
 
-        public UsuarioEntidade BuscarPorEmail(string email)
+        public UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario)
         {
-            return this.usuarioRepositorio.BuscarPorEmail(email);
+            return this.usuarioRepositorio.BuscarPorEmail(usuario);
         }
 
     }

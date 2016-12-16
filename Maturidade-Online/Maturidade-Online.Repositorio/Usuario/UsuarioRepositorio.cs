@@ -10,11 +10,11 @@ namespace Maturidade_Online.Repositorio
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         
-        public UsuarioEntidade BuscarPorEmail(string email)
+        public UsuarioEntidade BuscarPorEmail(UsuarioEntidade usuario)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
-                return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(email));
+                return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(usuario.Email));
             }
         }
 

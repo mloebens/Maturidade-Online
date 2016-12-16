@@ -13,7 +13,7 @@ namespace Maturidade_Online.Filter
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            UsuarioModel usuario = ServicoDeAutenticacao.UsuarioLogado;
+            UsuarioLogadoModel usuario = ServicoDeAutenticacao.UsuarioLogado;
 
             if (usuario == null) return false;
 

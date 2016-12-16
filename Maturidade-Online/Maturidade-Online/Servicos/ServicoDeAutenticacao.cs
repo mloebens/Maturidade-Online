@@ -11,16 +11,16 @@ namespace Maturidade_Online.Servicos
 
         private const string USUARIO_LOGADO_CHAVE = "USUARIO_LOGADO_CHAVE";
 
-        public static void Autenticar(UsuarioModel model)
+        public static void Autenticar(UsuarioLogadoModel model)
         {
             HttpContext.Current.Session[USUARIO_LOGADO_CHAVE] = model;
         }
 
-        public static UsuarioModel UsuarioLogado
+        public static UsuarioLogadoModel UsuarioLogado
         {
             get
             {
-                return (UsuarioModel)HttpContext.Current.Session[USUARIO_LOGADO_CHAVE];
+                return (UsuarioLogadoModel)HttpContext.Current.Session[USUARIO_LOGADO_CHAVE];
             }
         }
 

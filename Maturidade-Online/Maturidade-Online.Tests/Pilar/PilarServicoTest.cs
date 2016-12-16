@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Tests.Core;
 using System.Collections.Generic;
+using FakeItEasy;
 
 namespace Maturidade_Online.Tests.Pilar
 {
@@ -10,44 +11,59 @@ namespace Maturidade_Online.Tests.Pilar
     public class PilarServicoTest
     {
         [TestMethod]
-        public void PilarServicoAdicionarPilar()
+        public void PilarServicoPersistirIdZeroDeveAdicionar()
         {
-            PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-            PilarEntidade pilar = new PilarEntidade() { Id = 0, Titulo = "teste" };
+            var repositorioFake = A.Fake<IPilarRepositorio>();
 
-            int quantidadeDePilares = ((IList<PilarEntidade>)pilarServico.Listar()).Count;
-            pilarServico.Persistir(pilar);
+            var servico = new PilarServico(repositorioFake);
+            var pilar = A.Fake<PilarEntidade>();
 
-            Assert.AreEqual(quantidadeDePilares + 1, ((IList<PilarEntidade>)pilarServico.Listar()).Count);
+            servico.Persistir(pilar);
+
+            A.CallTo(() => repositorioFake.Criar(pilar))
+                .MustHaveHappened();
         }
 
         [TestMethod]
-        public void PilarServicoEditarPilar()
+        public void PilarServicoPersistirIdUmDeveEditar()
         {
-            PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-            PilarEntidade pilar = new PilarEntidade() { Id = 10, Titulo = "teste" };
+            var repositorioFake = A.Fake<IPilarRepositorio>();
 
-            int quantidadeDePilares = ((IList<PilarEntidade>)pilarServico.Listar()).Count;
-            pilarServico.Persistir(pilar);
+            var servico = new PilarServico(repositorioFake);
+            var pilar = new PilarEntidade() { Id = 1 };
 
-            Assert.AreEqual(quantidadeDePilares, ((IList<PilarEntidade>)pilarServico.Listar()).Count);
+            servico.Persistir(pilar);
+
+            A.CallTo(() => repositorioFake.Editar(pilar))
+                .MustHaveHappened();
         }
 
         [TestMethod]
         public void PilarServicoListarPilares()
         {
-            PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-            Assert.AreEqual(3, ((IList<PilarEntidade>)pilarServico.Listar()).Count);
+            var repositorioFake = A.Fake<IPilarRepositorio>();
+            var servico = new PilarServico(repositorioFake);
+
+            servico.Listar();
+
+            A.CallTo(() => repositorioFake.Listar())
+                .MustHaveHappened();
         }
 
 
         [TestMethod]
         public void PilarServicoRemoverPilar()
         {
-            PilarServico pilarServico = ServicoDeDependencia.CriarPilarServico();
-            pilarServico.Remover(new PilarEntidade() { Id = 2, Titulo = "Qualidade" });
+            var repositorioFake = A.Fake<IPilarRepositorio>();
 
-            Assert.AreEqual(2, ((IList<PilarEntidade>)pilarServico.Listar()).Count);
+            var servico = new PilarServico(repositorioFake);
+            var pilar = A.Fake<PilarEntidade>();
+
+            servico.Remover(pilar);
+
+            A.CallTo(() => repositorioFake.Remover(pilar))
+                .MustHaveHappened();
+
         }
     }
 }

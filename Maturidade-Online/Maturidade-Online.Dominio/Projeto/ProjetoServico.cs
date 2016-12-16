@@ -20,7 +20,7 @@ namespace Maturidade_Online.Dominio.Projeto
 
         public ProjetoEntidade BuscarPorId(ProjetoEntidade projeto)
         {
-            return projetoRepositorio.BuscarPorId(projeto.Id);
+            return projetoRepositorio.BuscarPorId(projeto);
         }
 
         public IEnumerable<ProjetoEntidade> Listar()
@@ -28,34 +28,33 @@ namespace Maturidade_Online.Dominio.Projeto
             return projetoRepositorio.Listar();
         }
 
-        public void Persistir(ProjetoEntidade projeto, string usuarioLogadoEmail)
+        public void Persistir(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
         {
            
             if (projeto.Id == 0)
             {
-                var usuarioLogado = usuarioRepositorio.BuscarPorEmail(usuarioLogadoEmail);
-                projeto.Usuario = usuarioLogado;
+                var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
+                projeto.Usuario = usuarioDaBase;
                 projetoRepositorio.Criar(projeto);
             }
             else
             {
-
-                this.verificarPermissao(projeto, usuarioLogadoEmail);
+                this.verificarPermissao(projeto, usuarioLogado);
                 projetoRepositorio.Editar(projeto);
             }
         }
 
-        public void Remover(ProjetoEntidade projeto, string usuarioLogadoEmail)
+        public void Remover(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
         {
-            this.verificarPermissao(projeto, usuarioLogadoEmail);
+            this.verificarPermissao(projeto, usuarioLogado);
             projetoRepositorio.Remover(projeto);
         }
 
-        private void verificarPermissao(ProjetoEntidade projeto, string usuarioLogadoEmail)
+        private void verificarPermissao(ProjetoEntidade projeto, UsuarioEntidade usuarioLogado)
         {
-            var usuarioLogado = usuarioRepositorio.BuscarPorEmail(usuarioLogadoEmail);
-            var projetoDaBase = projetoRepositorio.BuscarPorId(projeto.Id);
-            var usuarioPodeEditar = usuarioLogado.Id == projetoDaBase.UsuarioId || usuarioLogado.Permissao == Permissao.ADMINISTRADOR;
+            var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
+            var projetoDaBase = projetoRepositorio.BuscarPorId(projeto);
+            var usuarioPodeEditar = usuarioDaBase.Id == projetoDaBase.UsuarioId || usuarioDaBase.Permissao == Permissao.ADMINISTRADOR;
             if (!usuarioPodeEditar)
             {
                 throw new UsuarioException("Você não possuí permissão para realizar esta operação!");
