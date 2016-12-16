@@ -11,38 +11,38 @@ namespace Maturidade_Online.Servicos
     public class ServicoDeDependencia
     {
 
-        public static UsuarioServico MontarUsuarioServico()
+        public static UsuarioServico MontarUsuarioServico(ContextoDeDadosEF contexto)
         {
             UsuarioServico usuarioServico =
                 new UsuarioServico(
-                    new UsuarioRepositorio(),
+                    new UsuarioRepositorio(contexto),
                     new ServicoDeCriptografia());
             return usuarioServico;
         }
 
 
-        public static SubtopicoServico MontarSubtopicoServico()
+        public static SubtopicoServico MontarSubtopicoServico(ContextoDeDadosEF contexto)
         {
             SubtopicoServico subtopicoServico =
                 new SubtopicoServico(
-                    new SubtopicoRepositorioEF());
+                    new SubtopicoRepositorioEF(contexto));
             return subtopicoServico;
         }
 
-        public static CaracteristicaServico MontarCaracteristicaServico()
+        public static CaracteristicaServico MontarCaracteristicaServico(ContextoDeDadosEF contexto)
         {
             CaracteristicaServico caracteristicaServico =
                 new CaracteristicaServico(
-                    new CaracteristicaRepositorioEF());
+                    new CaracteristicaRepositorioEF(contexto));
             return caracteristicaServico;
         }
 
-         public static ProjetoServico MontarProjetoServico()
+         public static ProjetoServico MontarProjetoServico(ContextoDeDadosEF contexto)
         {
             ProjetoServico projetoServico =
                 new ProjetoServico(
-                    new ProjetoRepositorioEF(),
-                    new UsuarioRepositorio());
+                    new ProjetoRepositorioEF(contexto),
+                    new UsuarioRepositorio(contexto));
             return projetoServico;
         }
     }

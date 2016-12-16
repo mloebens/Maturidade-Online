@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Models;
+using Maturidade_Online.Repositorio;
 using Maturidade_Online.Servicos;
 using System;
 using System.Collections.Generic;
@@ -30,20 +31,23 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico();
-
-                var usuario = Mapper.Map<UsuarioModel, Usuario>(usuarioModel);
-
-                Usuario usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(usuario);
-
-                if (usuarioEncontrado != null)
+                using (var contexto = new ContextoDeDadosEF())
                 {
-                    ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(
-                        usuario.Email));
-                    return RedirectToAction("Index", "Home");
+                    UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico(contexto);
+
+                    var usuario = Mapper.Map<UsuarioModel, Usuario>(usuarioModel);
+
+                    Usuario usuarioEncontrado = usuarioServico.BuscarPorAutenticacao(usuario);
+
+                    if (usuarioEncontrado != null)
+                    {
+                        ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(
+                            usuario.Email));
+                        return RedirectToAction("Index", "Home");
+                    }
+                    
                 }
                 ModelState.AddModelError("", "Usuário ou Senha inválida.");
-
             }
 
             return View("Login");

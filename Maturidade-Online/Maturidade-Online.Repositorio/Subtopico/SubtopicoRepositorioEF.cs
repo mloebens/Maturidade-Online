@@ -10,13 +10,15 @@ namespace Maturidade_Online.Repositorio
 {
     public class SubtopicoRepositorioEF : RepositorioAbstratoEF<Subtopico>, ISubtopicoRepositorio
     {
+        public SubtopicoRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        {
+        }
+
         public override IEnumerable<Subtopico> Listar()
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                contexto.Configuration.ProxyCreationEnabled = false;
-                return contexto.Subtopico.Include("Pilares").ToList();
-            }
+            contexto.Configuration.ProxyCreationEnabled = false;
+            return contexto.Subtopico.Include("Pilares").ToList();
+
         }
 
 

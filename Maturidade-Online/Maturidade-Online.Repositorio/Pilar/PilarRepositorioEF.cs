@@ -10,5 +10,8 @@ namespace Maturidade_Online.Repositorio
 {
     public class PilarRepositorioEF : RepositorioAbstratoEF<Pilar>, IPilarRepositorio
     {
+        public PilarRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        {
+        }
     }
 }

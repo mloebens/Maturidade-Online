@@ -2,6 +2,7 @@
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
+using Maturidade_Online.Repositorio;
 using Maturidade_Online.Servicos;
 using System;
 using System.Collections.Generic;
@@ -13,30 +14,31 @@ namespace Maturidade_Online.Controllers
 {
     public class ProjetoController : Controller
     {
-        private ProjetoServico projetoServico = ServicoDeDependencia.MontarProjetoServico();
-
         [Autorizador]
         public ActionResult Manter(int? id)
         {
-            var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico();
-            var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico();
-            var caracteristicas = caracteristicaServico.Listar();
-            var subtopicos = subtopicosServico.Listar();
             var projetoModel = new ProjetoModel();
-
-            if (id.HasValue && id.Value > 0)
+            using (var contexto = new ContextoDeDadosEF())
             {
+                var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+                var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var caracteristicas = caracteristicaServico.Listar();
+                var subtopicos = subtopicosServico.Listar();
 
-                var projeto = new Projeto() { Id = id.Value };
-                var projetoDaBase = projetoServico.BuscarPorId(projeto);
-                if (projetoDaBase != null)
+
+                if (id.HasValue && id.Value > 0)
                 {
-                    projetoModel = Mapper.Map<Projeto, ProjetoModel>(projetoDaBase);
+                    var projeto = new Projeto() { Id = id.Value };
+                    var projetoDaBase = projetoServico.BuscarPorId(projeto);
+                    if (projetoDaBase != null)
+                    {
+                        projetoModel = Mapper.Map<Projeto, ProjetoModel>(projetoDaBase);
+                    }
                 }
+                projetoModel.listaDeCaracteristicas = caracteristicas;
+                projetoModel.listaDeSubtopicos = subtopicos;
             }
-            projetoModel.ListaDeCaracteristicas = caracteristicas;
-            projetoModel.ListaDeSubtopicos = subtopicos;
-
             return View("Projeto", projetoModel);
         }
 
@@ -45,37 +47,44 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                var projeto = Mapper.Map<ProjetoModel, Projeto>(projetoModel);
-                var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
-                var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
-                try
+                using (var contexto = new ContextoDeDadosEF())
                 {
-                    projetoServico.Persistir(projeto, usuarioAutenticado);
-                }
-                catch (UsuarioException e)
-                {
-                    ModelState.AddModelError("", e.Message);
+                    var projeto = Mapper.Map<ProjetoModel, Projeto>(projetoModel);
+                    var usuarioService = ServicoDeDependencia.MontarUsuarioServico(contexto);
+                    var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                    var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+                    try
+                    {
+                        projetoServico.Persistir(projeto, usuarioAutenticado);
+                    }
+                    catch (UsuarioException e)
+                    {
+                        ModelState.AddModelError("", e.Message);
+                    }
                 }
             }
 
-            //return View("Projeto");
-            return RedirectToAction("Manter");
+            return View("Projeto");
         }
 
         [Autorizador]
         public ActionResult Excluir(int id)
         {
-            var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
-            var projeto = new Projeto() { Id = id };
-            var projetoDaBase = projetoServico.BuscarPorId(projeto);
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+                var projeto = new Projeto() { Id = id };
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var projetoDaBase = projetoServico.BuscarPorId(projeto);
 
-            try
-            {
-                projetoServico.Remover(projetoDaBase, usuarioAutenticado);
-            }
-            catch (UsuarioException e)
-            {
-                ModelState.AddModelError("", e.Message);
+                try
+                {
+                    projetoServico.Remover(projetoDaBase, usuarioAutenticado);
+                }
+                catch (UsuarioException e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
             }
 
             return View("Projeto");

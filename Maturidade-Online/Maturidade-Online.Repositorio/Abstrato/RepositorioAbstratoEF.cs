@@ -8,41 +8,37 @@ using System.Data.Entity;
 
 namespace Maturidade_Online.Repositorio.Abstrato
 {
-    public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class {
+    public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class
+    {
+
+        protected ContextoDeDadosEF contexto;
+
+        public RepositorioAbstratoEF(ContextoDeDadosEF contexto)
+        {
+            this.contexto = contexto;
+        }
 
         public virtual void Criar(T entidade)
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                contexto.Entry<T>(entidade).State = EntityState.Added;
-                contexto.SaveChanges();
-            }
+            contexto.Entry<T>(entidade).State = EntityState.Added;
+            contexto.SaveChanges();
         }
 
         public virtual void Editar(T entidade)
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                contexto.Entry<T>(entidade).State = EntityState.Modified;
-                contexto.SaveChanges();
-            }
+            contexto.Entry<T>(entidade).State = EntityState.Modified;
+            contexto.SaveChanges();
         }
 
         public virtual IEnumerable<T> Listar()
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                return contexto.Set<T>().ToList();
-            }
+            return contexto.Set<T>().ToList();
         }
 
         public void Remover(T entidade)
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                contexto.Entry<T>(entidade).State = EntityState.Deleted;
-                contexto.SaveChanges();
-            }
+            contexto.Entry<T>(entidade).State = EntityState.Deleted;
+            contexto.SaveChanges();
         }
     }
 }

@@ -1,21 +1,23 @@
 ﻿using Maturidade_Online.Dominio;
+using Maturidade_Online.Repositorio.Abstrato;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class UsuarioRepositorio : IUsuarioRepositorio
+    public class UsuarioRepositorio : RepositorioAbstratoEF<Usuario>, IUsuarioRepositorio
     {
-        
+        public UsuarioRepositorio(ContextoDeDadosEF contexto) : base(contexto)
+        {
+        }
+
         public Usuario BuscarPorEmail(Usuario usuario)
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(usuario.Email));
-            }
+            return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(usuario.Email));
         }
 
     }

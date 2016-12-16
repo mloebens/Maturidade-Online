@@ -10,13 +10,14 @@ namespace Maturidade_Online.Repositorio
 {
     public class CaracteristicaRepositorioEF : RepositorioAbstratoEF<Caracteristica>, ICaracteristicaRepositorio
     {
+        public CaracteristicaRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        {
+        }
+
         public override IEnumerable<Caracteristica> Listar()
         {
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                contexto.Configuration.ProxyCreationEnabled = false;
-                return contexto.Caracteristica.Include("Subtopicos").ToList();
-            }
+            base.contexto.Configuration.ProxyCreationEnabled = false;
+            return contexto.Caracteristica.Include("Subtopicos").ToList();
         }
 
         public override void Editar(Caracteristica caracteristica)
