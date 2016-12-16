@@ -14,7 +14,7 @@ namespace Maturidade_Online.Controllers
 {
     public class ProjetoController : Controller
     {
-        [Autorizador]
+        //[Autorizador]
         public ActionResult Manter(int? id)
         {
             var projetoModel = new ProjetoModel();
@@ -36,8 +36,8 @@ namespace Maturidade_Online.Controllers
                         projetoModel = Mapper.Map<Projeto, ProjetoModel>(projetoDaBase);
                     }
                 }
-                projetoModel.ListaDeCaracteristicas = caracteristicas;
-                projetoModel.ListaDeSubtopicos = subtopicos;
+                projetoModel.listaDeCaracteristicas = caracteristicas;
+                projetoModel.listaDeSubtopicos = subtopicos;
             }
             return View("Projeto", projetoModel);
         }
@@ -80,6 +80,10 @@ namespace Maturidade_Online.Controllers
                 try
                 {
                     projetoServico.Remover(projetoDaBase, usuarioAutenticado);
+                }
+                catch (UsuarioException e)
+                {
+                    ModelState.AddModelError("", e.Message);
                 }
             }
 
