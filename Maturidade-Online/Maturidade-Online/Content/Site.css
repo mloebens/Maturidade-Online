@@ -29,14 +29,18 @@ div.login-item {
     margin: 15px auto;
 }
 
-.login-erro {
-    padding: 9px 5px 1px 5px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+.login-erro > .alert-danger li {
+    padding: 5px;
+    margin-bottom: 5px;
+    
 }
 
-.login-erro ul {
+.login-erro > .alert-danger ul {
     list-style-type: square;
+}
+
+.login-erro > .alert-danger {
+        border-radius: 10px;
 }
 
 #panel-login {

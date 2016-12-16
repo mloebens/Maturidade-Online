@@ -10,7 +10,9 @@
 
     <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
    
-            @Html.ValidationSummary(true, "", new { @class = "alert-danger login-erro" })
+        <div class="login-erro">
+            @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+        </div>
 
         <div id="panel-login" class="panel panel-info">
             <div class="panel-heading">
@@ -31,7 +33,7 @@
                 <div class="col-md-12 login-item">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        @Html.TextBoxFor(model => model.Senha, new { @class = "form-control", placeholder = "Senha" })
+                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control", placeholder = "Senha" })
                     </div>
                     <div class="col-md-12">
                         @Html.ValidationMessageFor(model => model.Senha)
