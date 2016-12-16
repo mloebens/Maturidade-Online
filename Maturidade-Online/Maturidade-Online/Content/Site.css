@@ -53,4 +53,11 @@ div.login-item {
 }
 
 
-
+/* Projeto */
+#caracteristicas > span.select2-container--default .select2-selection--multiple {
+    border-radius: 0px 4px 4px 0px;
+}
+#caracteristicas > span.select2.select2-container.select2-container--default {
+    display: block;
+    width: 100% !important;
+}
