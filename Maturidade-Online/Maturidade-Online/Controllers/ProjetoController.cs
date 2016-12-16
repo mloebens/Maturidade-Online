@@ -81,10 +81,6 @@ namespace Maturidade_Online.Controllers
                 {
                     projetoServico.Remover(projetoDaBase, usuarioAutenticado);
                 }
-                catch (UsuarioException e)
-                {
-                    ModelState.AddModelError("", e.Message);
-                }
             }
 
             return View("Projeto");
