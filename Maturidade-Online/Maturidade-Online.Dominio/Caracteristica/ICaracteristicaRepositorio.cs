@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Caracteristica
+namespace Maturidade_Online.Dominio
 {
-    public interface ICaracteristicaRepositorio : IRepositorio<CaracteristicaEntidade>
+    public interface ICaracteristicaRepositorio : IRepositorio<Caracteristica>
     {
     }
 }

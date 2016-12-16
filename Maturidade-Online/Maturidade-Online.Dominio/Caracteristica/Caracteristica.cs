@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Caracteristica
+namespace Maturidade_Online.Dominio
 {
     [Table("Caracteristica")]
-    public class CaracteristicaEntidade
+    public class Caracteristica
     {
         public int Id { get; set; }
         public string Nome { get; set; }
         public virtual ICollection<SubtopicoEntidade> Subtopicos { get; set; }
         public virtual ICollection<Projeto> Projetos { get; set; }
 
-        public CaracteristicaEntidade()
+        public Caracteristica()
         {
             this.Subtopicos = new HashSet<SubtopicoEntidade>();
             this.Projetos = new HashSet<Projeto>();

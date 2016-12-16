@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Caracteristica;
+﻿using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;
 using System;
@@ -15,7 +15,7 @@ namespace Maturidade_Online.Dominio
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
+        public virtual ICollection<Caracteristica> Caracteristicas { get; set; }
         public virtual ICollection<SubtopicoEntidade> Subtopicos { get; set; }
         public int UsuarioId { get; set; }
         public UsuarioEntidade Usuario { get; set; }
@@ -23,7 +23,7 @@ namespace Maturidade_Online.Dominio
         public Projeto()
         {
             this.Subtopicos = new HashSet<SubtopicoEntidade>();
-            this.Caracteristicas = new HashSet<CaracteristicaEntidade>();
+            this.Caracteristicas = new HashSet<Caracteristica>();
         }
     }
 }

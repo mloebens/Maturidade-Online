@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maturidade_Online.Dominio.Caracteristica
+namespace Maturidade_Online.Dominio
 {
     public class CaracteristicaServico
     {
@@ -15,12 +15,12 @@ namespace Maturidade_Online.Dominio.Caracteristica
             this.caracteristicaRepositorio = caracteristicaRepositorio;
         }
 
-        public IEnumerable<CaracteristicaEntidade> Listar()
+        public IEnumerable<Caracteristica> Listar()
         {
             return caracteristicaRepositorio.Listar();
         }
 
-        public void Persistir(CaracteristicaEntidade pilar)
+        public void Persistir(Caracteristica pilar)
         {
             if (pilar.Id == 0)
             {
@@ -32,7 +32,7 @@ namespace Maturidade_Online.Dominio.Caracteristica
             }
         }
 
-        public void Remover(CaracteristicaEntidade pilar)
+        public void Remover(Caracteristica pilar)
         {
             caracteristicaRepositorio.Remover(pilar);
         }

@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Maturidade_Online.Dominio.Caracteristica;
+using Maturidade_Online.Dominio;
 using System.Collections.Generic;
 using FakeItEasy;
 
-namespace Maturidade_Online.Tests.Caracteristica
+namespace Maturidade_Online.Tests
 {
     [TestClass]
     public class CaracteristicaServicoTest
@@ -14,7 +14,7 @@ namespace Maturidade_Online.Tests.Caracteristica
         {
             var repositorio = A.Fake<ICaracteristicaRepositorio>();
             var servico = new CaracteristicaServico(repositorio);
-            var caracteristica = A.Fake<CaracteristicaEntidade>();
+            var caracteristica = A.Fake<Caracteristica>();
             caracteristica.Id = 0;
             servico.Persistir(caracteristica);
 
@@ -26,7 +26,7 @@ namespace Maturidade_Online.Tests.Caracteristica
         {
             var repositorio = A.Fake<ICaracteristicaRepositorio>();
             var servico = new CaracteristicaServico(repositorio);
-            var caracteristica = A.Fake<CaracteristicaEntidade>();
+            var caracteristica = A.Fake<Caracteristica>();
             caracteristica.Id = 1;
 
             servico.Persistir(caracteristica);
@@ -50,7 +50,7 @@ namespace Maturidade_Online.Tests.Caracteristica
         {
             var repositorio = A.Fake<ICaracteristicaRepositorio>();
             var servico = new CaracteristicaServico(repositorio);
-            var subtopico = A.Fake<CaracteristicaEntidade>();
+            var subtopico = A.Fake<Caracteristica>();
             subtopico.Id = 1;
             servico.Remover(subtopico);
 

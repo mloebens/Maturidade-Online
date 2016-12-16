@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Caracteristica;
+﻿using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
@@ -22,14 +22,14 @@ namespace Maturidade_Online.Repositorio
         public DbSet<PilarEntidade> Pilar { get; set; }
         public DbSet<SubtopicoEntidade> Subtopico { get; set; }
         public DbSet<UsuarioEntidade> Usuario { get; set; }
-        public DbSet<CaracteristicaEntidade> Caracteristica { get; set; }
+        public DbSet<Caracteristica> Caracteristica { get; set; }
         public DbSet<Projeto> Projeto { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<CaracteristicaEntidade>()
+            modelBuilder.Entity<Caracteristica>()
                 .HasMany(p => p.Subtopicos)
                 .WithMany(s => s.Caracteristicas)
                 .Map(c =>

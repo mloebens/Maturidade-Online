@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Maturidade_Online.Dominio.Caracteristica;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Subtopico;
 using Maturidade_Online.Dominio.Usuario;

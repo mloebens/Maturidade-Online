@@ -1,4 +1,4 @@
-﻿using Maturidade_Online.Dominio.Caracteristica;
+﻿using Maturidade_Online.Dominio;
 using Maturidade_Online.Dominio.Pilar;
 using Maturidade_Online.Dominio;
 using System;
@@ -19,13 +19,13 @@ namespace Maturidade_Online.Dominio.Subtopico
         public int Pontuacao { get; set; }
         public int PilarEntidadeId { get; set; }
         public PilarEntidade Pilares { get; set; }
-        public virtual ICollection<CaracteristicaEntidade> Caracteristicas { get; set; }
+        public virtual ICollection<Caracteristica> Caracteristicas { get; set; }
 
         public virtual ICollection<Projeto> Projetos { get; set; }
 
         public SubtopicoEntidade()
         {
-            this.Caracteristicas = new HashSet<CaracteristicaEntidade>();
+            this.Caracteristicas = new HashSet<Caracteristica>();
             this.Projetos = new HashSet<Projeto>();
         }
     }
