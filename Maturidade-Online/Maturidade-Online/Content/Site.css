@@ -17,7 +17,7 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+
 select,
 textarea {
     max-width: 280px;
@@ -29,7 +29,20 @@ textarea {
 
 /* Login */
 
-#loginbox{
-    margin-top:100px;
+#panel-login {
+    border-color: black;
+}
+
+#panel-login .panel-heading {
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+
+#panel-login .btn {
+    background-color: orange;
+    margin: 0 auto;
+    font-weight: bold;
+    color: white;
 }
 
