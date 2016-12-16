@@ -2,6 +2,7 @@
 using Maturidade_Online.Dominio.Caracteristica;
 using Maturidade_Online.Dominio.Projeto;
 using Maturidade_Online.Dominio.Subtopico;
+using Maturidade_Online.Dominio.Usuario;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
 using Maturidade_Online.Servicos;
@@ -50,9 +51,34 @@ namespace Maturidade_Online.Controllers
                 var usuarioService = ServicoDeDependencia.MontarUsuarioServico();
 
                 var usuarioAutenticadoEmail = ServicoDeAutenticacao.UsuarioLogado.Login;
-                var usuarioLogado = usuarioService.BuscarPorEmail(usuarioAutenticadoEmail);
-                
-                projetoServico.Persistir(projeto, usuarioLogado);
+                try
+                {
+                    projetoServico.Persistir(projeto, usuarioAutenticadoEmail);
+                }
+                catch (UsuarioException e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
+            }
+
+            return View("Projeto");
+        }
+
+
+        public ActionResult Excluir(int id)
+        {
+            var usuarioAutenticadoEmail = ServicoDeAutenticacao.UsuarioLogado.Login;
+
+            var projeto = new ProjetoEntidade() { Id = id };
+            var projetoDaBase = projetoServico.BuscarPorId(projeto);
+
+            try
+            {
+                projetoServico.Remover(projetoDaBase, usuarioAutenticadoEmail);
+            }
+            catch (UsuarioException e)
+            {
+                ModelState.AddModelError("", e.Message);
             }
 
             return View("Projeto");

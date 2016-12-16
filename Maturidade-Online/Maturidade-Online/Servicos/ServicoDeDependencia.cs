@@ -47,7 +47,8 @@ namespace Maturidade_Online.Servicos
         {
             ProjetoServico projetoServico =
                 new ProjetoServico(
-                    new ProjetoRepositorioEF());
+                    new ProjetoRepositorioEF(),
+                    new UsuarioRepositorio());
             return projetoServico;
         }
     }

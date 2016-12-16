@@ -40,7 +40,8 @@ namespace Maturidade_Online.Tests.Core
         public static ProjetoServico CriarProjetoServico()
         {
             return new ProjetoServico(
-                    new ProjetoRepositorioMock()
+                    new ProjetoRepositorioMock(),
+                    new UsuarioRepositorioMock()
                 );
         }
 

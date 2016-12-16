@@ -1,6 +1,7 @@
 ﻿using Maturidade_Online.Dominio.Projeto;
 using System;
 using System.Collections.Generic;
+using Maturidade_Online.Dominio.Usuario;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Maturidade_Online.Mock
     {
         IList<ProjetoEntidade> projetos = new List<ProjetoEntidade>()
         {
-            new ProjetoEntidade() { Id = 1 },
+            new ProjetoEntidade() { Id = 1, Usuario = new UsuarioEntidade() { Id = 1, Email = "victor.eduardo@cwi.com.br" } },
             new ProjetoEntidade() { Id = 2 },
             new ProjetoEntidade() { Id = 3 }
         };

@@ -59,6 +59,7 @@
     <Compile Include="Usuario\IUsuarioRepositorio.cs" />
     <Compile Include="Usuario\Permissao.cs" />
     <Compile Include="Usuario\UsuarioEntidade.cs" />
+    <Compile Include="Usuario\UsuarioException.cs" />
     <Compile Include="Usuario\UsuarioServico.cs" />
   </ItemGroup>
   <ItemGroup />

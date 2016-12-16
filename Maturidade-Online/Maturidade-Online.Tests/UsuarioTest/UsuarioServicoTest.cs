@@ -41,6 +41,19 @@ namespace Maturidade_Online.Tests.UsuarioTest
 
         }
 
+        [TestMethod]
+        public void BuscarPorEmail()
+        {
+            UsuarioServico usuarioServico = ServicoDeDependencia.CriarUsuarioServico();
+            UsuarioRepositorioMock usuarioRepositorio = new UsuarioRepositorioMock();
+
+            string email = "carlos@cwi.com.br";
+            UsuarioEntidade usuarioMockado = usuarioRepositorio.BuscarPorEmail(email);
+
+            Assert.IsNotNull(usuarioMockado);
+
+        }
+
 
     }
 
