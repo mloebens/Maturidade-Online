@@ -115,7 +115,7 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
         {
-            if (idsCaracteristicas == null) return PartialView("_Subtopicos", new { });
+            if (idsCaracteristicas == null) return PartialView("_Subtopicos");
 
             using (var contexto = new ContextoDeDadosEF())
             {

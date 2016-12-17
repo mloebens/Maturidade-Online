@@ -31,7 +31,9 @@ namespace Maturidade_Online
 
             bundles.Add(new StyleBundle("~/Content/select2css").Include(
                         "~/Content/css/select2.min.css"));
-           
+            
+            bundles.Add(new ScriptBundle("~/bundles/projeto").Include(
+                        "~/Scripts/App/projeto.js"));
         }
     }
 }

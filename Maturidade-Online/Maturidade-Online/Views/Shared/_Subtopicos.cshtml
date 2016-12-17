@@ -1,27 +1,29 @@
 ﻿@model IEnumerable<Maturidade_Online.Dominio.Subtopico>
 
-<table class="table table-striped" id="listagem-subtopicos">
-    <thead>
-        <tr>
-            <th>Pilar</th>
-            <th>Subtópico</th>
-            <th>Atendido</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var subtopico in Model)
-        {
-            <tr id="subtopico">
-                <td>@subtopico.Pilares.Titulo</td>
-                <td data-pontuacao="@subtopico.Pontuacao">@subtopico.Nome</td>
-                <td>
-                    <input type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
-                </td>
+@if (Model != null)
+{
+    <table class="table table-striped" id="listagem-subtopicos">
+        <thead>
+            <tr>
+                <th>Pilar</th>
+                <th>Subtópico</th>
+                <th>Atendido</th>
             </tr>
-        }
+        </thead>
+        <tbody>
 
-    </tbody>
-</table>
+            @foreach (var subtopico in Model)
+            {
+                <tr id="subtopico">
+                    <td>@subtopico.Pilares.Titulo</td>
+                    <td data-pontuacao="@subtopico.Pontuacao">@subtopico.Nome</td>
+                    <td>
+                        <input type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
+                    </td>
+                </tr>
+            }
+            
 
-
+        </tbody>
+    </table>
+}
