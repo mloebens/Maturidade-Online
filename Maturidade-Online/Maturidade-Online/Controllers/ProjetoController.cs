@@ -50,10 +50,26 @@ namespace Maturidade_Online.Controllers
             {
                 using (var contexto = new ContextoDeDadosEF())
                 {
-                    var projeto = Mapper.Map<ProjetoModel, Projeto>(projetoModel);
+                    //Converter Caracteristica
+                    var caracteristicaService = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+                    var caracteristicaBanco = caracteristicaService.Listar();
+                    var listaCaracteristica = caracteristicaBanco.Where(s => projetoModel.Caracteristicas.Any(c => c == s.Id)).ToList();
+
+                    //Converter Subtópico
+                    var subtopicoService = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                    var subtopicoBanco = subtopicoService.Listar();
+                    var listaSubtopico = subtopicoBanco.Where(s => projetoModel.Subtopicos.Any(c => c == s.Id)).ToList();
+
+                    //Adicionar no projeto
+                    var projeto = new Projeto();
+                    projeto.Nome = projetoModel.Nome;
+                    projeto.Caracteristicas = listaCaracteristica;
+                    projeto.Subtopicos = listaSubtopico;
+
                     var usuarioService = ServicoDeDependencia.MontarUsuarioServico(contexto);
                     var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
                     var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+                    
                     try
                     {
                         projetoServico.Persistir(projeto, usuarioAutenticado);
@@ -102,14 +118,14 @@ namespace Maturidade_Online.Controllers
                 var subtopicosBanco = ServicoDeDependencia.MontarSubtopicoServico(contexto).Listar();
 
                 var lista = subtopicosBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
-            
-            //// TODO: consultar banco
-            //var subtopicos = new[]{
-            //    new Subtopico() { Id = 1, Pontuacao = 5, Nome = "Subtópico 1" },
-            //    new Subtopico() { Id = 2, Pontuacao = 7, Nome = "Subtópico 2" }
-            //};
 
-            return PartialView("_Subtopicos", lista);
+                //// TODO: consultar banco
+                //var subtopicos = new[]{
+                //    new Subtopico() { Id = 1, Pontuacao = 5, Nome = "Subtópico 1" },
+                //    new Subtopico() { Id = 2, Pontuacao = 7, Nome = "Subtópico 2" }
+                //};
+
+                return PartialView("_Subtopicos", lista);
             }
         }
 
