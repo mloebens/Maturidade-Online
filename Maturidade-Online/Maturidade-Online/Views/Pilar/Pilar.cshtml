@@ -1,0 +1,69 @@
+﻿@model  Maturidade_Online.Models.PilarModel
+@{
+    ViewBag.Title = "Pilar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Salvar", "Pilar", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="login-erro">
+        @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+    </div>
+
+    @Html.HiddenFor(model => model.Id)
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-info panel-manter">
+            <div class="panel-heading">
+                <div class="panel-title text-center">Pilares</div>
+            </div>
+
+            <div class="col-md-12 login-item">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
+                    @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", placeholder = "Nome do Pilar" })
+                </div>
+                <div class="col-md-12">
+                    @Html.ValidationMessageFor(model => model.Titulo)
+                </div>
+
+            </div>
+
+
+
+            <div class="col-sm-12">
+                <input id="cadastrar-pilar" type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
+            </div>
+
+        </div>
+    </div>
+}
+
+
+<div class="row">
+        <div id="container-listagem-pilares" class="col-md-6 col-lg-offset-3"></div>
+    </div>
+
+
+
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        var $listagemPilares = $('#container-listagem-pilares');
+
+        $("#cadastrar-pilar").ready(function () {
+            const urlGet = '@Url.Action("PesquisarPilares", "Pilar")';
+            jQuery.ajaxSettings.traditional = true;
+
+            $.get(urlGet, {})
+                .done(response => {
+                         $listagemPilares.html(response);
+                });
+        })
+
+    </script>
+}

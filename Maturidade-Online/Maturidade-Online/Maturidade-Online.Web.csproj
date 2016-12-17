@@ -164,11 +164,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PilarController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Filter\Autorizador.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PilarModel.cs" />
     <Compile Include="Models\ProjetoModel.cs" />
     <Compile Include="Models\UsuarioLogadoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
@@ -185,6 +187,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\App\projeto.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -273,6 +276,8 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Projeto\Projeto.cshtml" />
     <Content Include="Views\Shared\_Subtopicos.cshtml" />
+    <Content Include="Views\Pilar\Pilar.cshtml" />
+    <Content Include="Views\Shared\_Pilares.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

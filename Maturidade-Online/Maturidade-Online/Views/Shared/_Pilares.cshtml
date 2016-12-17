@@ -1,0 +1,21 @@
+﻿@model ICollection<Maturidade_Online.Dominio.Subtopico>
+
+<table class="table table-striped" id="listagem-subtopicos">
+    <thead>
+        <tr>
+            <th class="text-center">Subtópico</th>
+            <th class="text-center">Pontuação</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var subtopico in Model)
+        {
+            <tr id="subtopico">
+                <td class="text-center">@subtopico.Nome</td>
+                <td class="text-center">@subtopico.Pontuacao</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

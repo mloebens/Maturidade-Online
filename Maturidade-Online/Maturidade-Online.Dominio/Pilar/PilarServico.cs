@@ -36,5 +36,11 @@ namespace Maturidade_Online.Dominio
         {
             pilarRepositorio.Remover(pilar);
         }
+
+        public Pilar BuscarPorId(Pilar pilar)
+        {
+            return pilarRepositorio.BuscarPorId(pilar);
+
+        }
     }
 }

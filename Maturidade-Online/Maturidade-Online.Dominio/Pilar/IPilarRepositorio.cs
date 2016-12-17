@@ -9,5 +9,6 @@ namespace Maturidade_Online.Dominio
 {
     public interface IPilarRepositorio : IRepositorio<Pilar>
     {
+        Pilar BuscarPorId(Pilar pilar);
     }
 }
