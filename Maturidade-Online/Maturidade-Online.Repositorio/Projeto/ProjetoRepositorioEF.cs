@@ -42,8 +42,16 @@ namespace Maturidade_Online.Repositorio
 
         public override void Editar(Projeto projeto)
         {
-            ProjetoRepositorio repositorio = new ProjetoRepositorio();
-            repositorio.AlterarVinculos(projeto);
+
+            CaracteristicaRepositorioEF caracteristicaRepositorio = new CaracteristicaRepositorioEF(contexto);
+            SubtopicoRepositorioEF subtopicoRepositorio = new SubtopicoRepositorioEF(contexto);
+            var caracteristicasDaBase = caracteristicaRepositorio.Listar(projeto.Caracteristicas);
+            var subtopicosDaBase = subtopicoRepositorio.Listar(projeto.Subtopicos);
+
+            projeto.Subtopicos = subtopicosDaBase;
+            projeto.Caracteristicas = caracteristicasDaBase;
+
+
             base.Editar(projeto);
         }
     }

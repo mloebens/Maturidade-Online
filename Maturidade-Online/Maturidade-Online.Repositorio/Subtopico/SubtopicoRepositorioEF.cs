@@ -28,5 +28,19 @@ namespace Maturidade_Online.Repositorio
             repositorio.AlterarVinculos(subtopico);
             base.Editar(subtopico);
         }
+
+        public ICollection<Subtopico> Listar(ICollection<Subtopico> subtopico)
+        {
+            var ids = subtopico.Select(_ => _.Id);
+
+            return contexto.Subtopico.Where(c => ids.Any(id => id == c.Id)).ToList();
+        }
+
+        public ICollection<Subtopico> Listar(ICollection<Caracteristica> caracteristica)
+        {
+            var ids = caracteristica.Select(_ => _.Id);
+
+            return contexto.Subtopico.Include("Pilares").Where(s => s.Caracteristicas.Any(c => ids.Any(i => i == c.Id))).ToList();
+        }
     }
 }

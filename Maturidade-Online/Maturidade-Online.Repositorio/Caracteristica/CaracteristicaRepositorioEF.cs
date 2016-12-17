@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Maturidade_Online.Repositorio
 {
@@ -16,7 +17,7 @@ namespace Maturidade_Online.Repositorio
 
         public override IEnumerable<Caracteristica> Listar()
         {
-            base.contexto.Configuration.ProxyCreationEnabled = false;
+            contexto.Configuration.ProxyCreationEnabled = false;
             return contexto.Caracteristica.Include("Subtopicos").ToList();
         }
 
@@ -25,6 +26,13 @@ namespace Maturidade_Online.Repositorio
             CaracteristicaRepositorio repositorio = new CaracteristicaRepositorio();
             repositorio.AlterarVinculos(caracteristica);
             base.Editar(caracteristica);
+        }
+
+        public ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas)
+        {
+            var ids = caracteristicas.Select(_ => _.Id);
+
+            return contexto.Caracteristica.Include("Subtopicos").Where(c => ids.Any(id => id == c.Id)).ToList();
         }
     }
 }

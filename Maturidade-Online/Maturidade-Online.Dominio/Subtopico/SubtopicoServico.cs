@@ -36,5 +36,14 @@ namespace Maturidade_Online.Dominio
         {
             subtopicoRepositorio.Remover(pilar);
         }
+
+        ICollection<Subtopico> Listar(ICollection<Subtopico> subtopico)
+        {
+            return subtopicoRepositorio.Listar(subtopico);
+        }
+        public ICollection<Subtopico> Listar(ICollection<Caracteristica> caracteristica)
+        {
+            return subtopicoRepositorio.Listar(caracteristica);
+        }
     }
 }

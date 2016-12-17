@@ -37,5 +37,10 @@ namespace Maturidade_Online.Dominio
         {
             caracteristicaRepositorio.Remover(pilar);
         }
+
+        public ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas)
+        {
+            return caracteristicaRepositorio.Listar(caracteristicas);
+        }
     }
 }
