@@ -16,6 +16,11 @@ namespace Maturidade_Online.Controllers
     {
         [Autorizador]
         public ActionResult Manter(int? id)
+            {
+            var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico();
+            var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico();
+            var caracteristicas = caracteristicaServico.Listar();
+            var subtopicos = subtopicosServico.Listar();
         {
             var projetoModel = new ProjetoModel();
             using (var contexto = new ContextoDeDadosEF())
@@ -104,6 +109,28 @@ namespace Maturidade_Online.Controllers
             return PartialView("_Subtopicos", subtopicos);
         }
 
+            return View("Projeto");
+        }
+
+
+        // Partial View
+        [Autorizador]
+        public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
+        {
+            if (idsCaracteristicas == null) return PartialView("_Subtopicos", new { });
+
+            var subtopicosBanco = ServicoDeDependencia.MontarSubtopicoServico().Listar();
+           
+            var lista = subtopicosBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
+
+            // TODO: consultar banco
+            var subtopicos = new[]{
+                new Subtopico() { Id = 1, Pontuacao = 5, Nome = "Subtópico 1" },
+                new Subtopico() { Id = 2, Pontuacao = 7, Nome = "Subtópico 2" }
+            };
+
+            return PartialView("_Subtopicos", lista);
+        }
 
     }
 }
