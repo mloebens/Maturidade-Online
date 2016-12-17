@@ -62,7 +62,10 @@ namespace Maturidade_Online.Controllers
 
                     //Adicionar no projeto
                     var projeto = new Projeto();
-                    projeto.Id = projetoModel.Id.Value;
+                    if (projetoModel.Id.HasValue)
+                    {
+                        projeto.Id = projetoModel.Id.Value;
+                    }
                     projeto.Nome = projetoModel.Nome;
                     projeto.Caracteristicas = listaCaracteristica;
                     projeto.Subtopicos = listaSubtopico;
