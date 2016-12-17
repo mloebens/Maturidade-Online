@@ -29,7 +29,6 @@ namespace Maturidade_Online.Dominio
 
         public void Persistir(Projeto projeto, Usuario usuarioLogado)
         {
-           
             if (projeto.Id == 0)
             {
                 var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
@@ -38,18 +37,18 @@ namespace Maturidade_Online.Dominio
             }
             else
             {
-                this.verificarPermissao(projeto, usuarioLogado);
+                this.VerificarPermissao(projeto, usuarioLogado);
                 projetoRepositorio.Editar(projeto);
             }
         }
 
         public void Remover(Projeto projeto, Usuario usuarioLogado)
         {
-            this.verificarPermissao(projeto, usuarioLogado);
+            this.VerificarPermissao(projeto, usuarioLogado);
             projetoRepositorio.Remover(projeto);
         }
 
-        private void verificarPermissao(Projeto projeto, Usuario usuarioLogado)
+        private void VerificarPermissao(Projeto projeto, Usuario usuarioLogado)
         {
             var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
             var projetoDaBase = projetoRepositorio.BuscarPorId(projeto);

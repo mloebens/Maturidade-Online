@@ -19,10 +19,10 @@ namespace Maturidade_Online.Models
         public string Nome { get; set; }
 
         [Required]
-        public IEnumerable<int> Caracteristicas { get; set; }
+        public IEnumerable<int> IdsCaracteristicas { get; set; }
 
         [Required]
-        public IEnumerable<int> Subtopicos { get; set; }
+        public IEnumerable<int> IdsSubtopicos { get; set; }
 
         public IEnumerable<Caracteristica> ListaDeCaracteristicas { get; set; }
         public IEnumerable<Subtopico> ListaDeSubtopicos { get; set; }

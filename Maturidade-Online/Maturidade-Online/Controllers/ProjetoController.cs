@@ -53,15 +53,16 @@ namespace Maturidade_Online.Controllers
                     //Converter Caracteristica
                     var caracteristicaService = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                     var caracteristicaBanco = caracteristicaService.Listar();
-                    var listaCaracteristica = caracteristicaBanco.Where(s => projetoModel.Caracteristicas.Any(c => c == s.Id)).ToList();
+                    var listaCaracteristica = caracteristicaBanco.Where(s => projetoModel.IdsCaracteristicas.Any(c => c == s.Id)).ToList();
 
                     //Converter Subtópico
                     var subtopicoService = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                     var subtopicoBanco = subtopicoService.Listar();
-                    var listaSubtopico = subtopicoBanco.Where(s => projetoModel.Subtopicos.Any(c => c == s.Id)).ToList();
+                    var listaSubtopico = subtopicoBanco.Where(s => projetoModel.IdsSubtopicos.Any(c => c == s.Id)).ToList();
 
                     //Adicionar no projeto
                     var projeto = new Projeto();
+                    projeto.Id = projetoModel.Id.Value;
                     projeto.Nome = projetoModel.Nome;
                     projeto.Caracteristicas = listaCaracteristica;
                     projeto.Subtopicos = listaSubtopico;
