@@ -54,13 +54,5 @@ namespace Maturidade_Online.Servicos
             return projetoServico;
         }
 
-        public static PilarServico MontarPilarServico(ContextoDeDadosEF contexto)
-        {
-            PilarServico pilarServico = 
-            new PilarServico(
-                new PilarRepositorioEF(contexto));
-
-            return pilarServico;
-        }
     }
 }

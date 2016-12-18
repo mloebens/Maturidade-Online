@@ -11,6 +11,5 @@ namespace Maturidade_Online.Dominio
     {
         ICollection<PilarPontuacao> ListarPontuacaoTotal();
         Pilar BuscarPorId(Pilar pilar);
-        ICollection<PilarPontuacao> ListarPontuacaoTotal();
     }
 }
