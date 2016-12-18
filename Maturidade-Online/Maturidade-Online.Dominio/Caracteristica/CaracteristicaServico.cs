@@ -21,15 +21,15 @@ namespace Maturidade_Online.Dominio
             return caracteristicaRepositorio.Listar();
         }
 
-        public void Persistir(Caracteristica pilar)
+        public void Persistir(Caracteristica caracteristica)
         {
-            if (pilar.Id == 0)
+            if (caracteristica.Id == 0)
             {
-                caracteristicaRepositorio.Criar(pilar);
+                caracteristicaRepositorio.Criar(caracteristica);
             }
             else
             {
-                caracteristicaRepositorio.Editar(pilar);
+                caracteristicaRepositorio.Editar(caracteristica);
             }
         }
 
@@ -41,6 +41,11 @@ namespace Maturidade_Online.Dominio
         public ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas)
         {
             return caracteristicaRepositorio.Listar(caracteristicas);
+        }
+
+        public Caracteristica BuscarPorId(Caracteristica caracteristica)
+        {
+            return caracteristicaRepositorio.BuscarPorId(caracteristica);
         }
     }
 }

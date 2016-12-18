@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio;
+using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
 using Maturidade_Online.Repositorio;
 using Maturidade_Online.Servicos;
@@ -13,22 +14,83 @@ namespace Maturidade_Online.Controllers
 {
     public class CaracteristicaController : Controller
     {
-        public ActionResult Listar()
+
+        [Autorizador]
+        public ActionResult Manter(int? id)
+        {
+            var caracteristicaViewModel = new CaracteristicaViewModel();
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+ 
+
+                if (id.HasValue && id.Value > 0)
+                {
+                    var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+                    var caracteristicaDaBase = caracteristicaServico.BuscarPorId(new Caracteristica { Id = id.Value });
+
+                    if (caracteristicaDaBase != null)
+                    {
+                        caracteristicaViewModel = Mapper.Map<Caracteristica, CaracteristicaViewModel>(caracteristicaDaBase);
+                    }
+                }
+                caracteristicaViewModel.ListaDeSubtopicos = (ICollection<Subtopico>)subtopicoServico.Listar();
+            }
+            return View("Caracteristica", caracteristicaViewModel);
+        }
+
+
+        [Autorizador]
+        [ValidateAntiForgeryToken]
+        public ActionResult Salvar(CaracteristicaViewModel caracteristicaViewModel)
         {
 
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                if (ModelState.IsValid)
+                {
+                    var caracteristica = Mapper.Map<CaracteristicaViewModel, Caracteristica>(caracteristicaViewModel);
+
+                    try
+                    {
+                        caracteristicaServico.Persistir(caracteristica);
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", "Falha ao tentar cadastrar os dados no Banco de Dados.");
+                        caracteristicaViewModel.ListaDeSubtopicos = (ICollection<Subtopico>)subtopicoServico.Listar();
+                        return View("Caracteristica", caracteristicaViewModel);
+                    }
+
+                    
+                    return RedirectToAction("Manter");
+
+                }
+
+                caracteristicaViewModel.ListaDeSubtopicos = (ICollection<Subtopico>)subtopicoServico.Listar();
+            }
+
+            return View("Caracteristica", caracteristicaViewModel);
+        }
+
+
+
+
+
+
+        [Autorizador]
+        public ActionResult Listar()
+        {
             var caracteristicaViewModel = new List<CaracteristicaViewModel>();
             
             using (var contexto = new ContextoDeDadosEF())
             {
-
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                 var caracteristicasDaBase = caracteristicaServico.Listar();
-
                 caracteristicaViewModel = Mapper.Map<IEnumerable<Caracteristica>, List<CaracteristicaViewModel>>(caracteristicasDaBase);
-
             }
-
-
             return View("ListarCaracteristicas", caracteristicaViewModel);
         }
     }

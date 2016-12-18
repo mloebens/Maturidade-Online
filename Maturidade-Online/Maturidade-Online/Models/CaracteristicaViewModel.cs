@@ -10,6 +10,10 @@ namespace Maturidade_Online.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual ICollection<Subtopico> Subtopicos { get; set; }
+        public ICollection<Subtopico> Subtopicos { get; set; }
+
+        public ICollection<Subtopico> ListaDeSubtopicos { get; set; }
+
+        public ICollection<int> IdsSubtopicos { get; set; }
     }
 }

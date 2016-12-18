@@ -15,10 +15,6 @@
             @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
         </div>
 
-        <div @(ViewBag.MensagemSuccesso == null ? "hidden" : "")>
-            @ViewBag.MensagemSuccesso
-        </div>
-
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">

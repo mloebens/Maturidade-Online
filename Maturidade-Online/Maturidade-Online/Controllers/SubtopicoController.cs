@@ -19,7 +19,6 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult Manter(int? id)
         {
-
             var subtopicoViewModel = new SubtopicoViewModel();
             using (var contexto = new ContextoDeDadosEF())
             {
@@ -27,8 +26,8 @@ namespace Maturidade_Online.Controllers
 
                 if (id.HasValue && id.Value > 0)
                 {
-                    var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                    var subtopicoDaBase = subtopicosServico.BuscarPorId(new Subtopico { Id = id.Value });
+                    var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                    var subtopicoDaBase = subtopicoServico.BuscarPorId(new Subtopico { Id = id.Value });
 
                     if (subtopicoDaBase != null)
                     {
@@ -66,14 +65,6 @@ namespace Maturidade_Online.Controllers
                         return View("Subtopico", subtopicoViewModel);
                     }
 
-                    if (subtopico.Id > 0)
-                    {
-                        TempData["MensagemSucesso"] = "Subtopico alterado com sucesso.";
-                    }
-                    else
-                    {
-                        TempData["MensagemSucesso"] = "Subtopico cadastrado com sucesso.";
-                    }
                     return RedirectToAction("Manter");
 
                 }
@@ -128,7 +119,7 @@ namespace Maturidade_Online.Controllers
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var caracteristicas = idsCaracteristicas.Select(c => new Caracteristica() { Id = c }).ToList();
-                var subtopicosDaBase = subtopicoServico.Listar(caracteristicas);
+                var subtopicosDaBase = subtopicoServico.ListarComPilar(caracteristicas);
 
                 return PartialView("_Subtopicos", subtopicosDaBase);
             }

@@ -82,7 +82,7 @@
         $("#opcoes").change(function() {
 
             console.log('ola');
-            let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id))
+            let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
             console.log('idsCaracteristicas', idsCaracteristicas);
             const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
             jQuery.ajaxSettings.traditional = true;
@@ -90,7 +90,9 @@
                 .done(response => {
                     console.log('response', response);
                     $listagemSubtopicos.html(response);
-                });
+                }).fail(function(resposta){
+                    console.log(resposta)});
+
         })
 
 

@@ -28,7 +28,8 @@ namespace Maturidade_Online
                 cfg.CreateMap<SubtopicoViewModel, Subtopico>();
                 cfg.CreateMap<Subtopico, SubtopicoViewModel>();
                 cfg.CreateMap<Caracteristica, CaracteristicaViewModel>();
-                cfg.CreateMap<CaracteristicaViewModel,Caracteristica>();
+                cfg.CreateMap<CaracteristicaViewModel, Caracteristica>()
+                    .ForMember(destino => destino.Subtopicos, opcao => opcao.MapFrom(origem => origem.IdsSubtopicos.Select(id => new Subtopico { Id = id})));
             });
 
         }

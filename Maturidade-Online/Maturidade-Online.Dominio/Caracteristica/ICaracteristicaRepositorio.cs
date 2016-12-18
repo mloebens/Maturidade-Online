@@ -10,5 +10,6 @@ namespace Maturidade_Online.Dominio
     public interface ICaracteristicaRepositorio : IRepositorio<Caracteristica>
     {
         ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas);
+        Caracteristica BuscarPorId(Caracteristica caracteristica);
     }
 }
