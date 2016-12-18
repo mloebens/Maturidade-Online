@@ -9,6 +9,7 @@ namespace Maturidade_Online.Dominio
 {
     public interface IPilarRepositorio : IRepositorio<Pilar>
     {
+        ICollection<PilarPontuacao> ListarPontuacaoTotal();
         Pilar BuscarPorId(Pilar pilar);
         ICollection<PilarPontuacao> ListarPontuacaoTotal();
     }
