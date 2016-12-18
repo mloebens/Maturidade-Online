@@ -1,5 +1,7 @@
-﻿using Maturidade_Online.Dominio;
+﻿using AutoMapper;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
+using Maturidade_Online.Models;
 using Maturidade_Online.Repositorio;
 using Maturidade_Online.Servicos;
 using System;
@@ -12,6 +14,108 @@ namespace Maturidade_Online.Controllers
 {
     public class SubtopicoController : Controller
     {
+
+
+        [Autorizador]
+        public ActionResult Manter(int? id)
+        {
+
+            var subtopicoViewModel = new SubtopicoViewModel();
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+
+                if (id.HasValue && id.Value > 0)
+                {
+                    var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                    var subtopicoDaBase = subtopicosServico.BuscarPorId(new Subtopico { Id = id.Value });
+
+                    if (subtopicoDaBase != null)
+                    {
+                        subtopicoViewModel = Mapper.Map<Subtopico, SubtopicoViewModel>(subtopicoDaBase);
+                    }
+                }
+                subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();
+            }
+            return View("Subtopico", subtopicoViewModel);
+        }
+
+
+        [Autorizador]
+        [ValidateAntiForgeryToken]
+        public ActionResult Salvar(SubtopicoViewModel subtopicoViewModel)
+        {
+
+            using (var contexto = new ContextoDeDadosEF())
+            {
+
+                if (ModelState.IsValid)
+                {
+                    var subtopico = Mapper.Map<SubtopicoViewModel, Subtopico>(subtopicoViewModel);
+                    var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+
+                    try
+                    {
+                        subtopicoServico.Persistir(subtopico);
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", "Falha ao tentar cadastrar os dados no Banco de Dados.");
+                        return View("Subtopico");
+                    }
+
+                    if (subtopico.Id > 0)
+                    {
+                        TempData["MensagemSucesso"] = "Subtopico alterado com sucesso.";
+                    }
+                    else
+                    {
+                        TempData["MensagemSucesso"] = "Subtopico cadastrado com sucesso.";
+                    }
+                    return RedirectToAction("Manter");
+
+                }
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();
+            }
+
+            return View("Subtopico", subtopicoViewModel);
+        }
+
+        [Autorizador]
+        public ActionResult Excluir(int id)
+        {
+
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                if (id > 0)
+                {
+                    var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                    subtopicoServico.Remover(new Subtopico { Id = id });
+                }
+            }
+            return RedirectToAction("Listar");
+        }
+
+
+        [Autorizador]
+        public ActionResult Listar()
+        {
+
+            var subtopicoViewModel = new List<SubtopicoViewModel>();
+
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var subtopicosDaBase = subtopicoServico.Listar();
+                subtopicoViewModel = subtopicosDaBase.Select(_ => new SubtopicoViewModel { Id = _.Id, Nome = _.Nome, Descricao = _.Descricao, Pontuacao = _.Pontuacao }).ToList();
+            }
+
+            return View("ListarSubtopicos", subtopicoViewModel);
+        }
+
+
+
         // Partial View
         [Autorizador]
         public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)

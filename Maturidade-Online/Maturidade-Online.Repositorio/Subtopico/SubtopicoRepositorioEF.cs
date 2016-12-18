@@ -17,7 +17,7 @@ namespace Maturidade_Online.Repositorio
         public override IEnumerable<Subtopico> Listar()
         {
             contexto.Configuration.ProxyCreationEnabled = false;
-            return contexto.Subtopico.Include("Pilares").ToList();
+            return contexto.Subtopico.Include("Pilar").ToList();
 
         }
 
@@ -40,12 +40,17 @@ namespace Maturidade_Online.Repositorio
         {
             var ids = caracteristica.Select(_ => _.Id);
 
-            return contexto.Subtopico.Include("Pilares").Where(s => s.Caracteristicas.Any(c => ids.Any(i => i == c.Id))).ToList();
+            return contexto.Subtopico.Include("Pilar").Where(s => s.Caracteristicas.Any(c => ids.Any(i => i == c.Id))).ToList();
         }
 
         public ICollection<Subtopico> ListarPorPilar(int id)
         {
             return contexto.Subtopico.Where(s => s.PilarId == id).ToList();
+        }
+
+        public Subtopico BuscarPorId(Subtopico subtopico)
+        {
+            return contexto.Subtopico.FirstOrDefault(_ => _.Id == subtopico.Id);
         }
     }
 }

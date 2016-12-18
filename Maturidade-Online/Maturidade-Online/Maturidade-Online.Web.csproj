@@ -175,6 +175,7 @@
     <Compile Include="Models\ProjetoListarViewModel.cs" />
     <Compile Include="Models\PilarModel.cs" />
     <Compile Include="Models\ProjetoModel.cs" />
+    <Compile Include="Models\SubtopicoViewModel.cs" />
     <Compile Include="Models\UsuarioLogadoModel.cs" />
     <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -283,10 +284,11 @@
     <Content Include="Views\Pilar\Pilar.cshtml" />
     <Content Include="Views\Shared\_Pilares.cshtml" />
     <Content Include="Views\Pilar\ListarPilares.cshtml" />
+    <Content Include="Views\Subtopico\ListarSubtopicos.cshtml" />
+    <Content Include="Views\Subtopico\Subtopico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Subtopico\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -50,5 +50,10 @@ namespace Maturidade_Online.Dominio
         {
             return subtopicoRepositorio.ListarPorPilar(id);
         }
+
+        public Subtopico BuscarPorId(Subtopico subtopico)
+        {
+            return subtopicoRepositorio.BuscarPorId(subtopico);
+        }
     }
 }

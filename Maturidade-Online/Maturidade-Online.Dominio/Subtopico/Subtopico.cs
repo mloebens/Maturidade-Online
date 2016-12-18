@@ -14,7 +14,7 @@ namespace Maturidade_Online.Dominio
         public string Descricao { get; set; }
         public int Pontuacao { get; set; }
         public int PilarId { get; set; }
-        public Pilar Pilares { get; set; }
+        public Pilar Pilar { get; set; }
         public virtual ICollection<Caracteristica> Caracteristicas { get; set; }
 
         public virtual ICollection<Projeto> Projetos { get; set; }

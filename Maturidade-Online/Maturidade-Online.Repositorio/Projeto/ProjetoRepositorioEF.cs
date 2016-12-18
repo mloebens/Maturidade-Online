@@ -59,7 +59,7 @@ namespace Maturidade_Online.Repositorio
         public override IEnumerable<Projeto> Listar()
         {
             return contexto.Projeto
-                .Include(i => i.Subtopicos.Select(s => s.Pilares))
+                .Include(i => i.Subtopicos.Select(s => s.Pilar))
                 .ToList();
         }
     }

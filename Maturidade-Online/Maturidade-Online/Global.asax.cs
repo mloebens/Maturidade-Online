@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Maturidade_Online.Dominio;
-using Maturidade_Online.Dominio;
 using Maturidade_Online.Models;
 using System;
 using System.Collections.Generic;
@@ -26,6 +25,8 @@ namespace Maturidade_Online
                 cfg.CreateMap<ProjetoModel, Projeto>();
                 cfg.CreateMap<Projeto, ProjetoModel>();
                 cfg.CreateMap<UsuarioModel, Usuario>();
+                cfg.CreateMap<SubtopicoViewModel, Subtopico>();
+                cfg.CreateMap<Subtopico, SubtopicoViewModel>();
             });
 
         }

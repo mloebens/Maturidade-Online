@@ -9,17 +9,17 @@ div.login-item {
     margin: 15px auto;
 }
 
-.login-erro > .alert-danger li {
+.alerta-erro > .alert-danger li {
     padding: 5px;
     margin-bottom: 5px;
     
 }
 
-.login-erro > .alert-danger ul {
+.alerta-erro > .alert-danger ul {
     list-style-type: square;
 }
 
-.login-erro > .alert-danger {
+.alerta-erro > .alert-danger {
         border-radius: 10px;
 }
 
@@ -110,4 +110,11 @@ div.login-item {
     margin-left: 50px;
     margin-top: 50px;
     padding: 10px;
+}
+
+/* Caracteristica - Cadastrar */
+
+span.select2.select2-container.select2-container--default {
+    display: block;
+    width: 100% !important;
 }
