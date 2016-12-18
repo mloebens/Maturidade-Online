@@ -47,5 +47,10 @@ namespace Maturidade_Online.Dominio
         {
             return caracteristicaRepositorio.BuscarPorId(caracteristica);
         }
+
+        public ICollection<Caracteristica> Listar(Projeto projeto)
+        {
+            return caracteristicaRepositorio.Listar(projeto);
+        }
     }
 }

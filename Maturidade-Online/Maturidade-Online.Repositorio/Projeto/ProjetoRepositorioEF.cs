@@ -44,10 +44,25 @@ namespace Maturidade_Online.Repositorio
         { 
             CaracteristicaRepositorioEF caracteristicaRepositorio = new CaracteristicaRepositorioEF(contexto);
             SubtopicoRepositorioEF subtopicoRepositorio = new SubtopicoRepositorioEF(contexto);
+
+            var subtopicosParaRemover = subtopicoRepositorio.Listar(projeto);
+            var caracteristicasParaRemover = caracteristicaRepositorio.Listar(projeto);
+
             
+            var projetoDaBase = this.BuscarPorId(projeto);
+
+            foreach (var subtopico in subtopicosParaRemover)
+            {
+                projetoDaBase.Subtopicos.Remove(subtopico);
+            }
+
+            foreach (var caracteristica in caracteristicasParaRemover)
+            {
+                projetoDaBase.Caracteristicas.Remove(caracteristica);
+            }
+
             var caracteristicasDaBase = caracteristicaRepositorio.Listar(projeto.Caracteristicas);
             var subtopicosDaBase = subtopicoRepositorio.Listar(projeto.Subtopicos);
-            var projetoDaBase = this.BuscarPorId(projeto);
 
             projetoDaBase.Nome = projeto.Nome;
             projetoDaBase.Subtopicos = subtopicosDaBase;

@@ -41,6 +41,11 @@ namespace Maturidade_Online.Repositorio
             return contexto.Subtopico.Where(s => s.Caracteristicas.Any(c => ids.Any(i => i == c.Id))).ToList();
         }
 
+        public ICollection<Subtopico> Listar(Caracteristica caracteristica)
+        {
+            return contexto.Subtopico.Where(s => s.Caracteristicas.Any(c => c.Id == caracteristica.Id)).ToList();
+        }
+
         public ICollection<Subtopico> ListarPorPilar(int id)
         {
             return contexto.Subtopico.Where(s => s.PilarId == id).ToList();
@@ -49,6 +54,11 @@ namespace Maturidade_Online.Repositorio
         public Subtopico BuscarPorId(Subtopico subtopico)
         {
             return contexto.Subtopico.FirstOrDefault(_ => _.Id == subtopico.Id);
+        }
+
+        public ICollection<Subtopico> Listar(Projeto projeto)
+        {
+            return contexto.Subtopico.Where(s => s.Projetos.Any(c => c.Id == projeto.Id)).ToList();
         }
     }
 }

@@ -60,5 +60,15 @@ namespace Maturidade_Online.Dominio
         {
             return subtopicoRepositorio.BuscarPorId(subtopico);
         }
+
+        public ICollection<Subtopico> Listar(Caracteristica caracteristica)
+        {
+            return subtopicoRepositorio.Listar(caracteristica);
+        }
+
+        public ICollection<Subtopico> Listar(Projeto projeto)
+        {
+            return subtopicoRepositorio.Listar(projeto);
+        }
     }
 }

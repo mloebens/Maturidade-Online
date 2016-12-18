@@ -37,13 +37,17 @@ namespace Maturidade_Online.Repositorio
         public override void Editar(Caracteristica caracteristica)
         {
             var caracteristicaDaBase = this.BuscarPorId(caracteristica);
-            caracteristicaDaBase.Nome = caracteristica.Nome;
-
             //TODO injetar com inteface
             var subtopicoRepositorio = new SubtopicoRepositorioEF(contexto);
+            var subtopicosParaRemover = subtopicoRepositorio.Listar(caracteristica);
+
+            foreach (var subtopico in subtopicosParaRemover)
+            {
+                caracteristicaDaBase.Subtopicos.Remove(subtopico);
+            }
+
+            caracteristicaDaBase.Nome = caracteristica.Nome;
             var subtopicosDaBase = subtopicoRepositorio.Listar(caracteristica.Subtopicos);
-
-
             caracteristicaDaBase.Subtopicos = subtopicosDaBase;
             base.Editar(caracteristicaDaBase);
         }
@@ -58,6 +62,12 @@ namespace Maturidade_Online.Repositorio
         public Caracteristica BuscarPorId(Caracteristica caracteristica)
         {
             return contexto.Caracteristica.FirstOrDefault(_ => _.Id == caracteristica.Id);
+        }
+
+        public ICollection<Caracteristica> Listar(Projeto projeto)
+        {
+            return contexto.Caracteristica.Where(s => s.Projetos.Any(c => c.Id == projeto.Id)).ToList();
+
         }
     }
 }

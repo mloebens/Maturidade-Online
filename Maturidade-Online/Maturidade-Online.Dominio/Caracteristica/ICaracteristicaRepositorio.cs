@@ -11,5 +11,6 @@ namespace Maturidade_Online.Dominio
     {
         ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas);
         Caracteristica BuscarPorId(Caracteristica caracteristica);
+        ICollection<Caracteristica> Listar(Projeto projeto);
     }
 }
