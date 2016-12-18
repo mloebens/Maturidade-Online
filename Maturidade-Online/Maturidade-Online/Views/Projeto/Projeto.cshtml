@@ -7,8 +7,6 @@
 @using (Html.BeginForm("Salvar", "Projeto", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
 {
 
-
-
     @Html.AntiForgeryToken()
 
     <div class="login-erro">
@@ -65,10 +63,6 @@
     </div>
 }
 
-
-
-
-
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
@@ -81,11 +75,6 @@
         console.log(lastParameter);
         var numero = lastParameter.substr(lastParameter.length - 1);
         console.log(numero);
-        //var numero = 2;
-        //console.log(numero);
-        //console.log($.isNumeric(lastChar));
-        //console.log($.isNumeric(numero));
-
         if ($.isNumeric(numero)) {
             console.log('É numero');
         }
@@ -95,19 +84,13 @@
             console.log('ola');
             let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id))
             console.log('idsCaracteristicas', idsCaracteristicas);
-            const urlGet = '@Url.Action("PesquisarSubtopicos", "Projeto")';
+            const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
             jQuery.ajaxSettings.traditional = true;
             $.get(urlGet, { idsCaracteristicas })
                 .done(response => {
                     console.log('response', response);
                     $listagemSubtopicos.html(response);
                 });
-            //let idCaracteristica = parseInt($(this).select2('data')[0].id);
-            //console.log('idCaracteristica', idCaracteristica);
-            //console.log('this', $(this).select2('data')[0].text);
-            //console.log('subTopicos', $listagemSubtopicos)
-            //$listagemSubtopicos.show();
-
         })
 
 

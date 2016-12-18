@@ -111,6 +111,7 @@ namespace Maturidade_Online.Controllers
             return View("Projeto");
         }
 
+        [Autorizador]
         public ActionResult Listar()
         {
 
@@ -153,11 +154,11 @@ namespace Maturidade_Online.Controllers
                         var pontuacaoAtual = projetoListaPilarViewModel.Pontuacao == 0 ? 1 : projetoListaPilarViewModel.Pontuacao;
                         var percentualDePontuacao = pontuacaoAtual * 100 / pilarPontuacaoTotal.PontuacaoTotal;
                         string cor = "amarelo";
-                       if(percentualDePontuacao <= 25)
+                        if (percentualDePontuacao <= 25)
                         {
                             cor = "vermelho";
                         }
-                        if(percentualDePontuacao >= 76)
+                        if (percentualDePontuacao >= 76)
                         {
                             cor = "verde";
                         }
@@ -172,43 +173,8 @@ namespace Maturidade_Online.Controllers
 
                 }
 
-
                 return View("Listar", projetosViewModel);
             }
         }
-
-
-
-
-
-
-
-
-        // Partial View
-        [Autorizador]
-        public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
-        {
-            if (idsCaracteristicas == null) return PartialView("_Subtopicos");
-
-            using (var contexto = new ContextoDeDadosEF())
-            {
-                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                var caracteristicas = idsCaracteristicas.Select(c => new Caracteristica() { Id = c }).ToList();
-                var subtopicosDaBase = subtopicoServico.Listar(caracteristicas);
-
-
-
-                //var lista = subtopicosBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
-
-                //// TODO: consultar banco
-                //var subtopicos = new[]{
-                //    new Subtopico() { Id = 1, Pontuacao = 5, Nome = "Subtópico 1" },
-                //    new Subtopico() { Id = 2, Pontuacao = 7, Nome = "Subtópico 2" }
-                //};
-
-                return PartialView("_Subtopicos", subtopicosDaBase);
-            }
-        }
-
     }
 }

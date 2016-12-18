@@ -15,7 +15,7 @@ $("#opcoes").change(function () {
     console.log('idsCaracteristicas', idsCaracteristicas);
     if (idsCaracteristicas.length == 0) {
     }
-    const urlGet = '@Url.Action("PesquisarSubtopicos", "Projeto")';
+    const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
     jQuery.ajaxSettings.traditional = true;
     $.get(urlGet, { idsCaracteristicas })
         .done(response => {
