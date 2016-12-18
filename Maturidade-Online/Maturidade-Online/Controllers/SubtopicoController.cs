@@ -48,12 +48,13 @@ namespace Maturidade_Online.Controllers
 
             using (var contexto = new ContextoDeDadosEF())
             {
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
 
                 if (ModelState.IsValid)
                 {
                     var subtopico = Mapper.Map<SubtopicoViewModel, Subtopico>(subtopicoViewModel);
-                    var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-
+                   
                     try
                     {
                         subtopicoServico.Persistir(subtopico);
@@ -61,7 +62,8 @@ namespace Maturidade_Online.Controllers
                     catch (Exception e)
                     {
                         ModelState.AddModelError("", "Falha ao tentar cadastrar os dados no Banco de Dados.");
-                        return View("Subtopico");
+                        subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();
+                        return View("Subtopico", subtopicoViewModel);
                     }
 
                     if (subtopico.Id > 0)
@@ -75,7 +77,7 @@ namespace Maturidade_Online.Controllers
                     return RedirectToAction("Manter");
 
                 }
-                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                
                 subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();
             }
 

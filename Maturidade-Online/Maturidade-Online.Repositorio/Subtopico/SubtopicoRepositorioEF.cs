@@ -21,14 +21,6 @@ namespace Maturidade_Online.Repositorio
 
         }
 
-
-        public override void Editar(Subtopico subtopico)
-        {
-            SubtopicoRepositorio repositorio = new SubtopicoRepositorio();
-            repositorio.AlterarVinculos(subtopico);
-            base.Editar(subtopico);
-        }
-
         public ICollection<Subtopico> Listar(ICollection<Subtopico> subtopico)
         {
             var ids = subtopico.Select(_ => _.Id);
