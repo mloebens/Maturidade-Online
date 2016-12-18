@@ -11,6 +11,6 @@ namespace Maturidade_Online.Dominio
     {
         ICollection<Subtopico> Listar(ICollection<Subtopico> subtopico);
         ICollection<Subtopico> Listar(ICollection<Caracteristica> caracteristica);
-
+        ICollection<Subtopico> ListarPorPilar(int id);
     }
 }

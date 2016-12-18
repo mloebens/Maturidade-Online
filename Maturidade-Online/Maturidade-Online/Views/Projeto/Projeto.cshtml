@@ -77,6 +77,19 @@
 
         var $listagemSubtopicos = $('#container-subtopicos-dados');
 
+        let lastParameter = $(location).attr('pathname');
+        console.log(lastParameter);
+        var numero = lastParameter.substr(lastParameter.length - 1);
+        console.log(numero);
+        //var numero = 2;
+        //console.log(numero);
+        //console.log($.isNumeric(lastChar));
+        //console.log($.isNumeric(numero));
+
+        if ($.isNumeric(numero)) {
+            console.log('É numero');
+        }
+
         $("#opcoes").change(function() {
 
             console.log('ola');

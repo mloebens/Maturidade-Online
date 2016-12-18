@@ -42,5 +42,10 @@ namespace Maturidade_Online.Repositorio
 
             return contexto.Subtopico.Include("Pilares").Where(s => s.Caracteristicas.Any(c => ids.Any(i => i == c.Id))).ToList();
         }
+
+        public ICollection<Subtopico> ListarPorPilar(int id)
+        {
+            return contexto.Subtopico.Where(s => s.PilarId == id).ToList();
+        }
     }
 }

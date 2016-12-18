@@ -43,8 +43,8 @@
 
 
 <div class="row">
-        <div id="container-listagem-pilares" class="col-md-6 col-lg-offset-3"></div>
-    </div>
+    <div id="container-listagem-pilares" class="col-md-6 col-lg-offset-3"></div>
+</div>
 
 
 
@@ -55,15 +55,30 @@
 
         var $listagemPilares = $('#container-listagem-pilares');
 
-        $("#cadastrar-pilar").ready(function () {
-            const urlGet = '@Url.Action("PesquisarPilares", "Pilar")';
-            jQuery.ajaxSettings.traditional = true;
+        let lastParameter = $(location).attr('pathname');
+        console.log(lastParameter);
+        var numero = lastParameter.substr(lastParameter.length - 1);
+        console.log(numero);
+        //var numero = 2;
+        //console.log(numero);
+        //console.log($.isNumeric(lastChar));
+        //console.log($.isNumeric(numero));
 
-            $.get(urlGet, {})
-                .done(response => {
-                         $listagemPilares.html(response);
-                });
-        })
+        if ($.isNumeric(numero)) {
+            let id = parseInt(numero);
+            console.log('É numero');
+            $("#cadastrar-pilar").ready(function () {
+                const urlGet = '@Url.Action("PesquisarPilares", "Pilar")';
+                jQuery.ajaxSettings.traditional = true;
+                $.get(urlGet, { id })
+                    .done(response => {
+                        $listagemPilares.html(response);
+                    });
+            })
+
+        }
+
+
 
     </script>
 }

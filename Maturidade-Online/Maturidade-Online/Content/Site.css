@@ -61,3 +61,20 @@ div.login-item {
     display: block;
     width: 100% !important;
 }
+
+/* Pilar */
+
+.grid-listagem{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px
+}
+
+.grid-listagem .grid-lista{
+    border: solid 1px;
+    border-radius: 10px;
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 10px;
+}

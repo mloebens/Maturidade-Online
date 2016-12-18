@@ -33,6 +33,7 @@ namespace Maturidade_Online.Controllers
                         pilarModel.Titulo = pilarDaBase.Titulo;
                         //pilarModel = Mapper.Map<Pilar, PilarModel>(pilarDaBase);
                     }
+
                 }
 
             }
@@ -73,10 +74,23 @@ namespace Maturidade_Online.Controllers
             return RedirectToAction("Manter");
         }
 
+        public ActionResult ListarPilares()
+        {
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var listaDePilares = pilarServico.Listar();
+
+
+                return View("ListarPilares", listaDePilares);
+            }
+
+        }
+
 
         // Partial View
         //[Autorizador]
-        public ActionResult PesquisarPilares()
+        public ActionResult PesquisarPilares(int[] id)
         {
 
             using (var contexto = new ContextoDeDadosEF())
@@ -85,9 +99,11 @@ namespace Maturidade_Online.Controllers
 
 
 
-                var lista = subtopicoServico.Listar();
+                var lista = subtopicoServico.ListarPorPilar(id.FirstOrDefault());
+                var listaTotal = subtopicoServico.Listar();
 
                 // TODO: consultar banco
+                if (lista.Count < 1) return PartialView("_Subtopicos");
 
                 return PartialView("_Pilares", lista);
             }

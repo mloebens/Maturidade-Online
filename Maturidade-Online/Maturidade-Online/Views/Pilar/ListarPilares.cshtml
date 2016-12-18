@@ -1,0 +1,21 @@
+﻿@model ICollection<Maturidade_Online.Dominio.Pilar>
+@{
+    ViewBag.Title = "ListarPilares";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Pilares Cadastrados</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 grid-listagem">
+            @foreach (var pilar in Model)
+            {
+                <div class="col-md-2 grid-lista">
+                    <p class="text-center">@pilar.Titulo</p>
+                    <p class="text-center"><a href="/Pilar/Manter/@pilar.Id" class="btn btn-default">Editar</a></p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

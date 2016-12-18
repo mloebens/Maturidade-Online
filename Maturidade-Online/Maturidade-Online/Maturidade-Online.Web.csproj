@@ -278,6 +278,7 @@
     <Content Include="Views\Shared\_Subtopicos.cshtml" />
     <Content Include="Views\Pilar\Pilar.cshtml" />
     <Content Include="Views\Shared\_Pilares.cshtml" />
+    <Content Include="Views\Pilar\ListarPilares.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
