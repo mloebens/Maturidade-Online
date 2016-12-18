@@ -112,9 +112,19 @@ div.login-item {
     padding: 10px;
 }
 
-/* Caracteristica - Cadastrar */
+/* Subtopico - Cadastrar */
 
 span.select2.select2-container.select2-container--default {
     display: block;
     width: 100% !important;
+}
+
+/* Caracteristica - Listar */
+
+.caracteristica-subtopico{
+    display: inline-block;
+    background-color: lightgrey;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 3px;
 }

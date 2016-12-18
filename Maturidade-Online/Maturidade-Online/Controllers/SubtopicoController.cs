@@ -110,7 +110,7 @@ namespace Maturidade_Online.Controllers
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var subtopicosDaBase = subtopicoServico.Listar();
-                subtopicoViewModel = subtopicosDaBase.Select(_ => new SubtopicoViewModel { Id = _.Id, Nome = _.Nome, Descricao = _.Descricao, Pontuacao = _.Pontuacao }).ToList();
+                subtopicoViewModel  = Mapper.Map<IEnumerable<Subtopico>, List<SubtopicoViewModel>>(subtopicosDaBase);
             }
 
             return View("ListarSubtopicos", subtopicoViewModel);

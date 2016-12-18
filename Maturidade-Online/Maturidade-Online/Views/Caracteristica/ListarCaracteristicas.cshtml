@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Maturidade_Online.Models.CaracteristicaViewModel>
+
+@{
+    ViewBag.Title = "Caracteristicas";
+}
+
+<h2>Caracteristicas</h2>
+
+<p>
+    @Html.ActionLink("Nova Caracteristica", "Manter", "Caracteristica", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayName("Subtópicos")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @foreach (var subtopico in item.Subtopicos)
+                {
+                    <div class="caracteristica-subtopico">@Html.DisplayName(subtopico.Nome)</div>
+                }
+
+            </td>
+            <td>
+                <a class="glyphicon glyphicon-pencil" href="~/Caracteristica/Manter/@item.Id"></a>
+                <a class="glyphicon glyphicon-trash" href="~/Caracteristica/Excluir/@item.Id"></a>
+            </td>
+        </tr>
+    }
+
+</table>

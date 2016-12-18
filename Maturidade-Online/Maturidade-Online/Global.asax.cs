@@ -27,6 +27,8 @@ namespace Maturidade_Online
                 cfg.CreateMap<UsuarioModel, Usuario>();
                 cfg.CreateMap<SubtopicoViewModel, Subtopico>();
                 cfg.CreateMap<Subtopico, SubtopicoViewModel>();
+                cfg.CreateMap<Caracteristica, CaracteristicaViewModel>();
+                cfg.CreateMap<CaracteristicaViewModel,Caracteristica>();
             });
 
         }
