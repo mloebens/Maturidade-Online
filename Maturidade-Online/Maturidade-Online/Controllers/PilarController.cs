@@ -87,6 +87,28 @@ namespace Maturidade_Online.Controllers
 
         }
 
+        public ActionResult ExcluirPilar(int id)
+        {
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
+                var usuarioServico = ServicoDeDependencia.MontarUsuarioServico(contexto).BuscarPorEmail(usuarioAutenticado);
+
+                if (usuarioServico.Permissao.Equals(Permissao.ADMINISTRADOR)){
+
+                    var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                    var pilar = new Pilar() { Id = id };
+                    pilar = pilarServico.BuscarPorId(pilar);
+
+                    pilarServico.Remover(pilar);
+                }
+            }
+
+            return RedirectToAction("ListarPilares");
+        }
+
+
+
 
         // Partial View
         //[Autorizador]

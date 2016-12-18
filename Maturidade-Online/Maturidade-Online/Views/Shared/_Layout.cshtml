@@ -35,6 +35,25 @@
                         </ul>
                     </li>
                 </ul>
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle nav" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listagens<span class="caret"></span></a>
+                        <ul class="dropdown-menu nav" role="menu">
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Pilar", "ListarPilares", "Pilar")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Subtópico", "Subtopico", "Cadastro")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Caracterísica", "Caracteristica", "Cadastro")</li>
+                            <li role="separator" class="divider"></li>
+                            <li>@Html.ActionLink("Projeto", "Manter", "Projeto")</li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
+
+
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Deslogar", "Login")</li>
                 </ul>
