@@ -73,7 +73,7 @@ namespace Maturidade_Online.Controllers
                     var usuarioService = ServicoDeDependencia.MontarUsuarioServico(contexto);
                     var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
                     var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
-                    
+
                     try
                     {
                         projetoServico.Persistir(projeto, usuarioAutenticado);
@@ -110,6 +110,79 @@ namespace Maturidade_Online.Controllers
 
             return View("Projeto");
         }
+
+        public ActionResult Listar()
+        {
+
+
+            var projetosViewModel = new List<ProjetoListarViewModel>();
+
+            using (var contexto = new ContextoDeDadosEF())
+            {
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
+
+                ViewBag.pilaresPontuacaoTotal = pilaresPontuacoesTotais;
+
+                IEnumerable<Projeto> projetosDaBase = new List<Projeto>();
+                projetosDaBase = projetoServico.Listar();
+
+                foreach (var projeto in projetosDaBase)
+                {
+                    var projetoViewModel = new ProjetoListarViewModel();
+                    projetoViewModel.Id = projeto.Id;
+                    projetoViewModel.Nome = projeto.Nome;
+                    projetoViewModel.CriadorId = projeto.UsuarioId;
+
+                    var pilaresDoProjeto = projeto.Subtopicos.GroupBy(s =>
+                       new { Id = s.PilarId })
+                           .Select(s => new { Id = s.Key.Id, Total = s.Sum(_ => _.Pontuacao) }).ToList();
+
+                    var projetoListaPilaresViewModel = new List<ProjetoListarPilarViewModel>();
+                    foreach (var pilarPontuacaoTotal in pilaresPontuacoesTotais)
+                    {
+                        var projetoListaPilarViewModel = new ProjetoListarPilarViewModel();
+                        projetoListaPilarViewModel.Id = pilarPontuacaoTotal.Id;
+                        projetoListaPilarViewModel.Titulo = pilarPontuacaoTotal.Titulo;
+
+                        var pilarEncontrado = pilaresDoProjeto.FirstOrDefault(_ => _.Id == pilarPontuacaoTotal.Id);
+                        projetoListaPilarViewModel.Pontuacao = pilarEncontrado != null ? pilarEncontrado.Total : 0;
+
+
+                        var pontuacaoAtual = projetoListaPilarViewModel.Pontuacao == 0 ? 1 : projetoListaPilarViewModel.Pontuacao;
+                        var percentualDePontuacao = pontuacaoAtual * 100 / pilarPontuacaoTotal.PontuacaoTotal;
+                        string cor = "amarelo";
+                       if(percentualDePontuacao <= 25)
+                        {
+                            cor = "vermelho";
+                        }
+                        if(percentualDePontuacao >= 76)
+                        {
+                            cor = "verde";
+                        }
+                        projetoListaPilarViewModel.cor = cor;
+
+                        projetoListaPilaresViewModel.Add(projetoListaPilarViewModel);
+                    }
+
+                    projetoViewModel.Pilares = projetoListaPilaresViewModel;
+
+                    projetosViewModel.Add(projetoViewModel);
+
+                }
+
+
+                return View("Listar", projetosViewModel);
+            }
+        }
+
+
+
+
+
+
+
 
         // Partial View
         [Autorizador]

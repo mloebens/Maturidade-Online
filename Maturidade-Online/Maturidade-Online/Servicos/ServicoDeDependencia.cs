@@ -29,6 +29,14 @@ namespace Maturidade_Online.Servicos
             return subtopicoServico;
         }
 
+        public static PilarServico MontarPilarServico(ContextoDeDadosEF contexto)
+        {
+            PilarServico pilarServico =
+                new PilarServico(
+                    new PilarRepositorioEF(contexto));
+            return pilarServico;
+        }
+
         public static CaracteristicaServico MontarCaracteristicaServico(ContextoDeDadosEF contexto)
         {
             CaracteristicaServico caracteristicaServico =

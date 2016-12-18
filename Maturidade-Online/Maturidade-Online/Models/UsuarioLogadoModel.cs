@@ -7,12 +7,13 @@ namespace Maturidade_Online.Models
 {
     public class UsuarioLogadoModel
     {
-
+        public int Id { get; set; }
         public string Email { get; private set; }
 
-        public UsuarioLogadoModel(string email)
+        public UsuarioLogadoModel(int id, string email)
         {
             this.Email = email;
+            this.Id = id;
         }
 
     }

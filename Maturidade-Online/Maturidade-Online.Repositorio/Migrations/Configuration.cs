@@ -30,57 +30,369 @@ namespace Maturidade_Online.Repositorio.Migrations
 
             context.Pilar.AddOrUpdate(
                     p => p.Titulo,
-                    new Pilar { Id = 1, Titulo = "Infraestrutura" },
-                    new Pilar { Id = 2, Titulo = "Gestão" },
-                    new Pilar { Id = 3, Titulo = "Qualidade" }
+                    new Pilar { Id = 1, Titulo = "Gerência de Configuração" },
+                    new Pilar { Id = 2, Titulo = "Geração de Pacote" },
+                    new Pilar { Id = 3, Titulo = "Testes" },
+                    new Pilar { Id = 4, Titulo = "Performance" },
+                    new Pilar { Id = 5, Titulo = "Segurança" },
+                    new Pilar { Id = 6, Titulo = "Arquitetura" },
+                    new Pilar { Id = 7, Titulo = "UX" },
+                    new Pilar { Id = 8, Titulo = "Código" },
+                    new Pilar { Id = 9, Titulo = "Banco de Dados" }
                 );
 
+            var subtopicos = new List<Subtopico>() {
+                new Subtopico
+                    {
+                        Id = 1,
+                        Nome = "Ferramentas de Controle de Versão",
+                        Descricao = "",
+                        Pontuacao = 1,
+                        PilarId = 1
+                    },
+                new Subtopico
+                {
+                    Id = 2,
+                    Nome = "Estratégia de Brenches bem Definida",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 1
+                },
+                new Subtopico
+                {
+                    Id = 3,
+                    Nome = "Tags/Labels",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 1
+                },
+                new Subtopico
+                {
+                    Id = 4,
+                    Nome = "Comentários em Commits",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 1
+                },
+                new Subtopico
+                {
+                    Id = 5,
+                    Nome = "Commits por Funcionalidades",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 1
+                },
+                new Subtopico
+                {
+                    Id = 6,
+                    Nome = "Publicação Automatizada",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 2
+                },
+                new Subtopico
+                {
+                    Id = 7,
+                    Nome = "Deploys de Baixo Risco",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 2
+                },
+                new Subtopico
+                {
+                    Id = 8,
+                    Nome = "Validações Automáticas",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 2
+                },
+                new Subtopico
+                {
+                    Id = 9,
+                    Nome = "Fontes Integrados a cada Commit",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 2
+                },
+                new Subtopico
+                {
+                    Id = 10,
+                    Nome = "Automatizados",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 11,
+                    Nome = "Cobertura Plena na Camada de Domínio ",
+                    Descricao = "",
+                    Pontuacao = 4,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 12,
+                    Nome = "Execução via IC",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 13,
+                    Nome = "Independência de Ambiente",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 14,
+                    Nome = "Novo Teste a cada Bug ",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 15,
+                    Nome = "Escritos em BDD",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 3
+                },
+                new Subtopico
+                {
+                    Id = 16,
+                    Nome = "Testes de Stress",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 4
+                },
+                new Subtopico
+                {
+                    Id = 17,
+                    Nome = "Como Requisito",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 4
+                },
+                new Subtopico
+                {
+                    Id = 18,
+                    Nome = "Execução automatizada dos testes de Performance",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 4
+                },
+                new Subtopico
+                {
+                    Id = 19,
+                    Nome = "Monitoramento de CPUs e Memória",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 4
+                },
+                new Subtopico
+                {
+                    Id = 20,
+                    Nome = "Alerta de Riscos",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 4
+                },
+                new Subtopico
+                {
+                    Id = 21,
+                    Nome = "OWASP Top 10",
+                    Descricao = "",
+                    Pontuacao = 5,
+                    PilarId = 5
+                },
+                new Subtopico
+                {
+                    Id = 22,
+                    Nome = "Testes automatizados de segurança",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 5
+                },
+                new Subtopico
+                {
+                    Id = 23,
+                    Nome = "EVIL User nos cenários",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 5
+                },
+                new Subtopico
+                {
+                    Id = 24,
+                    Nome = "Como requisito",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 5
+                },
+                new Subtopico
+                {
+                    Id = 25,
+                    Nome = "Evolutiva",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 6
+                },
+                new Subtopico
+                {
+                    Id = 26,
+                    Nome = "Modularizada",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 6
+                },
+                new Subtopico
+                {
+                    Id = 27,
+                    Nome = "Escalável",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 6
+                },
+                new Subtopico
+                {
+                    Id = 28,
+                    Nome = "Templates",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 6
+                },
+                new Subtopico
+                {
+                    Id = 29,
+                    Nome = "Responsivo à Medições",
+                    Descricao = "",
+                    Pontuacao = 4,
+                    PilarId = 7
+                },
+                new Subtopico
+                {
+                    Id = 30,
+                    Nome = "Sob Medida",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 7
+                },
+                new Subtopico
+                {
+                    Id = 31,
+                    Nome = "Templates",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 7
+                },
+                new Subtopico
+                {
+                    Id = 32,
+                    Nome = "Prototipação",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 7
+                },
+                new Subtopico
+                {
+                    Id = 33,
+                    Nome = "Code Review",
+                    Descricao = "",
+                    Pontuacao = 4,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 34,
+                    Nome = "Validações Automáticas - Complexidade e número de linhas",
+                    Descricao = "",
+                    Pontuacao = 3,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 35,
+                    Nome = "Validações Automáticas - Estilos e Boas Práticas",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 36,
+                    Nome = "Padrões",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 37,
+                    Nome = "Propriedade Coletiva",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 38,
+                    Nome = "Logs e Políticas de Tratamento de Erros",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 8
+                },
+                new Subtopico
+                {
+                    Id = 39,
+                    Nome = "Evitar Lógica de Negócio",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 9
+                },
+                new Subtopico
+                {
+                    Id = 40,
+                    Nome = "Atualizado via IC",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 9
+                },
+                new Subtopico
+                {
+                    Id = 41,
+                    Nome = "Integridade",
+                    Descricao = "",
+                    Pontuacao = 1,
+                    PilarId = 9
+                },
+                new Subtopico
+                {
+                    Id = 42,
+                    Nome = "Boas Práticas de ORM",
+                    Descricao = "",
+                    Pontuacao = 2,
+                    PilarId = 9
+                },
+                new Subtopico
+                {
+                    Id = 43,
+                    Nome = "Análise de Performance",
+                    Descricao = "",
+                    Pontuacao = 4,
+                    PilarId = 9
+                }
+        };
 
-            Subtopico subtopico1 = new Subtopico
-            {
-                Id = 1,
-                Nome = "subtopico1",
-                Descricao = "Nenhuma",
-                Pontuacao = 3,
-                PilarId = 1
-            };
-            Subtopico subtopico2 = new Subtopico
-            {
-                Id = 2,
-                Nome = "subtopico2",
-                Descricao = "Nenhuma",
-                Pontuacao = 5,
-                PilarId = 1
-            };
 
-            Subtopico subtopico3 = new Subtopico
-            {
-                Id = 3,
-                Nome = "subtopico3",
-                Descricao = "Nenhuma",
-                Pontuacao = 3,
-                PilarId = 2
-            };
+            subtopicos.ForEach(s => context.Subtopico.AddOrUpdate(p => p.Nome, s ));
 
-            Subtopico subtopico4 = new Subtopico
-            {
-                Id = 4,
-                Nome = "subtopico4",
-                Descricao = "Nenhuma",
-                Pontuacao = 5,
-                PilarId = 3
-            };
-
-            context.Subtopico.AddOrUpdate(
-                p => p.Nome,
-                subtopico1,
-                subtopico2,
-                subtopico3,
-                subtopico4
-            );
-
-            var caracteristica1subtopico = new List<Subtopico>() { subtopico1, subtopico2 };
-            var caracteristica2subtopico = new List<Subtopico>() { subtopico3, subtopico4 };
+            var caracteristica1subtopico = new List<Subtopico>() { subtopicos[0], subtopicos[1] };
+            var caracteristica2subtopico = new List<Subtopico>() { subtopicos[2], subtopicos[3] };
 
             Caracteristica caracteristica1 = new Caracteristica()
             {
@@ -97,27 +409,27 @@ namespace Maturidade_Online.Repositorio.Migrations
             };
 
             context.Caracteristica.AddOrUpdate(
-                p => p.Nome,
-                caracteristica1,
-                caracteristica2
-            );
+                                p => p.Nome,
+                                caracteristica1,
+                                caracteristica2
+                            );
 
             var projeto1Caracteristicas = new List<Caracteristica>() { caracteristica1, caracteristica2 };
-            var projeto1subtopicos = new List<Subtopico>() { subtopico1, subtopico2, subtopico3, subtopico4 };
+            var projeto1subtopicos = new List<Subtopico>() { subtopicos[0], subtopicos[1], subtopicos[2], subtopicos[3], subtopicos[4], subtopicos[5], subtopicos[6] };
 
             Projeto projeto1 = new Projeto()
             {
                 Id = 1,
                 Nome = "Projeto1",
                 Caracteristicas = projeto1Caracteristicas,
-                Subtopicos = projeto1subtopicos,
+                Subtopicos = subtopicos,
                 Usuario = usuario1
             };
 
             context.Projeto.AddOrUpdate(
-                p => p.Nome,
-                projeto1
-            );
+                                p => p.Nome,
+                                projeto1
+                            );
         }
     }
 }

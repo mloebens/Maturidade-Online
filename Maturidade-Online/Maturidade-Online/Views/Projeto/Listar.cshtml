@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Maturidade_Online.Models.ProjetoListarViewModel>
+
+@{
+    var usuario = Maturidade_Online.Servicos.ServicoDeAutenticacao.UsuarioLogado;
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar</h2>
+
+@Html.ActionLink("Novo Projeto", "Manter", "Projeto", null, new { @class = "btn btn-primary" })
+
+<table class="table table-responsive table-bordered">
+    <thead>
+        <tr>
+
+            <th>Projeto</th>
+            @foreach (var pilar in ViewBag.pilaresPontuacaoTotal)
+            {
+                <th class="pilar-cabecalho">@pilar.Titulo</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var projeto in @Model)
+        {
+            <tr>
+                <td>@projeto.Nome</td>
+                @foreach (var pilar in projeto.Pilares)
+                {
+                    <td class="pilar-valores @pilar.cor">@pilar.Pontuacao</td>
+                }
+                <td>
+                    @{ if (usuario.Id == projeto.CriadorId)
+                        {
+                            <a class="glyphicon glyphicon-pencil" href="~/Projeto/Manter/@projeto.Id"></a>
+                            <a class="glyphicon glyphicon-trash" href="~/Projeto/Excluir/@projeto.Id"></a>
+                        }
+                    }
+
+                </td>
+
+            </tr>
+         }
+    </tbody>
+
+</table>
+
+
+

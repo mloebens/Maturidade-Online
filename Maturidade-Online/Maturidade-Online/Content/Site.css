@@ -53,13 +53,46 @@ div.login-item {
 }
 
 
-/* Projeto */
+/* Projeto Cadastrar*/
 #caracteristicas > span.select2-container--default .select2-selection--multiple {
     border-radius: 0px 4px 4px 0px;
 }
 #caracteristicas > span.select2.select2-container.select2-container--default {
     display: block;
     width: 100% !important;
+}
+
+
+
+
+/* Projeto Listar */
+.projeto > .panel-body > .coluna {
+    vertical-align: top;
+    display: inline-block;
+    word-break:break-all;
+}
+
+.pilar {
+    font-weight: bold;
+}
+.verde {
+    background-color: green;
+}
+.amarelo {
+    background-color: yellow;
+}
+.vermelho {
+    background-color: red;
+}
+
+.pilar-valores, pilar-cabecalho {
+    text-align: center !important;
+    font-weight: bold;
+}
+
+.pilar-valores{
+    color: #000000;
+
 }
 
 /* Pilar */

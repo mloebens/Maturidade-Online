@@ -37,6 +37,11 @@ namespace Maturidade_Online.Dominio
             pilarRepositorio.Remover(pilar);
         }
 
+        public ICollection<PilarPontuacao> ListarPontuacaoTotal()
+        {
+            return pilarRepositorio.ListarPontuacaoTotal();
+        }
+
         public Pilar BuscarPorId(Pilar pilar)
         {
             return pilarRepositorio.BuscarPorId(pilar);

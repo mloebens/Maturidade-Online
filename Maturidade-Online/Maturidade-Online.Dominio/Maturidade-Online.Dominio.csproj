@@ -56,6 +56,7 @@
     <Compile Include="Pilar\IPilarRepositorio.cs" />
     <Compile Include="Abstrato\IRepositorio.cs" />
     <Compile Include="Pilar\Pilar.cs" />
+    <Compile Include="Pilar\PilarPontuacao.cs" />
     <Compile Include="Pilar\PilarServico.cs" />
     <Compile Include="Projeto\IProjetoRepositorio.cs" />
     <Compile Include="Projeto\Projeto.cs" />
