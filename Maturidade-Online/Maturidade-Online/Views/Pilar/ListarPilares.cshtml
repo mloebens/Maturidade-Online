@@ -4,51 +4,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">Pilares</h2>
-<div class="pull-right">
-    @Html.ActionLink("Novo Pilar", "Manter", "Pilar", null, new { @class = "btn btn-primary" })
-</div>
-<table id="listar-pilares" class="table">
-    <thead>
-        <tr>
-            <th class="text-center">
-                @Html.DisplayName("Pilar")
-            </th>
-            <th class="text-center">
-                @Html.DisplayName("Pontuação")
-            </th>
-            <th class="text-center">
-                @Html.DisplayName("Subtópicos")
-            </th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var pilar in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => pilar.Titulo)
-                </td>
-                <td class="text-center">
-                    @pilar.Subtopicos.Sum(_ => _.Pontuacao)
-                </td>
-                <td>
-                    @foreach (var subtopico in pilar.Subtopicos)
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Pilares</strong>
+        <a href="/Pilar/Manter" class="btn btn-xs btn-success pull-right">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Novo Pilar</span>
+        </a>
+    </div>
+    <div class="panel-body">
+        <table id="listar-pilares" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Pilar")
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayName("Pontuação")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pilar in Model)
                 {
-                        <div class="tags">@Html.DisplayName(subtopico.Nome)</div>
-                    }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(_ => pilar.Titulo)
+                        </td>
+                        <td class="text-center">
+                            @pilar.Subtopicos.Sum(_ => _.Pontuacao)
+                        </td>
+                       
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <a class="btn btn-xs btn-default" href="~/Pilar/Manter/@pilar.Id">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a class="btn btn-xs btn-danger" href="~/Pilar/Excluir/@pilar.Id">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </div>
+                        </td>
 
-                </td>
-                <td>
-                    <a class="glyphicon glyphicon-pencil" href="~/Pilar/Manter/@pilar.Id.Value"></a>
-                </td>
-                <td>
-                    <a class="glyphicon glyphicon-trash" href="~/Pilar/Excluir/@pilar.Id.Value"></a>
-                </td>
-
-            </tr>
-        }
-    </tbody>
-</table>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

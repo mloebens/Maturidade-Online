@@ -4,32 +4,45 @@
     ViewBag.Title = "Caracteristica";
 }
 
-<h2>Caracteristica</h2>
+<div>
+    <legend>@(Model.Id > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
+</div>
 
+<div class="alerta-erro">
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+</div>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+    </div>
+}
 
 @using (Html.BeginForm("Salvar", "Caracteristica", FormMethod.Post, new { }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome)
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome" })
+        @Html.ValidationMessageFor(model => model.Nome)
+    </div>
+    <div class="form-group">
+        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
+    </div>
+}
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-success" />
-            </div>
-        </div>
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Subtópicos</strong>
+        <a href="/Subtopico/Manter" class="btn btn-xs btn-success pull-right">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Novo Subtópico</span>
+        </a>
+    </div>
+    <div class="panel-body">
         <table class="table table-striped table-responsive">
             <thead>
                 <tr>
@@ -53,10 +66,9 @@
         </table>
 
     </div>
-}
-
+</div>
 <div>
-    @Html.ActionLink("Listar", "Listar", "Caracteristica", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Listar", "Listar", "Caracteristica", "", new { @class = "btn btn-default pull-right" })
 </div>
 
 @section Scripts {

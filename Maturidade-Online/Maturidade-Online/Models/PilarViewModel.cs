@@ -14,6 +14,7 @@ namespace Maturidade_Online.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Título")]
         public string Titulo { get; set; }
         public ICollection<Subtopico> Subtopicos { get; set; }
 

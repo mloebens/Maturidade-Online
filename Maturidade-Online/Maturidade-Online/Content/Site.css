@@ -1,6 +1,6 @@
-﻿body {
-    padding-top: 100px;
-    padding-bottom: 20px;
+﻿
+body {
+    padding: 100px 10px 50px 10px ;
 }
 
 .btn-padrao {
@@ -8,11 +8,6 @@
     margin: 0 auto;
     font-weight: bold;
     color: white;
-}
-
-.glyphicon-trash,
-.glyphicon-pencil {
-    color: black;
 }
 
 
@@ -77,17 +72,20 @@ div.login-item {
 }
 .pilar-valores{
     display: inline-block;
-    padding: 5px 10px;
-    border-radius: 12px;
-    width: 50px;
+    padding: 10px;
+    border-radius: 20px;
+    width: 40px;
 }
 
 .verde {
-    background-color: green;
+    background-color: #69ce69;
+    color: green !important;
+    border: 1px solid green;
 }
 
 .amarelo {
     background-color: yellow;
+    color: #777 !important;
 }
 
 .vermelho {

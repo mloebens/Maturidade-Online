@@ -12,7 +12,7 @@ namespace Maturidade_Online.Models
         public int Id { get; set; }
         [Required]
         public string Nome { get; set; }
-        [Required]
+        [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
         public string Descricao { get; set; }
         [Required]
         public int Pontuacao { get; set; }
