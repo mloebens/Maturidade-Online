@@ -1,4 +1,4 @@
-﻿@model ICollection<Maturidade_Online.Dominio.Pilar>
+﻿@model ICollection<Maturidade_Online.Models.PilarViewModel>
 @{
     ViewBag.Title = "ListarPilares";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,17 +6,47 @@
 
 <h2 class="text-center">Pilares Cadastrados</h2>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 grid-listagem">
-            @foreach (var pilar in Model)
-            {
-                <div class="col-md-2 grid-lista">
-                    <p class="text-center">@pilar.Titulo</p>
-                    <p class="text-center"><a href="/Pilar/Manter/@pilar.Id" class="btn btn-default">Editar</a></p>
-                    <p class="text-center"><a href="/Pilar/ExcluirPilar/@pilar.Id" class="btn btn-danger">Deletar</a></p>
-                </div>
-            }
-        </div>
-    </div>
-</div>
+<table id="listar-pilares" class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("Pilar")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("Pontuação")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("Subtópicos")
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pilar in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => pilar.Titulo)
+                </td>
+                <td class="text-center">
+                    @pilar.Subtopicos.Sum(_ => _.Pontuacao)
+                </td>
+                <td>
+                    @foreach (var subtopico in pilar.Subtopicos)
+                {
+                        <div class="tags">@Html.DisplayName(subtopico.Nome)</div>
+                    }
+
+                </td>
+                <td>
+                    <a class="glyphicon glyphicon-pencil" href="~/Pilar/Manter/@pilar.Id.Value"></a>
+                </td>
+                <td>
+                    <a class="glyphicon glyphicon-trash" href="~/Pilar/Excluir/@pilar.Id.Value"></a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

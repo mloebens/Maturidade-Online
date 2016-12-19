@@ -14,7 +14,7 @@ namespace Maturidade_Online.Controllers
 {
     public class PilarController : Controller
     {
-        // GET: Pilar
+        [Autorizador]
         public ActionResult Manter(int? id)
         {
             var pilarViewModel = new PilarViewModel();
@@ -37,6 +37,7 @@ namespace Maturidade_Online.Controllers
             return View("Pilar", pilarViewModel);
         }
 
+        [Autorizador]
         public ActionResult Salvar(PilarViewModel pilarModel)
         {
             if (ModelState.IsValid)
@@ -78,42 +79,43 @@ namespace Maturidade_Online.Controllers
             return RedirectToAction("Manter");
         }
 
+        [Autorizador]
         public ActionResult ListarPilares()
         {
+            var pilarViewModel = new List<PilarViewModel>();
+
             using (var contexto = new ContextoDeDadosEF())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
                 var listaDePilares = pilarServico.Listar();
+                pilarViewModel = Mapper.Map<IEnumerable<Pilar>, List<PilarViewModel>>(listaDePilares);
 
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                foreach (var pilar in pilarViewModel)
+                {
+                    pilar.Subtopicos = subtopicoServico.Listar(new Pilar { Id = pilar.Id.Value });
+                }
 
-                return View("ListarPilares", listaDePilares);
+                return View("ListarPilares", pilarViewModel);
             }
 
         }
 
-        public ActionResult ExcluirPilar(int id)
+        [Autorizador]
+        public ActionResult Excluir(int id)
         {
             using (var contexto = new ContextoDeDadosEF())
             {
-                var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
-                var usuarioServico = ServicoDeDependencia.MontarUsuarioServico(contexto).BuscarPorEmail(usuarioAutenticado);
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var pilar = new Pilar() { Id = id };
+                pilar = pilarServico.BuscarPorId(pilar);
 
-                if (usuarioServico.Permissao.Equals(Permissao.ADMINISTRADOR))
-                {
+                pilarServico.Remover(pilar);
 
-                    var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                    var pilar = new Pilar() { Id = id };
-                    pilar = pilarServico.BuscarPorId(pilar);
-
-                    pilarServico.Remover(pilar);
-                }
             }
 
             return RedirectToAction("ListarPilares");
         }
-
-
-
 
         // Partial View
         //[Autorizador]
@@ -123,9 +125,6 @@ namespace Maturidade_Online.Controllers
             using (var contexto = new ContextoDeDadosEF())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-
-
-
                 var lista = subtopicoServico.ListarPorPilar(id.FirstOrDefault());
                 var listaTotal = subtopicoServico.Listar();
 

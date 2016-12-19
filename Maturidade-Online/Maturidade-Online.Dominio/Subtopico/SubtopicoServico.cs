@@ -20,15 +20,15 @@ namespace Maturidade_Online.Dominio
             return subtopicoRepositorio.Listar();
         }
 
-        public void Persistir(Subtopico pilar)
+        public void Persistir(Subtopico subtopico)
         {
-            if (pilar.Id == 0)
+            if (subtopico.Id == 0)
             {
-                subtopicoRepositorio.Criar(pilar);
+                subtopicoRepositorio.Criar(subtopico);
             }
             else
             {
-                subtopicoRepositorio.Editar(pilar);
+                subtopicoRepositorio.Editar(subtopico);
             }
         }
 

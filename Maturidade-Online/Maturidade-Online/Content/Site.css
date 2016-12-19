@@ -10,6 +10,11 @@
     color: white;
 }
 
+.glyphicon-trash,
+.glyphicon-pencil {
+    color: black;
+}
+
 
 /* Login */
 
@@ -92,22 +97,12 @@ div.login-item {
     color: #000000;
 }
 
-/* Pilar */
+/* Pilar Listar */
 
-.grid-listagem {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 100px;
+#listar-pilares tbody tr td{
+    vertical-align: middle;
 }
 
-    .grid-listagem .grid-lista {
-        border: solid 1px;
-        border-radius: 10px;
-        margin-left: 50px;
-        margin-top: 50px;
-        padding: 10px;
-    }
 
 #cadastrar-pilar {
     margin-bottom: 20px;
@@ -122,9 +117,9 @@ span.select2.select2-container.select2-container--default {
 
 /* Caracteristica - Listar */
 
-.caracteristica-subtopico {
+.tags {
     display: inline-block;
-    background-color: lightgrey;
+    background-color: orange;
     padding: 5px 10px;
     border-radius: 15px;
     margin: 3px;
