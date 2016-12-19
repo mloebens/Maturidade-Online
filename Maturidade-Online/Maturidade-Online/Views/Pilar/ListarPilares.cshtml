@@ -4,8 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">Pilares Cadastrados</h2>
-
+<h2 class="text-center">Pilares</h2>
+<div class="pull-right">
+    @Html.ActionLink("Novo Pilar", "Manter", "Pilar", null, new { @class = "btn btn-primary" })
+</div>
 <table id="listar-pilares" class="table">
     <thead>
         <tr>

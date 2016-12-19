@@ -20,6 +20,8 @@ namespace Maturidade_Online.Models
         [Required]
         public int PilarId { get; set; }
 
+        public Pilar Pilar { get; set; }
+
         public ICollection<Pilar> Pilares { get; set; }
     }
 }

@@ -80,7 +80,7 @@ namespace Maturidade_Online.Controllers
         }
 
         [Autorizador]
-        public ActionResult ListarPilares()
+        public ActionResult Listar()
         {
             var pilarViewModel = new List<PilarViewModel>();
 
