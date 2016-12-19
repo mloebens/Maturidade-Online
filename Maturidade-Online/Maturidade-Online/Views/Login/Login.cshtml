@@ -10,9 +10,15 @@
 
     <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
    
-        <div class="alerta-erro">
-            @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
-        </div>
+
+
+        @if (ViewData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Erro!</strong> @ViewData["MensagemErro"]
+            </div>
+        }
+      
 
         <div id="panel-login" class="panel panel-info">
             <div class="panel-heading">
@@ -41,7 +47,7 @@
                 </div>
 
                 <div class="col-sm-12 login-item">
-                    <input type="submit" class="btn btn-sm btn-block" value="Entrar" />
+                    <input type="submit" class="btn btn-sm btn-block btn-padrao" value="Entrar" />
                 </div>
 
             </div>

@@ -175,7 +175,7 @@
     <Compile Include="Models\CaracteristicaViewModel.cs" />
     <Compile Include="Models\ProjetoListarPilarViewModel.cs" />
     <Compile Include="Models\ProjetoListarViewModel.cs" />
-    <Compile Include="Models\PilarModel.cs" />
+    <Compile Include="Models\PilarViewModel.cs" />
     <Compile Include="Models\ProjetoModel.cs" />
     <Compile Include="Models\SubtopicoViewModel.cs" />
     <Compile Include="Models\UsuarioLogadoModel.cs" />

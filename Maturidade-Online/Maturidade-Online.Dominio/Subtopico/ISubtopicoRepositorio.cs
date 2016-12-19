@@ -13,6 +13,7 @@ namespace Maturidade_Online.Dominio
         ICollection<Subtopico> Listar(ICollection<Caracteristica> caracteristica);
         ICollection<Subtopico> Listar(Caracteristica caracteristica);
         ICollection<Subtopico> Listar(Projeto projeto);
+        ICollection<Subtopico> Listar(Pilar pilar);
         ICollection<Subtopico> ListarComPilar(ICollection<Caracteristica> caracteristica);
         ICollection<Subtopico> ListarPorPilar(int id);
         Subtopico BuscarPorId(Subtopico subtopico);

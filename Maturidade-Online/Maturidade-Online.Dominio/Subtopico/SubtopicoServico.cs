@@ -70,5 +70,10 @@ namespace Maturidade_Online.Dominio
         {
             return subtopicoRepositorio.Listar(projeto);
         }
+
+        public ICollection<Subtopico> Listar(Pilar pilar)
+        {
+            return subtopicoRepositorio.Listar(pilar);
+        }
     }
 }

@@ -17,31 +17,27 @@ namespace Maturidade_Online.Controllers
         // GET: Pilar
         public ActionResult Manter(int? id)
         {
-            var pilarModel = new PilarModel();
+            var pilarViewModel = new PilarViewModel();
             using (var contexto = new ContextoDeDadosEF())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                var pilares = pilarServico.Listar();
 
                 if (id.HasValue && id.Value > 0)
                 {
                     var pilar = new Pilar() { Id = id.Value };
                     var pilarDaBase = pilarServico.BuscarPorId(pilar);
-                    if (pilarDaBase != null)
-                    {
-                        pilarModel.Id = pilarDaBase.Id;
-                        pilarModel.Titulo = pilarDaBase.Titulo;
-                        //pilarModel = Mapper.Map<Pilar, PilarModel>(pilarDaBase);
-                    }
+                    pilarViewModel = Mapper.Map<Pilar, PilarViewModel>(pilarDaBase);
 
+                    var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                    pilarViewModel.Subtopicos = subtopicoServico.Listar(pilar);
                 }
 
             }
 
-            return View("Pilar", pilarModel);
+            return View("Pilar", pilarViewModel);
         }
 
-        public ActionResult Salvar(PilarModel pilarModel)
+        public ActionResult Salvar(PilarViewModel pilarModel)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +62,14 @@ namespace Maturidade_Online.Controllers
                         ModelState.AddModelError("", e.Message);
                     }
 
+                    if (pilarModel.Id != null && pilarModel.Id.Value > 0)
+                    {
+                        TempData["MensagemSucesso"] = "Pilar alterado com sucesso.";
+                    }
+                    else
+                    {
+                        TempData["MensagemSucesso"] = "Pilar cadastrado com sucesso.";
+                    }
                 }
 
                 return RedirectToAction("Manter");
@@ -94,7 +98,8 @@ namespace Maturidade_Online.Controllers
                 var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
                 var usuarioServico = ServicoDeDependencia.MontarUsuarioServico(contexto).BuscarPorEmail(usuarioAutenticado);
 
-                if (usuarioServico.Permissao.Equals(Permissao.ADMINISTRADOR)){
+                if (usuarioServico.Permissao.Equals(Permissao.ADMINISTRADOR))
+                {
 
                     var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
                     var pilar = new Pilar() { Id = id };

@@ -60,5 +60,10 @@ namespace Maturidade_Online.Repositorio
         {
             return contexto.Subtopico.Where(s => s.Projetos.Any(c => c.Id == projeto.Id)).ToList();
         }
+
+        public ICollection<Subtopico> Listar(Pilar pilar)
+        {
+            return contexto.Subtopico.Where(s => s.PilarId == pilar.Id).ToList();
+        }
     }
 }

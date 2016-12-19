@@ -3,6 +3,14 @@
     padding-bottom: 20px;
 }
 
+.btn-padrao {
+    background-color: orange;
+    margin: 0 auto;
+    font-weight: bold;
+    color: white;
+}
+
+
 /* Login */
 
 div.login-item {
@@ -12,7 +20,6 @@ div.login-item {
 .alerta-erro > .alert-danger li {
     padding: 5px;
     margin-bottom: 5px;
-    
 }
 
 .alerta-erro > .alert-danger ul {
@@ -20,43 +27,31 @@ div.login-item {
 }
 
 .alerta-erro > .alert-danger {
-        border-radius: 10px;
+    border-radius: 10px;
 }
 
-.panel-manter .panel-heading{
+.panel-manter .panel-heading {
     background-color: black;
     color: white;
-    font-size:20px;
-}
-
-.panel-manter .btn{
-    background-color: lightgreen;
-    font-weight: bold;
-    border: 1px solid;
+    font-size: 20px;
 }
 
 #panel-login {
     border-color: black;
 }
 
-#panel-login .panel-heading {
-    background-color: black;
-    color: white;
-    border-color: black;
-}
-
-#panel-login .btn {
-    background-color: orange;
-    margin: 0 auto;
-    font-weight: bold;
-    color: white;
-}
+    #panel-login .panel-heading {
+        background-color: black;
+        color: white;
+        border-color: black;
+    }
 
 
 /* Projeto Cadastrar*/
 #caracteristicas > span.select2-container--default .select2-selection--multiple {
     border-radius: 0px 4px 4px 0px;
 }
+
 #caracteristicas > span.select2.select2-container.select2-container--default {
     display: block;
     width: 100% !important;
@@ -69,18 +64,21 @@ div.login-item {
 .projeto > .panel-body > .coluna {
     vertical-align: top;
     display: inline-block;
-    word-break:break-all;
+    word-break: break-all;
 }
 
 .pilar {
     font-weight: bold;
 }
+
 .verde {
     background-color: green;
 }
+
 .amarelo {
     background-color: yellow;
 }
+
 .vermelho {
     background-color: red;
 }
@@ -90,26 +88,29 @@ div.login-item {
     font-weight: bold;
 }
 
-.pilar-valores{
+.pilar-valores {
     color: #000000;
-
 }
 
 /* Pilar */
 
-.grid-listagem{
+.grid-listagem {
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 100px
+    padding-left: 100px;
 }
 
-.grid-listagem .grid-lista{
-    border: solid 1px;
-    border-radius: 10px;
-    margin-left: 50px;
-    margin-top: 50px;
-    padding: 10px;
+    .grid-listagem .grid-lista {
+        border: solid 1px;
+        border-radius: 10px;
+        margin-left: 50px;
+        margin-top: 50px;
+        padding: 10px;
+    }
+
+#cadastrar-pilar {
+    margin-bottom: 20px;
 }
 
 /* Subtopico - Cadastrar */
@@ -121,7 +122,7 @@ span.select2.select2-container.select2-container--default {
 
 /* Caracteristica - Listar */
 
-.caracteristica-subtopico{
+.caracteristica-subtopico {
     display: inline-block;
     background-color: lightgrey;
     padding: 5px 10px;

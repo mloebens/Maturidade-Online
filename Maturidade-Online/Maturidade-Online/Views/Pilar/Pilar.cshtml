@@ -1,20 +1,26 @@
-﻿@model  Maturidade_Online.Models.PilarModel
+﻿@model  Maturidade_Online.Models.PilarViewModel
 @{
     ViewBag.Title = "Pilar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    @using (Html.BeginForm("Salvar", "Pilar", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Salvar", "Pilar", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
-{
-    @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
 
-    <div class="login-erro">
-        @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
-    </div>
+        <div class="alerta-erro">
+            @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+        </div>
+        if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success">
+                <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+            </div>
+        }
 
-    @Html.HiddenFor(model => model.Id)
-    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info panel-manter">
             <div class="panel-heading">
                 <div class="panel-title text-center">Pilares</div>
@@ -28,60 +34,53 @@
                 <div class="col-md-12">
                     @Html.ValidationMessageFor(model => model.Titulo)
                 </div>
-
             </div>
-
-
 
             <div class="col-sm-12">
-                <input id="cadastrar-pilar" type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
-            </div>
-            <div class="col-md-12">
-                <a href="/Subtopico/Manter" class="btn btn-sm btn-danger btn-block text-center">Cadastrar Subtópico</a>
+                <input id="cadastrar-pilar" type="submit" class="btn btn-sm btn-block btn-padrao" value="Salvar" />
             </div>
         </div>
+    }
+
+
+    @if (Model.Subtopicos != null)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Subtópico</th>
+                    <th class="text-center">Pontuação</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model.Subtopicos.Count == 0)
+                {
+                    <tr>
+                        <td colspan="12">Nenhum subtópico encontrado.</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var subtopico in Model.Subtopicos)
+                    {
+                        <tr>
+                            <td>@subtopico.Nome</td>
+                            <td class="text-center">@subtopico.Pontuacao</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    }
+
+    <div class="col-md-12">
+        <a href="/Subtopico/Manter" class="btn btn-sm btn-block btn-primary">Cadastrar Subtópico</a>
     </div>
 
-}
-
-
-<div class="row">
-    <div id="container-listagem-pilares" class="col-md-6 col-lg-offset-3"></div>
 </div>
 
-
-
-
 @section scripts {
-
-    <script type="text/javascript">
-
-        var $listagemPilares = $('#container-listagem-pilares');
-
-        let lastParameter = $(location).attr('pathname');
-        console.log(lastParameter);
-        var numero = lastParameter.substr(lastParameter.length - 1);
-        console.log(numero);
-        //var numero = 2;
-        //console.log(numero);
-        //console.log($.isNumeric(lastChar));
-        //console.log($.isNumeric(numero));
-
-        if ($.isNumeric(numero)) {
-            let id = parseInt(numero);
-            console.log('É numero');
-            $("#cadastrar-pilar").ready(function () {
-                const urlGet = '@Url.Action("PesquisarPilares", "Pilar")';
-                jQuery.ajaxSettings.traditional = true;
-                $.get(urlGet, { id })
-                    .done(response => {
-                        $listagemPilares.html(response);
-                    });
-            })
-
-        }
-
-
-
-    </script>
+    @Scripts.Render("~/bundles/jqueryval")
 }

@@ -46,7 +46,7 @@ namespace Maturidade_Online.Controllers
                     }
                     
                 }
-                ModelState.AddModelError("", "Usuário ou Senha inválida.");
+                ViewData["MensagemErro"] = "Usuário ou Senha inválido.";
             }
 
             return View("Login");

@@ -22,6 +22,8 @@ namespace Maturidade_Online
 
             Mapper.Initialize(cfg => 
             {
+                cfg.CreateMap<PilarViewModel, Pilar>();
+                cfg.CreateMap<Pilar, PilarViewModel>();
                 cfg.CreateMap<ProjetoModel, Projeto>();
                 cfg.CreateMap<Projeto, ProjetoModel>();
                 cfg.CreateMap<UsuarioModel, Usuario>();
