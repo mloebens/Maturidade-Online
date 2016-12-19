@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class PilarRepositorioEF : RepositorioAbstratoEF<Pilar>, IPilarRepositorio
+    public class PilarRepositorio : RepositorioAbstrato<Pilar>, IPilarRepositorio
     {
-        public PilarRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        public PilarRepositorio(ContextoDeDados contexto) : base(contexto)
         {
         }
 

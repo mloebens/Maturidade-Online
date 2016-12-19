@@ -28,7 +28,9 @@
                 <td>@projeto.Nome</td>
                 @foreach (var pilar in projeto.Pilares)
                 {
-                    <td class="pilar-valores @pilar.cor">@pilar.Pontuacao</td>
+                    <td class="text-center">
+                        <div class="pilar-valores @pilar.cor">@pilar.Pontuacao</div>
+                    </td>
                 }
                 <td>
                     @{ if (usuario.Id == projeto.CriadorId)

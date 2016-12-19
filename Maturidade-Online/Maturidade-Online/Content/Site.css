@@ -75,6 +75,12 @@ div.login-item {
 .pilar {
     font-weight: bold;
 }
+.pilar-valores{
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 12px;
+    width: 50px;
+}
 
 .verde {
     background-color: green;

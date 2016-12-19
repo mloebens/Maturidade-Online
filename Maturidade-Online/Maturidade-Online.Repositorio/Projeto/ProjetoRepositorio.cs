@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class ProjetoRepositorioEF : RepositorioAbstratoEF<Projeto>, IProjetoRepositorio
+    public class ProjetoRepositorio : RepositorioAbstrato<Projeto>, IProjetoRepositorio
     {
-        public ProjetoRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        public ProjetoRepositorio(ContextoDeDados contexto) : base(contexto)
         {
         }
 
@@ -42,8 +42,8 @@ namespace Maturidade_Online.Repositorio
 
         public override void Editar(Projeto projeto)
         { 
-            CaracteristicaRepositorioEF caracteristicaRepositorio = new CaracteristicaRepositorioEF(contexto);
-            SubtopicoRepositorioEF subtopicoRepositorio = new SubtopicoRepositorioEF(contexto);
+            CaracteristicaRepositorio caracteristicaRepositorio = new CaracteristicaRepositorio(contexto);
+            SubtopicoRepositorio subtopicoRepositorio = new SubtopicoRepositorio(contexto);
 
             var subtopicosParaRemover = subtopicoRepositorio.Listar(projeto);
             var caracteristicasParaRemover = caracteristicaRepositorio.Listar(projeto);

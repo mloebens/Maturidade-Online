@@ -18,7 +18,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Manter(int? id)
         {
             var pilarViewModel = new PilarViewModel();
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
 
@@ -42,7 +42,7 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var contexto = new ContextoDeDadosEF())
+                using (var contexto = new ContextoDeDados())
                 {
                     //Adicionar no projeto
                     var pilar = new Pilar();
@@ -84,7 +84,7 @@ namespace Maturidade_Online.Controllers
         {
             var pilarViewModel = new List<PilarViewModel>();
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
                 var listaDePilares = pilarServico.Listar();
@@ -104,7 +104,7 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult Excluir(int id)
         {
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
                 var pilar = new Pilar() { Id = id };
@@ -122,7 +122,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult PesquisarPilares(int[] id)
         {
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var lista = subtopicoServico.ListarPorPilar(id.FirstOrDefault());

@@ -19,7 +19,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Manter(int? id)
         {
             var caracteristicaViewModel = new CaracteristicaViewModel();
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
  
@@ -45,7 +45,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Salvar(CaracteristicaViewModel caracteristicaViewModel)
         {
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
@@ -85,7 +85,7 @@ namespace Maturidade_Online.Controllers
         {
             var caracteristicaViewModel = new List<CaracteristicaViewModel>();
             
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                 var caracteristicasDaBase = caracteristicaServico.Listar();

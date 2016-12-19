@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class UsuarioRepositorio : RepositorioAbstratoEF<Usuario>, IUsuarioRepositorio
+    public class UsuarioRepositorio : RepositorioAbstrato<Usuario>, IUsuarioRepositorio
     {
-        public UsuarioRepositorio(ContextoDeDadosEF contexto) : base(contexto)
+        public UsuarioRepositorio(ContextoDeDados contexto) : base(contexto)
         {
         }
 

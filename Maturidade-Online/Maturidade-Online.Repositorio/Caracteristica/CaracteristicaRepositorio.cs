@@ -10,9 +10,9 @@ using System.Data.Entity;
 
 namespace Maturidade_Online.Repositorio
 {
-    public class CaracteristicaRepositorioEF : RepositorioAbstratoEF<Caracteristica>, ICaracteristicaRepositorio
+    public class CaracteristicaRepositorio : RepositorioAbstrato<Caracteristica>, ICaracteristicaRepositorio
     {
-        public CaracteristicaRepositorioEF(ContextoDeDadosEF contexto) : base(contexto)
+        public CaracteristicaRepositorio(ContextoDeDados contexto) : base(contexto)
         {
         }
 
@@ -38,7 +38,7 @@ namespace Maturidade_Online.Repositorio
         {
             var caracteristicaDaBase = this.BuscarPorId(caracteristica);
             //TODO injetar com inteface
-            var subtopicoRepositorio = new SubtopicoRepositorioEF(contexto);
+            var subtopicoRepositorio = new SubtopicoRepositorio(contexto);
             var subtopicosParaRemover = subtopicoRepositorio.Listar(caracteristica);
 
             foreach (var subtopico in subtopicosParaRemover)

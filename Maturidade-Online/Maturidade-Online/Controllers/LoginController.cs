@@ -31,7 +31,7 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var contexto = new ContextoDeDadosEF())
+                using (var contexto = new ContextoDeDados())
                 {
                     UsuarioServico usuarioServico = ServicoDeDependencia.MontarUsuarioServico(contexto);
 

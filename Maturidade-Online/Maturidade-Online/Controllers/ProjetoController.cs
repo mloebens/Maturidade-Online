@@ -19,7 +19,7 @@ namespace Maturidade_Online.Controllers
         {
 
             var projetoModel = new ProjetoModel();
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                 var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
@@ -48,7 +48,7 @@ namespace Maturidade_Online.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var contexto = new ContextoDeDadosEF())
+                using (var contexto = new ContextoDeDados())
                 {
                     //Converter Caracteristica
                     var caracteristicaService = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
@@ -91,7 +91,7 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult Excluir(int id)
         {
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var usuarioAutenticado = new Usuario() { Email = ServicoDeAutenticacao.UsuarioLogado.Email };
                 var projeto = new Projeto() { Id = id };
@@ -118,7 +118,7 @@ namespace Maturidade_Online.Controllers
 
             var projetosViewModel = new List<ProjetoListarViewModel>();
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);

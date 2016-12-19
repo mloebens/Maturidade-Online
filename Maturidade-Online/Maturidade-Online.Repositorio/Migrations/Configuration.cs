@@ -7,14 +7,14 @@ namespace Maturidade_Online.Repositorio.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Maturidade_Online.Repositorio.ContextoDeDadosEF>
+    internal sealed class Configuration : DbMigrationsConfiguration<Maturidade_Online.Repositorio.ContextoDeDados>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDadosEF context)
+        protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDados context)
         {
 
             Usuario usuario1 = new Usuario { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };

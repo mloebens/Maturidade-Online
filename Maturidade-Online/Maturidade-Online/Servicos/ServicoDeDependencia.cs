@@ -11,7 +11,7 @@ namespace Maturidade_Online.Servicos
     public class ServicoDeDependencia
     {
 
-        public static UsuarioServico MontarUsuarioServico(ContextoDeDadosEF contexto)
+        public static UsuarioServico MontarUsuarioServico(ContextoDeDados contexto)
         {
             UsuarioServico usuarioServico =
                 new UsuarioServico(
@@ -21,35 +21,35 @@ namespace Maturidade_Online.Servicos
         }
 
 
-        public static SubtopicoServico MontarSubtopicoServico(ContextoDeDadosEF contexto)
+        public static SubtopicoServico MontarSubtopicoServico(ContextoDeDados contexto)
         {
             SubtopicoServico subtopicoServico =
                 new SubtopicoServico(
-                    new SubtopicoRepositorioEF(contexto));
+                    new SubtopicoRepositorio(contexto));
             return subtopicoServico;
         }
 
-        public static PilarServico MontarPilarServico(ContextoDeDadosEF contexto)
+        public static PilarServico MontarPilarServico(ContextoDeDados contexto)
         {
             PilarServico pilarServico =
                 new PilarServico(
-                    new PilarRepositorioEF(contexto));
+                    new PilarRepositorio(contexto));
             return pilarServico;
         }
 
-        public static CaracteristicaServico MontarCaracteristicaServico(ContextoDeDadosEF contexto)
+        public static CaracteristicaServico MontarCaracteristicaServico(ContextoDeDados contexto)
         {
             CaracteristicaServico caracteristicaServico =
                 new CaracteristicaServico(
-                    new CaracteristicaRepositorioEF(contexto));
+                    new CaracteristicaRepositorio(contexto));
             return caracteristicaServico;
         }
 
-         public static ProjetoServico MontarProjetoServico(ContextoDeDadosEF contexto)
+         public static ProjetoServico MontarProjetoServico(ContextoDeDados contexto)
         {
             ProjetoServico projetoServico =
                 new ProjetoServico(
-                    new ProjetoRepositorioEF(contexto),
+                    new ProjetoRepositorio(contexto),
                     new UsuarioRepositorio(contexto));
             return projetoServico;
         }

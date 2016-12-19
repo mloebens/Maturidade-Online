@@ -8,12 +8,12 @@ using System.Data.Entity;
 
 namespace Maturidade_Online.Repositorio.Abstrato
 {
-    public abstract class RepositorioAbstratoEF<T> : IRepositorio<T> where T : class
+    public abstract class RepositorioAbstrato<T> : IRepositorio<T> where T : class
     {
 
-        protected ContextoDeDadosEF contexto;
+        protected ContextoDeDados contexto;
 
-        public RepositorioAbstratoEF(ContextoDeDadosEF contexto)
+        public RepositorioAbstrato(ContextoDeDados contexto)
         {
             this.contexto = contexto;
         }

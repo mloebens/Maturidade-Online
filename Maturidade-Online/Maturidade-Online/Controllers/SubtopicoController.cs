@@ -20,7 +20,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Manter(int? id)
         {
             var subtopicoViewModel = new SubtopicoViewModel();
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
 
@@ -45,7 +45,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Salvar(SubtopicoViewModel subtopicoViewModel)
         {
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
@@ -79,7 +79,7 @@ namespace Maturidade_Online.Controllers
         public ActionResult Excluir(int id)
         {
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 if (id > 0)
                 {
@@ -97,7 +97,7 @@ namespace Maturidade_Online.Controllers
 
             var subtopicoViewModel = new List<SubtopicoViewModel>();
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var subtopicosDaBase = subtopicoServico.Listar();
@@ -115,7 +115,7 @@ namespace Maturidade_Online.Controllers
         {
             if (idsCaracteristicas == null) return PartialView("_Subtopicos");
 
-            using (var contexto = new ContextoDeDadosEF())
+            using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var caracteristicas = idsCaracteristicas.Select(c => new Caracteristica() { Id = c }).ToList();
