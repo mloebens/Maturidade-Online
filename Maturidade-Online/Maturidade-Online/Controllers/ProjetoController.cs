@@ -24,8 +24,10 @@ namespace Maturidade_Online.Controllers
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                 var subtopicosServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                 var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
                 var caracteristicas = caracteristicaServico.Listar();
                 var subtopicos = subtopicosServico.Listar();
+                projetoModel.PilaresPontuacao = pilarServico.ListarPontuacaoTotal();
 
 
                 if (id.HasValue && id.Value > 0)

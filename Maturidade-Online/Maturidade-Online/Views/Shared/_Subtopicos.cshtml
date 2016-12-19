@@ -16,9 +16,9 @@
             {
                 <tr id="subtopico">
                     <td>@subtopico.Pilar.Titulo</td>
-                    <td data-pontuacao="@subtopico.Pontuacao">@subtopico.Nome</td>
+                    <td>@subtopico.Nome</td>
                     <td>
-                        <input type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
+                        <input data-pontuacao="@subtopico.Pontuacao" id="ids-subtopicos" type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
                     </td>
                 </tr>
             }

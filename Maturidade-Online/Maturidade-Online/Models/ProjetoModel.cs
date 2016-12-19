@@ -23,6 +23,7 @@ namespace Maturidade_Online.Models
         [Required]
         public IEnumerable<int> IdsSubtopicos { get; set; }
 
+        public IEnumerable<PilarPontuacao> PilaresPontuacao { get; set; }
         public IEnumerable<Caracteristica> ListaDeCaracteristicas { get; set; }
         public IEnumerable<Subtopico> ListaDeSubtopicos { get; set; }
     }

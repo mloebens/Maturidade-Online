@@ -58,8 +58,13 @@
             <div class="col-sm-12">
                 <input type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
             </div>
-            
-            <div id="grafico"></div>
+
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-sm btn-block" value="Atualizar Gráfico" id="botao-grafico" />
+            </div>
+
+
+            <canvas id="myChart" width="400" height="400"></canvas>
 
         </div>
     </div>
@@ -67,47 +72,72 @@
 
 @section scripts {
     <script type="text/javascript">
+
+        // Instanciar SELECT2 ao carregar página
         $(document).ready(function () {
             $("#opcoes").select2();
         });
 
+        // Função para trazer lista de subtópicos quando há alteração na seleção das Características
         var $listagemSubtopicos = $('#container-subtopicos-dados');
-
-        let lastParameter = $(location).attr('pathname');
-        console.log(lastParameter);
-        var numero = lastParameter.substr(lastParameter.length - 1);
-        console.log(numero);
-        if ($.isNumeric(numero)) {
-            console.log('É numero');
-        }
-
         $("#opcoes").change(function() {
-
-            console.log('ola');
             let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
-            console.log('idsCaracteristicas', idsCaracteristicas);
             const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
             jQuery.ajaxSettings.traditional = true;
             $.get(urlGet, { idsCaracteristicas })
                 .done(response => {
-                    console.log('response', response);
                     $listagemSubtopicos.html(response);
                 }).fail(function(resposta){
                     console.log(resposta)});
 
         })
 
-        $("#opcoes").ready(function () {
+        // Função para criar o gráfico quando clicado no botão
+        var $divGrafico = $('#grafico');
+        var $botaoGrafico = $("#botao-grafico");
+        $botaoGrafico.click(function (event) {
+            event.preventDefault();
+            var labels = [];
+            @foreach(var label in Model.PilaresPontuacao)
+            {
+                @:labels.push("@label.Titulo");
+            }
+            console.log(labels);
 
-            var $divGrafico = $('#grafico');
+            // Inicio captação IDs
+            var dados = $('input:checked').map(function () {
+                return $(this).data ();
+            }).get();
+            console.log(dados);
+            // Fim captação IDs
 
-            const urlGet = '@Url.Action("GerarGrafico", "Projeto")';
-            jQuery.ajaxSettings.traditional = true;
-            $.get(urlGet)
-                .done(response => {
-                    console.log('response', response);
-                    $divGrafico.html(response);
-                });
+            var data = [];
+            @foreach(var data in Model.PilaresPontuacao)
+            {
+                @:data.push("@data.PontuacaoTotal");
+            }
+            console.log(data);
+
+            var dadosTabela = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Vida no Crescer",
+                        backgroundColor: "rgba(179,181,198,0.2)",
+                        borderColor: "rgba(179,181,198,1)",
+                        pointBackgroundColor: "rgba(179,181,198,1)",
+                        pointBorderColor: "#fff",
+                        pointHoverBackgroundColor: "#fff",
+                        pointHoverBorderColor: "rgba(179,181,198,1)",
+                        data: dados
+                    }]
+            };
+
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'radar',
+                data: dadosTabela
+            });
         })
 
     </script>
