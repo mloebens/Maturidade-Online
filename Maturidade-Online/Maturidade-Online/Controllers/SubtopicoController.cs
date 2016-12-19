@@ -58,7 +58,7 @@ namespace Maturidade_Online.Controllers
                     {
                         subtopicoServico.Persistir(subtopico);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         ModelState.AddModelError("", "Falha ao tentar cadastrar os dados no Banco de Dados.");
                         subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();

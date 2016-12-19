@@ -290,6 +290,7 @@
     <Content Include="Views\Subtopico\Subtopico.cshtml" />
     <Content Include="Views\Caracteristica\ListarCaracteristicas.cshtml" />
     <Content Include="Views\Caracteristica\Caracteristica.cshtml" />
+    <Content Include="Views\Shared\_Grafico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -58,6 +58,8 @@
             <div class="col-sm-12">
                 <input type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
             </div>
+            
+            <div id="grafico"></div>
 
         </div>
     </div>
@@ -95,7 +97,18 @@
 
         })
 
+        $("#opcoes").ready(function () {
 
+            var $divGrafico = $('#grafico');
+
+            const urlGet = '@Url.Action("GerarGrafico", "Projeto")';
+            jQuery.ajaxSettings.traditional = true;
+            $.get(urlGet)
+                .done(response => {
+                    console.log('response', response);
+                    $divGrafico.html(response);
+                });
+        })
 
     </script>
 }

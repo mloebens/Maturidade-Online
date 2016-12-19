@@ -111,6 +111,37 @@ namespace Maturidade_Online.Controllers
             return View("Projeto");
         }
 
+        public ActionResult GerarGrafico()
+        {
+            var projetosViewModel = new ProjetoListarViewModel();
+
+            using (var contexto = new ContextoDeDados())
+            {
+
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
+
+
+                var pilaresBanco = pilarServico.Listar();
+
+                var listaDePilarViewModel = new List<ProjetoListarPilarViewModel>();
+
+                foreach (var pilar in pilaresPontuacoesTotais)
+                {
+                    var pilarViewModel = new ProjetoListarPilarViewModel();
+                    pilarViewModel.Titulo = pilar.Titulo;
+                    pilarViewModel.Pontuacao = pilar.PontuacaoTotal;
+
+                    listaDePilarViewModel.Add(pilarViewModel);
+                }
+
+
+                return PartialView("_Grafico", listaDePilarViewModel);
+            }
+
+        }
+
         [Autorizador]
         public ActionResult Listar()
         {
