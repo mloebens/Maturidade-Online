@@ -3,70 +3,78 @@
 @{
     ViewBag.Title = "Subtópico";
 }
+<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    @using (Html.BeginForm("Salvar", "Subtopico", FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Salvar", "Subtopico", FormMethod.Post, new { }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Subtópico</h4>
-        <hr />
         <div class="alerta-erro">
             @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
         </div>
+        if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success">
+                <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+            </div>
+        }
 
-        @Html.HiddenFor(model => model.Id)
+        <div class="panel panel-info panel-manter">
+            <div class="panel-heading">
+                <div class="panel-title text-center">Subtópico</div>
+            </div>
+            <div class="panel-body">
+                @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", placeholder = "Nome" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2", placeholder = "Descrição" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.Pontuacao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Pontuacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Pontuacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    @Html.LabelFor(model => model.PilarId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select id="pilar-select2" class="js-example-basic-single" name="@Html.NameFor(m => m.PilarId)">
+                            @foreach (var pilar in Model.Pilares)
+                            {
+                                <option @(pilar.Id == Model.PilarId ? "selected" : "" ) value="@pilar.Id">@pilar.Titulo</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(model => model.PilarId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-block btn-padrao" />
+                    </div>
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Pontuacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pontuacao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pontuacao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PilarId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select id="pilar-select2" class="js-example-basic-single" name="@Html.NameFor(m => m.PilarId)">
-                    @foreach (var pilar in Model.Pilares)
-                    {
-                        <option @(pilar.Id == Model.PilarId ? "selected" : "" ) value="@pilar.Id">@pilar.Titulo</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.PilarId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-success" />
-            </div>
-        </div>
-       
-
+    <div>
+        @Html.ActionLink("Listar", "Listar", "Subtopico", null, new { @class = "btn btn-primary" })
     </div>
-}
-
-<div>
-    @Html.ActionLink("Listar", "Listar", "Subtopico", null, new { @class = "btn btn-primary" })
 </div>
 
 @section Scripts {
