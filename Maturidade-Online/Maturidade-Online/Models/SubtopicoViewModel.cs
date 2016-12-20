@@ -1,6 +1,7 @@
 ﻿using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,16 @@ namespace Maturidade_Online.Models
     public class SubtopicoViewModel
     {
         public int Id { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string Nome { get; set; }
+
         [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
+        [DisplayName("Descrição")]
         public string Descricao { get; set; }
+
         [Required]
+        [DisplayName("Pontuação")]
         public int Pontuacao { get; set; }
 
         [Required]

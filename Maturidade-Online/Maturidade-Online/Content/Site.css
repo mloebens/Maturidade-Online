@@ -78,6 +78,11 @@ div.login-item {
     vertical-align: middle;
 }
 
+/* Pilar Cadastrar */
+.margin-top{
+    margin-top: 60px;
+}
+
 
 #cadastrar-pilar {
     margin-bottom: 20px;

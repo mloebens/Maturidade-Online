@@ -26,7 +26,7 @@
     @Html.HiddenFor(model => model.Id)
     <div class="form-group">
         @Html.LabelFor(model => model.Nome)
-        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome" })
+        @Html.TextBoxFor(model => model.Nome, new { maxlength = 100, @class = "form-control", placeholder = "Nome" })
         @Html.ValidationMessageFor(model => model.Nome)
     </div>
     <div class="form-group">
