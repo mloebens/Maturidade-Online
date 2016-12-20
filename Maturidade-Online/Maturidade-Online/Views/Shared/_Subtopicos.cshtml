@@ -2,12 +2,13 @@
 
 @if (Model != null)
 {
+
     <table class="table table-striped" id="listagem-subtopicos">
         <thead>
             <tr>
                 <th>Pilar</th>
-                <th>Subtópico</th>
-                <th>Atendido</th>
+                <th class="text-center">Subtópico</th>
+                <th class="text-center">Atendido</th>
             </tr>
         </thead>
         <tbody>
@@ -16,8 +17,8 @@
             {
                 <tr id="subtopico">
                     <td>@subtopico.Pilar.Titulo</td>
-                    <td>@subtopico.Nome</td>
-                    <td>
+                    <td class="text-center">@subtopico.Nome</td>
+                    <td class="text-center">
                         <input data-pontuacao="@subtopico.Pontuacao" id="ids-subtopicos" type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
                     </td>
                 </tr>

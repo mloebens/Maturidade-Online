@@ -1,73 +1,73 @@
 ﻿@model  Maturidade_Online.Models.ProjetoModel
 @{
-    ViewBag.Title = "Manter";
+    ViewBag.Title = "Projeto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Salvar", "Projeto", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
-{
+<div>
+    <legend>@(Model.Id.HasValue && Model.Id.Value > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
+</div>
 
+<div class="alerta-erro">
+    @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+</div>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success">
+        <strong>Sucesso!</strong> @TempData["MensagemSucesso"]
+    </div>
+}
+
+@using (Html.BeginForm("Salvar", "Projeto", FormMethod.Post, new { @class = "form-horizontal col-xs-12" }))
+{
     @Html.AntiForgeryToken()
 
-    <div class="login-erro">
-        @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome)
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Título" })
+        @Html.ValidationMessageFor(model => model.Nome)
     </div>
 
-    @Html.HiddenFor(model => model.Id)
-    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info panel-manter">
-            <div class="panel-heading">
-                <div class="panel-title text-center">Projetos</div>
-            </div>
-
-            <div class="col-md-12 login-item">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-plus"></i></span>
-                    @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome do Projeto" })
-                </div>
-                <div class="col-md-12">
-                    @Html.ValidationMessageFor(model => model.Nome)
-                </div>
-
-            </div>
-
-            <div class="col-md-12 login-item">
-                <div id="caracteristicas" class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
-
-
-                    <select id="opcoes" name="@Html.NameFor(m => m.IdsCaracteristicas)" class="js-example-basic-multiple js-states form-control" multiple>
-                        @foreach (var caracteristica in Model.ListaDeCaracteristicas)
-                        {
-                            <option value="@caracteristica.Id">@caracteristica.Nome</option>
-                        }
-                    </select>
-                    <div class="col-md-12">
-                        @Html.ValidationMessageFor(model => model.IdsCaracteristicas)
-                    </div>
-
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div id="container-subtopicos-dados" class="col-md-8 col-lg-offset-2"></div>
-            </div>
-            
-
-            <div class="col-sm-12">
-                <input type="submit" class="btn btn-sm btn-block" value="Cadastrar" />
-            </div>
-
-            <div class="col-sm-12">
-                <input type="submit" class="btn btn-sm btn-block" value="Atualizar Gráfico" id="botao-grafico" />
-            </div>
-
-
-            <canvas id="myChart" width="400" height="400"></canvas>
-
+    <div class="form-group">
+        @Html.LabelFor(model => model.ListaDeCaracteristicas)
+        <div id="caracteristicas" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-tags"></i></span>
+            <select id="opcoes" name="@Html.NameFor(m => m.IdsCaracteristicas)" class="js-example-basic-multiple js-states form-control" multiple>
+                @foreach (var caracteristica in Model.ListaDeCaracteristicas)
+                {
+                    <option value="@caracteristica.Id">@caracteristica.Nome</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.IdsCaracteristicas)
         </div>
     </div>
+
+
+    <div id="container-subtopicos-dados" class="panel panel-default">
+
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-sm btn-sucess pull-right" value="Atualizar Gráfico" id="botao-grafico" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink("Voltar", "Listar", "Projeto", "", new { @class = "btn btn-sm btn-default pull-right" })
+    </div>
+
+    
+
+    <div class="form-group col-md-6">
+        <canvas id="myChart"></canvas>
+    </div>
+
 }
 
 @section scripts {
@@ -80,15 +80,16 @@
 
         // Função para trazer lista de subtópicos quando há alteração na seleção das Características
         var $listagemSubtopicos = $('#container-subtopicos-dados');
-        $("#opcoes").change(function() {
+        $("#opcoes").change(function () {
             let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
             const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
             jQuery.ajaxSettings.traditional = true;
             $.get(urlGet, { idsCaracteristicas })
                 .done(response => {
                     $listagemSubtopicos.html(response);
-                }).fail(function(resposta){
-                    console.log(resposta)});
+                }).fail(function (resposta) {
+                    console.log(resposta)
+                });
 
         })
 
@@ -101,28 +102,29 @@
             @foreach(var label in Model.PilaresPontuacao)
             {
                 @:labels.push("@label.Titulo");
-            }
+                                                                                                                                                }
             console.log(labels);
 
             // Inicio captação IDs
+
             var dados = $('input:checked').map(function () {
-                return $(this).data ();
+                return $(this).val();
             }).get();
-            console.log(dados);
+            console.log('dados', dados);
             // Fim captação IDs
 
             var data = [];
             @foreach(var data in Model.PilaresPontuacao)
             {
                 @:data.push("@data.PontuacaoTotal");
-            }
+                                                                                                                                                }
             console.log(data);
 
             var dadosTabela = {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Vida no Crescer",
+                        label: "Projeto",
                         backgroundColor: "rgba(179,181,198,0.2)",
                         borderColor: "rgba(179,181,198,1)",
                         pointBackgroundColor: "rgba(179,181,198,1)",
