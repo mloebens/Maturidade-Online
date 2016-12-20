@@ -5,6 +5,7 @@ using Maturidade_Online.Models;
 using Maturidade_Online.Repositorio;
 using Maturidade_Online.Servicos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -140,6 +141,27 @@ namespace Maturidade_Online.Controllers
 
 
                 return PartialView("_Grafico", listaDePilarViewModel);
+            }
+
+        }
+
+
+        public JsonResult ArrayParaGrafico(int[] dados)
+        {
+            var subtopicos = dados.Select(c => new Subtopico() { Id = c }).ToList();
+
+            using (var contexto = new ContextoDeDados())
+            {
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var lista = new List<Subtopico>();
+                foreach (var subtopico in subtopicos)
+                {
+                    var subtopicoBase = subtopicoServico.BuscarPorId(subtopico);
+                    lista.Add(subtopicoBase);
+                }
+
+                return Json(lista, JsonRequestBehavior.AllowGet);
             }
 
         }

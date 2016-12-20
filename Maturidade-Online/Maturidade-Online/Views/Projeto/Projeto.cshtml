@@ -109,9 +109,25 @@
 
             var dados = $('input:checked').map(function () {
                 return $(this).val();
+                //return $(this).attr('data-pontuacao');
             }).get();
             console.log('dados', dados);
             // Fim captação IDs
+
+
+            //Ajax
+
+            const urlGet = '@Url.Action("ArrayParaGrafico", "Projeto")';
+            $.get(urlGet, { dados })
+                .done(response => {
+                    var resultado = response;
+                    console.log(response);
+                }).fail(function (resposta) {
+                    console.log(resposta)
+                });
+
+            //Fim Ajax
+
 
             var data = [];
             @foreach(var data in Model.PilaresPontuacao)
