@@ -14,8 +14,6 @@ namespace Maturidade_Online.Controllers
 {
     public class SubtopicoController : Controller
     {
-
-
         [Autorizador]
         public ActionResult Manter(int? id)
         {
@@ -38,7 +36,6 @@ namespace Maturidade_Online.Controllers
             }
             return View("Subtopico", subtopicoViewModel);
         }
-
 
         [Autorizador]
         [ValidateAntiForgeryToken]
@@ -63,6 +60,15 @@ namespace Maturidade_Online.Controllers
                         ModelState.AddModelError("", "Falha ao tentar cadastrar os dados no Banco de Dados.");
                         subtopicoViewModel.Pilares = (ICollection<Pilar>)pilarServico.Listar();
                         return View("Subtopico", subtopicoViewModel);
+                    }
+
+                    if (subtopicoViewModel.Id > 0)
+                    {
+                        TempData["MensagemSucesso"] = "Subtópico alterado com sucesso.";
+                    }
+                    else
+                    {
+                        TempData["MensagemSucesso"] = "Subtópico cadastrado com sucesso.";
                     }
 
                     return RedirectToAction("Manter");

@@ -64,7 +64,15 @@ namespace Maturidade_Online.Controllers
                         return View("Caracteristica", caracteristicaViewModel);
                     }
 
-                    
+                    if (caracteristicaViewModel.Id > 0)
+                    {
+                        TempData["MensagemSucesso"] = "Caracteristica alterada com sucesso.";
+                    }
+                    else
+                    {
+                        TempData["MensagemSucesso"] = "Caracteristica cadastrada com sucesso.";
+                    }
+
                     return RedirectToAction("Manter");
 
                 }

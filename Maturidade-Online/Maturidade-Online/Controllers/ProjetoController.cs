@@ -83,6 +83,15 @@ namespace Maturidade_Online.Controllers
                     {
                         ModelState.AddModelError("", e.Message);
                     }
+
+                    if (projetoModel.Id.HasValue)
+                    {
+                        TempData["MensagemSucesso"] = "Projeto alterado com sucesso.";
+                    }
+                    else
+                    {
+                        TempData["MensagemSucesso"] = "Projeto cadastrado com sucesso.";
+                    }
                 }
             }
 
