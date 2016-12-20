@@ -15,7 +15,7 @@ namespace Maturidade_Online.Controllers
     public class CaracteristicaController : Controller
     {
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
             var caracteristicaViewModel = new CaracteristicaViewModel();
@@ -40,7 +40,7 @@ namespace Maturidade_Online.Controllers
         }
 
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         [ValidateAntiForgeryToken]
         public ActionResult Salvar(CaracteristicaViewModel caracteristicaViewModel)
         {
@@ -88,7 +88,7 @@ namespace Maturidade_Online.Controllers
 
 
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
             var caracteristicaViewModel = new List<CaracteristicaViewModel>();

@@ -17,7 +17,21 @@ namespace Maturidade_Online.Filter
 
             if (usuario == null) return false;
 
-            return true;
+            string[] permissoesRequidas = this.Roles.Split(',')
+                                                   .Where(p => !String.IsNullOrEmpty(p))
+                                                   .ToArray();
+
+            foreach (string permissao in permissoesRequidas)
+            {
+                if (!permissao.Any(p => p.Equals(usuario.Permissao)))
+                {
+                    return false;
+                }
+            }
+
+
+
+            return true; 
         }
 
         //Redirecionar para pagina de autenticação caso não autenticado

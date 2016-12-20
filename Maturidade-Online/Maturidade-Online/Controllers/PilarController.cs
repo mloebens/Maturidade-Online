@@ -14,7 +14,7 @@ namespace Maturidade_Online.Controllers
 {
     public class PilarController : Controller
     {
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
             var pilarViewModel = new PilarViewModel();
@@ -37,7 +37,7 @@ namespace Maturidade_Online.Controllers
             return View("Pilar", pilarViewModel);
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Salvar(PilarViewModel pilarModel)
         {
             if (ModelState.IsValid)
@@ -79,7 +79,7 @@ namespace Maturidade_Online.Controllers
             return RedirectToAction("Manter");
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
             var pilarViewModel = new List<PilarViewModel>();
@@ -101,7 +101,7 @@ namespace Maturidade_Online.Controllers
 
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Excluir(int id)
         {
             using (var contexto = new ContextoDeDados())
@@ -117,8 +117,8 @@ namespace Maturidade_Online.Controllers
             return RedirectToAction("ListarPilares");
         }
 
-        // Partial View
-        //[Autorizador]
+
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult PesquisarPilares(int[] id)
         {
 

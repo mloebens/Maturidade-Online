@@ -14,7 +14,7 @@ namespace Maturidade_Online.Controllers
 {
     public class SubtopicoController : Controller
     {
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
             var subtopicoViewModel = new SubtopicoViewModel();
@@ -37,7 +37,7 @@ namespace Maturidade_Online.Controllers
             return View("Subtopico", subtopicoViewModel);
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         [ValidateAntiForgeryToken]
         public ActionResult Salvar(SubtopicoViewModel subtopicoViewModel)
         {
@@ -81,7 +81,7 @@ namespace Maturidade_Online.Controllers
             return View("Subtopico", subtopicoViewModel);
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Excluir(int id)
         {
 
@@ -97,7 +97,7 @@ namespace Maturidade_Online.Controllers
         }
 
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
 
@@ -116,7 +116,7 @@ namespace Maturidade_Online.Controllers
 
 
         // Partial View
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
         {
             if (idsCaracteristicas == null) return PartialView("_Subtopicos");

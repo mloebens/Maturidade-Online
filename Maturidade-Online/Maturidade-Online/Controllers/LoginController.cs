@@ -41,7 +41,7 @@ namespace Maturidade_Online.Controllers
 
                     if (usuarioEncontrado != null)
                     {
-                        ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(usuarioEncontrado.Id,usuario.Email));
+                        ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(usuarioEncontrado.Id,usuario.Email, usuario.Permissao));
                         return RedirectToAction("Listar", "Projeto");
                     }
                     

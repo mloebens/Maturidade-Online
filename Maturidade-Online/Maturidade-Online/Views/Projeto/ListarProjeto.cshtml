@@ -46,7 +46,7 @@
                                 </td>
                             }
                             <td>
-                                @{ if (usuario.Id == projeto.CriadorId)
+                                @{ if (usuario.Id == projeto.CriadorId || usuario.Permissao == Maturidade_Online.Dominio.Permissao.ADMINISTRADOR)
                                     {
                                         <div class="btn-group btn-group-xs">
                                             <a class="btn btn-xs btn-default" href="~/Projeto/Manter/@projeto.Id">
