@@ -165,7 +165,7 @@ namespace Maturidade_Online.Controllers
                 }
             }
 
-            return View("Listar", projetosViewModel);
+            return View("ListarProjeto", projetosViewModel);
         }
 
 
@@ -283,7 +283,7 @@ namespace Maturidade_Online.Controllers
                 {
                     Id = pilar.Id,
                     Titulo = pilar.Titulo,
-                    Percentual = 0
+                    Percentual = null
                 });
             }
             var listaDePilares = CalcularPercentual(mapeamentoCatategorias, mapeamentoSubtopicos, listaDePilaresModelo);
