@@ -1,6 +1,7 @@
 ﻿using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace Maturidade_Online.Models
         public IEnumerable<int> IdsSubtopicos { get; set; }
 
         public IEnumerable<PilarPontuacao> PilaresPontuacao { get; set; }
+
+        [DisplayName("Lista de Características")]
         public IEnumerable<Caracteristica> ListaDeCaracteristicas { get; set; }
         public IEnumerable<Subtopico> ListaDeSubtopicos { get; set; }
     }
