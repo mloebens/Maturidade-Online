@@ -415,14 +415,14 @@ namespace Maturidade_Online.Repositorio.Migrations
                             );
 
             var projeto1Caracteristicas = new List<Caracteristica>() { caracteristica1, caracteristica2 };
-            var projeto1subtopicos = new List<Subtopico>() { subtopicos[0], subtopicos[1], subtopicos[2], subtopicos[3], subtopicos[4], subtopicos[5], subtopicos[6] };
+            var projeto1subtopicos = new List<Subtopico>() { caracteristica1subtopico[0], caracteristica1subtopico[1], caracteristica2subtopico[0], caracteristica2subtopico[1] };
 
             Projeto projeto1 = new Projeto()
             {
                 Id = 1,
                 Nome = "Projeto1",
                 Caracteristicas = projeto1Caracteristicas,
-                Subtopicos = subtopicos,
+                Subtopicos = projeto1subtopicos,
                 Usuario = usuario1
             };
 

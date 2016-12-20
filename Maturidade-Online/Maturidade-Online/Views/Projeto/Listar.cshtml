@@ -38,12 +38,17 @@
                             <td>@projeto.Nome</td>
                             @foreach (var pilar in projeto.Pilares)
                 {
-                                <td class="text-center">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="@pilar.Pontuacao" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
-                                            @pilar.Pontuacao %
-                                        </div>
-                                    </div>
+                                 <td class="text-center">
+                                     <div class="pilar-valores">@pilar.Percentual</div>
+                                 </td>
+                             }
+                             <td>
+                                 @{ if (usuario.Id == projeto.CriadorId)
+                                     {
+                                         <a class="btn btn-xs glyphicon glyphicon-pencil" href="~/Projeto/Manter/@projeto.Id"></a>
+                                         <a class="btn btn-xs glyphicon glyphicon-trash" href="~/Projeto/Excluir/@projeto.Id"></a>
+                                     }
+                                 }
 
 
                                 </td>

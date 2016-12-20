@@ -95,7 +95,7 @@
 
         // Função para criar o gráfico quando clicado no botão
         var $divGrafico = $('#grafico');
-        var $botaoGrafico = $("#botao-grafico");
+        @*var $botaoGrafico = $("#botao-grafico");
         $botaoGrafico.click(function (event) {
             event.preventDefault();
             var labels = [];
@@ -112,12 +112,12 @@
                 //return $(this).attr('data-pontuacao');
             }).get();
             console.log('dados', dados);
-            // Fim captação IDs
+            // Fim captação IDs*@
 
 
             //Ajax
 
-            const urlGet = '@Url.Action("ArrayParaGrafico", "Projeto")';
+            @*const urlGet = '@Url.Action("ArrayParaGrafico", "Projeto")';
             $.get(urlGet, { dados })
                 .done(response => {
                     var resultado = response.toArray();
@@ -156,8 +156,8 @@
                 type: 'radar',
                 data: dadosTabela
             });
-        })
-        //]]>
+        })*@
+
     </script>
 }
 

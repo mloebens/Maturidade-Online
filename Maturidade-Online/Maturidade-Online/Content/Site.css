@@ -58,18 +58,12 @@ div.login-item {
 }
 
 
-
-
 /* Projeto Listar */
-.projeto > .panel-body > .coluna {
-    vertical-align: top;
-    display: inline-block;
-    word-break: break-all;
+#tabela-projetos tbody td {
+    vertical-align: middle;
 }
 
-.pilar {
-    font-weight: bold;
-}
+
 .pilar-valores{
     display: inline-block;
     padding: 10px;
@@ -77,28 +71,27 @@ div.login-item {
     width: 40px;
 }
 
-.verde {
+.percentual-alto {
     background-color: #69ce69;
-    color: green !important;
+    color: green;
     border: 1px solid green;
 }
 
-.amarelo {
-    background-color: yellow;
-    color: #777 !important;
+.percentual-medio {
+    background-color: #ecc170;
+    color: #9e6600;
+    border: 1px solid #9e6600;
 }
 
-.vermelho {
-    background-color: red;
+.percentual-baixo {
+    background-color: #f56a53;
+    border: 1px solid #af0707;
+    color: #af0707;
 }
 
 .pilar-valores, pilar-cabecalho {
     text-align: center !important;
     font-weight: bold;
-}
-
-.pilar-valores {
-    color: #000000;
 }
 
 /* Pilar Listar */
@@ -133,3 +126,4 @@ span.select2.select2-container.select2-container--default {
     border-radius: 15px;
     margin: 3px;
 }
+

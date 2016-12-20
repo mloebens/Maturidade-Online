@@ -18,7 +18,6 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult Manter(int? id)
         {
-
             var projetoModel = new ProjetoModel();
             using (var contexto = new ContextoDeDados())
             {
@@ -29,7 +28,6 @@ namespace Maturidade_Online.Controllers
                 var caracteristicas = caracteristicaServico.Listar();
                 var subtopicos = subtopicosServico.Listar();
                 projetoModel.PilaresPontuacao = pilarServico.ListarPontuacaoTotal();
-
 
                 if (id.HasValue && id.Value > 0)
                 {
@@ -113,40 +111,91 @@ namespace Maturidade_Online.Controllers
 
             return View("Projeto");
         }
+        /*
+                public ActionResult GerarGrafico()
+                {
+                    var projetosViewModel = new ProjetoListarViewModel();
 
-        public ActionResult GerarGrafico()
+                    using (var contexto = new ContextoDeDados())
+                    {
+
+                        var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                        var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                        var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
+
+
+                        var pilaresBanco = pilarServico.Listar();
+
+                        var listaDePilarViewModel = new List<ProjetoListarPilarViewModel>();
+
+                        foreach (var pilar in pilaresPontuacoesTotais)
+                        {
+                            var pilarViewModel = new ProjetoListarPilarViewModel();
+                            pilarViewModel.Titulo = pilar.Titulo;
+                            pilarViewModel.Pontuacao = pilar.PontuacaoTotal;
+
+                            listaDePilarViewModel.Add(pilarViewModel);
+                        }
+
+
+                        return PartialView("_Grafico", listaDePilarViewModel);
+                    }
+
+                }
+
+            */
+
+        [Autorizador]
+        public ActionResult Listar()
         {
-            var projetosViewModel = new ProjetoListarViewModel();
+            var projetosViewModel = new List<ProjetoListarViewModel>();
 
             using (var contexto = new ContextoDeDados())
             {
-
                 var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
-                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
+                var projetos = projetoServico.Listar();
 
-
-                var pilaresBanco = pilarServico.Listar();
-
-                var listaDePilarViewModel = new List<ProjetoListarPilarViewModel>();
-
-                foreach (var pilar in pilaresPontuacoesTotais)
+                foreach (var projeto in projetos)
                 {
-                    var pilarViewModel = new ProjetoListarPilarViewModel();
-                    pilarViewModel.Titulo = pilar.Titulo;
-                    pilarViewModel.Pontuacao = pilar.PontuacaoTotal;
-
-                    listaDePilarViewModel.Add(pilarViewModel);
+                    var projetoViewModel = gerarProjetoFormatado(projeto, contexto);
+                    projetoViewModel.Id = projeto.Id;
+                    projetoViewModel.Nome = projeto.Nome;
+                    projetoViewModel.CriadorId = projeto.UsuarioId;
+                    projetosViewModel.Add(projetoViewModel);
                 }
-
-
-                return PartialView("_Grafico", listaDePilarViewModel);
             }
 
+            return View("Listar", projetosViewModel);
         }
 
 
-        public JsonResult ArrayParaGrafico(int[] dados)
+
+        private List<ProjetoListarPilarViewModel> CalcularPercentual(List<PilarPontuacao> pilaresRestricao, List<PilarPontuacao> pilaresAtual, List<ProjetoListarPilarViewModel> modelo)
+        {
+            var pilaresViewModel = new List<ProjetoListarPilarViewModel>();
+            foreach (var pilar in modelo)
+            {
+                var pilarAtual = pilaresAtual.FirstOrDefault(_ => _.Id == pilar.Id);
+                var pilarRestricao = pilaresRestricao.FirstOrDefault(_ => _.Id == pilar.Id);
+
+                if (pilarAtual != null && pilarRestricao != null)
+                {
+                    pilaresViewModel.Add(new ProjetoListarPilarViewModel()
+                    {
+                        Id = pilarAtual.Id,
+                        Titulo = pilarAtual.Titulo,
+                        Percentual = (pilarAtual.PontuacaoTotal * 100) / pilarRestricao.PontuacaoTotal
+                    });
+                }
+                else
+                {
+                    pilaresViewModel.Add(pilar);
+                }
+            }
+            return pilaresViewModel;
+        }
+
+      public JsonResult ArrayParaGrafico(int[] dados)
         {
             var subtopicos = dados.Select(c => new Subtopico() { Id = c }).ToList();
 
@@ -166,70 +215,82 @@ namespace Maturidade_Online.Controllers
 
         }
 
-        [Autorizador]
-        public ActionResult Listar()
+        
+
+        private List<PilarPontuacao> AgrupadorDePilar(ICollection<Caracteristica> caracteristicas)
         {
-
-
-            var projetosViewModel = new List<ProjetoListarViewModel>();
-
-            using (var contexto = new ContextoDeDados())
+            var pilares = new List<PilarPontuacao>();
+            foreach (var caracteristica in caracteristicas)
             {
-                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
-                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
-
-                ViewBag.pilaresPontuacaoTotal = pilaresPontuacoesTotais;
-
-                IEnumerable<Projeto> projetosDaBase = new List<Projeto>();
-                projetosDaBase = projetoServico.Listar();
-
-                foreach (var projeto in projetosDaBase)
+                foreach (var subtopico in caracteristica.Subtopicos)
                 {
-                    var projetoViewModel = new ProjetoListarViewModel();
-                    projetoViewModel.Id = projeto.Id;
-                    projetoViewModel.Nome = projeto.Nome;
-                    projetoViewModel.CriadorId = projeto.UsuarioId;
-
-                    var pilaresDoProjeto = projeto.Subtopicos.GroupBy(s =>
-                       new { Id = s.PilarId })
-                           .Select(s => new { Id = s.Key.Id, Total = s.Sum(_ => _.Pontuacao) }).ToList();
-
-                    var projetoListaPilaresViewModel = new List<ProjetoListarPilarViewModel>();
-                    foreach (var pilarPontuacaoTotal in pilaresPontuacoesTotais)
+                    var pilar = pilares.FirstOrDefault(_ => _.Id == subtopico.PilarId);
+                    if (pilar != null)
                     {
-                        var projetoListaPilarViewModel = new ProjetoListarPilarViewModel();
-                        projetoListaPilarViewModel.Id = pilarPontuacaoTotal.Id;
-                        projetoListaPilarViewModel.Titulo = pilarPontuacaoTotal.Titulo;
-
-                        var pilarEncontrado = pilaresDoProjeto.FirstOrDefault(_ => _.Id == pilarPontuacaoTotal.Id);
-                        projetoListaPilarViewModel.Pontuacao = pilarEncontrado != null ? pilarEncontrado.Total : 0;
-
-
-                        var pontuacaoAtual = projetoListaPilarViewModel.Pontuacao == 0 ? 1 : projetoListaPilarViewModel.Pontuacao;
-                        var percentualDePontuacao = pontuacaoAtual * 100 / pilarPontuacaoTotal.PontuacaoTotal;
-                        string cor = "amarelo";
-                        if (percentualDePontuacao <= 25)
-                        {
-                            cor = "vermelho";
-                        }
-                        if (percentualDePontuacao >= 76)
-                        {
-                            cor = "verde";
-                        }
-                        projetoListaPilarViewModel.cor = cor;
-
-                        projetoListaPilaresViewModel.Add(projetoListaPilarViewModel);
+                        pilar.PontuacaoTotal += subtopico.Pontuacao;
                     }
-
-                    projetoViewModel.Pilares = projetoListaPilaresViewModel;
-
-                    projetosViewModel.Add(projetoViewModel);
-
+                    else
+                    {
+                        pilares.Add(new PilarPontuacao()
+                        {
+                            Id = subtopico.PilarId,
+                            Titulo = subtopico.Pilar.Titulo,
+                            PontuacaoTotal = subtopico.Pontuacao
+                        });
+                    }
                 }
-
-                return View("Listar", projetosViewModel);
             }
+            return pilares;
         }
+
+        private List<PilarPontuacao> AgrupadorDePilar(ICollection<Subtopico> subtopicos)
+        {
+            var pilares = new List<PilarPontuacao>();
+            foreach (var subtopico in subtopicos)
+            {
+                var pilar = pilares.FirstOrDefault(_ => _.Id == subtopico.PilarId);
+                if (pilar != null)
+                {
+                    pilar.PontuacaoTotal += subtopico.Pontuacao;
+                }
+                else
+                {
+                    pilares.Add(new PilarPontuacao()
+                    {
+                        Id = subtopico.PilarId,
+                        Titulo = subtopico.Pilar.Titulo,
+                        PontuacaoTotal = subtopico.Pontuacao
+                    });
+                }
+            }
+            return pilares;
+        }
+
+        private ProjetoListarViewModel gerarProjetoFormatado(Projeto projeto, ContextoDeDados contexto)
+        {
+            var projetoViewModel = new ProjetoListarViewModel();
+            var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+            var pilares = pilarServico.Listar();
+            ViewBag.pilaresPontuacaoTotal = pilares;
+
+            var mapeamentoCatategorias = AgrupadorDePilar(projeto.Caracteristicas);
+            var mapeamentoSubtopicos = AgrupadorDePilar(projeto.Subtopicos);
+
+            var listaDePilaresModelo = new List<ProjetoListarPilarViewModel>();
+            foreach (var pilar in pilares)
+            {
+                listaDePilaresModelo.Add(new ProjetoListarPilarViewModel()
+                {
+                    Id = pilar.Id,
+                    Titulo = pilar.Titulo,
+                    Percentual = 0
+                });
+            }
+            var listaDePilares = CalcularPercentual(mapeamentoCatategorias, mapeamentoSubtopicos, listaDePilaresModelo);
+            projetoViewModel.Pilares = listaDePilares;
+
+            return projetoViewModel;
+        }
+
     }
 }
