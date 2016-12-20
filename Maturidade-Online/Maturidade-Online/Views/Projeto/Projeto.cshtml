@@ -26,7 +26,7 @@
     @Html.HiddenFor(model => model.Id)
     <div class="form-group">
         @Html.LabelFor(model => model.Nome)
-        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Título" })
+        @Html.TextBoxFor(model => model.Nome, new { maxlength = 100, @class = "form-control", placeholder = "Título" })
         @Html.ValidationMessageFor(model => model.Nome)
     </div>
 
@@ -72,7 +72,7 @@
 
 @section scripts {
     <script type="text/javascript">
-
+        //<![CDATA[
         // Instanciar SELECT2 ao carregar página
         $(document).ready(function () {
             $("#opcoes").select2();
@@ -120,8 +120,8 @@
             const urlGet = '@Url.Action("ArrayParaGrafico", "Projeto")';
             $.get(urlGet, { dados })
                 .done(response => {
-                    var resultado = response;
-                    console.log(response);
+                    var resultado = response.toArray();
+                    console.log(response).toArray();
                 }).fail(function (resposta) {
                     console.log(resposta)
                 });
@@ -157,7 +157,7 @@
                 data: dadosTabela
             });
         })
-
+        //]]>
     </script>
 }
 

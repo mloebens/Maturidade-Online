@@ -5,7 +5,7 @@
 }
 
 <div>
-    <legend>@(Model.Id.HasValue && Model.Id.Value > 0?"Editar":"Cadastrar" ) @ViewBag.Title</legend>
+    <legend>@(Model.Id.HasValue && Model.Id.Value > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
 </div>
 
 <div class="alerta-erro">
@@ -26,22 +26,25 @@
     @Html.HiddenFor(model => model.Id)
     <div class="form-group">
         @Html.LabelFor(model => model.Titulo)
-        @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", placeholder = "Título" })
+        @Html.TextBoxFor(model => model.Titulo, new { maxlength = 100, @class = "form-control", placeholder = "Título" })
         @Html.ValidationMessageFor(model => model.Titulo)
     </div>
-    <div class="form-group">
-        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
+
+    <div class="form-group btn-group btn-group-sm pull-right">
+        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success" value="Salvar">Salvar</button>
+        @Html.ActionLink("Voltar", "Listar", "Pilar", "", new { @class = "btn btn-warning btn-sm" })
     </div>
 }
 
-<div class="panel panel-default">
+<div class="panel panel-default margin-top">
     <div class="panel-heading">
         <strong>Subtópicos</strong>
-        <a href="/Subtopico/Manter" class="btn btn-xs btn-success pull-right">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            <span>Novo Subtópico</span>
-        </a>
-    </div>
+        
+            <a href="/Subtopico/Manter" class="btn btn-xs btn-success pull-right">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <span>Novo Subtópico</span>
+            </a>
+            </div>
     <div class="panel-body">
         @if (Model.Subtopicos != null)
         {
@@ -72,14 +75,12 @@
                     }
                 </tbody>
             </table>
-        } else
+        }
+        else
         {
             <div>Este pilar não possui nenhum subtópico.</div>
         }
     </div>
-</div>
-<div>
-    @Html.ActionLink("Voltar", "Listar", "Pilar", "", new { @class = "btn btn-default pull-right" })
 </div>
 
 @section scripts {

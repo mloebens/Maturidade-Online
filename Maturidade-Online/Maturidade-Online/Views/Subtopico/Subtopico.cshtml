@@ -28,7 +28,7 @@
     @Html.HiddenFor(model => model.Id)
     <div class="form-group">
         @Html.LabelFor(model => model.Nome)
-        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", placeholder = "Nome" })
+        @Html.TextBoxFor(model => model.Nome, new { maxlength = 100, @class = "form-control", placeholder = "Nome" })
         @Html.ValidationMessageFor(model => model.Nome)
     </div>
 
@@ -40,7 +40,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.Pontuacao, "Pontuação")
-        @Html.TextBoxFor(model => model.Pontuacao, new { @class = "form-control" })
+        @Html.TextBoxFor(model => model.Pontuacao, new { @type = "number", @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Pontuacao)
     </div>
 
@@ -55,14 +55,12 @@
         @Html.ValidationMessageFor(model => model.PilarId)
     </div>
 
-    <div class="form-group">
-        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
+    <div class="btn-group btn-group-sm pull-right">
+        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success" value="Salvar">Salvar</button>
+        @Html.ActionLink("Voltar", "Listar", "Subtopico", "", new { @class = "btn btn-warning btn-sm" })
     </div>
 }
 
-<div>
-    @Html.ActionLink("Voltar", "Listar", "Subtopico", "", new { @class = "btn btn-default pull-right"})
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -9,55 +9,61 @@
 
 
 <div class="panel panel-default">
-     <div class="panel-heading">
-         <strong>
+    <div class="panel-heading">
+        <strong>
             Lista de Projetos
-         </strong>
-         @Html.ActionLink("Novo Projeto", "Manter", "Projeto", null, new { @class = "btn btn-success btn-xs pull-right" })
-     </div>
-     <div class="panel-body">
+        </strong>
+        @Html.ActionLink("Novo Projeto", "Manter", "Projeto", null, new { @class = "btn btn-success btn-xs pull-right" })
+    </div>
+    <div class="panel-body">
 
 
-         <div class="table-responsive">
-             <table class="table table-striped table-hover">
-                 <thead>
-                     <tr>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
 
-                         <th>Projeto</th>
-                         @foreach (var pilar in ViewBag.pilaresPontuacaoTotal)
+                        <th>Projeto</th>
+                        @foreach (var pilar in ViewBag.pilaresPontuacaoTotal)
             {
-                             <th class="pilar-cabecalho">@pilar.Titulo</th>
-                         }
-                         <th></th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     @foreach (var projeto in @Model)
-                     {
-                         <tr>
-                             <td>@projeto.Nome</td>
-                             @foreach (var pilar in projeto.Pilares)
+                            <th class="pilar-cabecalho">@pilar.Titulo</th>
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var projeto in @Model)
+                    {
+                        <tr>
+                            <td>@projeto.Nome</td>
+                            @foreach (var pilar in projeto.Pilares)
                 {
-                                 <td class="text-center">
-                                     <div class="pilar-valores @pilar.cor">@pilar.Pontuacao</div>
-                                 </td>
-                             }
-                             <td>
-                                 @{ if (usuario.Id == projeto.CriadorId)
-                                     {
-                                         <a class="btn btn-xs glyphicon glyphicon-pencil" href="~/Projeto/Manter/@projeto.Id"></a>
-                                         <a class="btn btn-xs glyphicon glyphicon-trash" href="~/Projeto/Excluir/@projeto.Id"></a>
-                                     }
-                                 }
+                                <td class="text-center">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="@pilar.Pontuacao" aria-valuemin="0" aria-valuemax="100" style="min-width: 3em;">
+                                            @pilar.Pontuacao %
+                                        </div>
+                                    </div>
 
-                             </td>
 
-                         </tr>
-                                     }
-                 </tbody>
+                                </td>
+                            }
+                            <td>
+                                @{ if (usuario.Id == projeto.CriadorId)
+                                    {
+                                        <a class="btn btn-xs glyphicon glyphicon-pencil" href="~/Projeto/Manter/@projeto.Id"></a>
+                                        <a class="btn btn-xs glyphicon glyphicon-trash" href="~/Projeto/Excluir/@projeto.Id"></a>
+                                    }
+                                }
 
-             </table>
-         </div>
-     </div>
+                            </td>
+
+                        </tr>
+                                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 </div>
 

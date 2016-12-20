@@ -29,7 +29,7 @@
                 <div class="col-md-12 login-item">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                        @Html.TextBoxFor(model => model.Email, new { maxlength = 50, @class = "form-control", placeholder = "Email" })
                     </div>
                     <div class="col-md-12">
                         @Html.ValidationMessageFor(model => model.Email)
@@ -39,7 +39,7 @@
                 <div class="col-md-12 login-item">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control", placeholder = "Senha" })
+                        @Html.PasswordFor(model => model.Senha, new { maxlength = 50, @class = "form-control", placeholder = "Senha" })
                     </div>
                     <div class="col-md-12">
                         @Html.ValidationMessageFor(model => model.Senha)
