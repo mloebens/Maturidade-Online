@@ -19,7 +19,7 @@ namespace Maturidade_Online.Controllers
         {
             if (Session["USUARIO_LOGADO_CHAVE"] != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Listar", "Projeto");
             }
 
             return View();
@@ -42,7 +42,7 @@ namespace Maturidade_Online.Controllers
                     if (usuarioEncontrado != null)
                     {
                         ServicoDeAutenticacao.Autenticar(new UsuarioLogadoModel(usuarioEncontrado.Id,usuario.Email));
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Listar", "Projeto");
                     }
                     
                 }
