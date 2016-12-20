@@ -8,51 +8,31 @@
     @Styles.Render("~/Content/select2css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/fontawesome")
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
+            <img src="~/Content/img/logo-cwi.png" height="20%" width="20%" />
+
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
-                @Html.ActionLink("Maturidade Online", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <span class="navbar-brand">Maturidade Online</span>
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle nav" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastrar<span class="caret"></span></a>
-                        <ul class="dropdown-menu nav" role="menu">
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Pilar", "Manter", "Pilar")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Subtópico", "Manter", "Subtopico")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Caracterísica", "Manter", "Caracteristica")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Projeto", "Manter", "Projeto")</li>
-                            <li role="separator" class="divider"></li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Projeto", "Listar", "Projeto")</li>
                 </ul>
-
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle nav" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listagens<span class="caret"></span></a>
-                        <ul class="dropdown-menu nav" role="menu">
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Pilar", "Listar", "Pilar")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Subtópico", "Listar", "Subtopico")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Caracterísica", "Listar", "Caracteristica")</li>
-                            <li role="separator" class="divider"></li>
-                            <li>@Html.ActionLink("Projeto", "Listar", "Projeto")</li>
-                            <li role="separator" class="divider"></li>
-                        </ul>
-                    </li>
+                    <li>@Html.ActionLink("Pilar", "Listar", "Pilar")</li>
                 </ul>
-
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Subtópico", "Listar", "Subtopico")</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Característica", "Listar", "Caracteristica")</li>
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Logout", "Deslogar", "Login")</li>
@@ -68,7 +48,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/select2")
 
- 
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
