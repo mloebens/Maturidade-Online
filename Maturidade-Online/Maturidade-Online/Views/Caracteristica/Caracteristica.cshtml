@@ -4,9 +4,8 @@
     ViewBag.Title = "Caracteristica";
 }
 
-<div>
-    <legend>@(Model.Id > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
-</div>
+<legend>@(Model.Id > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
+
 
 <div class="alerta-erro">
     @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
@@ -22,18 +21,19 @@
 @using (Html.BeginForm("Salvar", "Caracteristica", FormMethod.Post, new { }))
 {
     @Html.AntiForgeryToken()
-
-    @Html.HiddenFor(model => model.Id)
-    <div class="form-group">
-        @Html.LabelFor(model => model.Nome)
-        @Html.TextBoxFor(model => model.Nome, new { maxlength = 100, @class = "form-control", placeholder = "Nome" })
-        @Html.ValidationMessageFor(model => model.Nome)
+    <div class="row">
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label"})
+            @Html.TextBoxFor(model => model.Nome, new { maxlength = 100, @class = "form-control", placeholder = "Nome" })
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+        <div class="form-group">
+            <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
+            @Html.ActionLink("Voltar", "Listar", "Caracteristica", "", new { @class = "btn btn-warning btn-sm" })
+        </div>
     </div>
-    <div class="form-group">
-        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success pull-right" value="Salvar">Salvar</button>
-    </div>
-
-    <div class="panel panel-default">
+    <div class="panel panel-default row">
         <div class="panel-heading">
             <strong>Subtópicos</strong>
             <a href="/Subtopico/Manter" class="btn btn-xs btn-success pull-right">

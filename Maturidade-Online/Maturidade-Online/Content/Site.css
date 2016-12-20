@@ -3,6 +3,11 @@ body {
     padding: 100px 10px 50px 10px;
 }
 
+.navbar-brand {
+    padding: 10px;
+}
+
+
 .btn-padrao {
     background-color: orange;
     margin: 0 auto;
@@ -65,6 +70,11 @@ div.login-item {
     display: inline-block;
     float: none;
     vertical-align: middle;
+
+}
+
+.barra-de-progresso .progress-bar {
+    min-width: 3em;
 }
 
 .pilar-valores, pilar-cabecalho {
