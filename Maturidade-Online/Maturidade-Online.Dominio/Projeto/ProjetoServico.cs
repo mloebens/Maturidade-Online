@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LojaDeItens.Dominio.Configuracao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,5 +59,22 @@ namespace Maturidade_Online.Dominio
                 throw new UsuarioException("Você não possuí permissão para realizar esta operação!");
             }
         }
+
+        public ICollection<Projeto> Listar(int pagina, int quantidadePorPagina)
+        {
+            var paginacao = new Paginacao()
+            {
+                PaginaDesejada = pagina,
+                QuantidadePorPagina = quantidadePorPagina
+            };
+
+            return this.projetoRepositorio.Listar(paginacao);
+        }
+
+        public int QuantidadeTotal()
+        {
+            return this.projetoRepositorio.QuantidadeTotal();
+        }
+
     }
 }

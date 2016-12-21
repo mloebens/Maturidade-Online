@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LojaDeItens.Dominio.Configuracao;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
@@ -15,6 +16,7 @@ namespace Maturidade_Online.Controllers
 {
     public class ProjetoController : Controller
     {
+        private IServicoDeConfiguracao configuracaoServico = ServicoDeDependencia.MontarConfiguracaoServico();
 
         [Autorizador]
         public ActionResult Index()
@@ -132,24 +134,7 @@ namespace Maturidade_Online.Controllers
         [Autorizador]
         public ActionResult Listar()
         {
-            var projetosViewModel = new List<ProjetoListarViewModel>();
-
-            using (var contexto = new ContextoDeDados())
-            {
-                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
-                var projetos = projetoServico.Listar();
-
-                foreach (var projeto in projetos)
-                {
-                    var projetoViewModel = gerarProjetoFormatado(projeto, contexto);
-                    projetoViewModel.Id = projeto.Id;
-                    projetoViewModel.Nome = projeto.Nome;
-                    projetoViewModel.CriadorId = projeto.UsuarioId;
-                    projetosViewModel.Add(projetoViewModel);
-                }
-            }
-
-            return View("ListarProjeto", projetosViewModel);
+            return View("ListarProjeto");
         }
 
         [Autorizador]
@@ -189,6 +174,50 @@ namespace Maturidade_Online.Controllers
             return Json(projetosViewModel, JsonRequestBehavior.AllowGet);
         }
 
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public PartialViewResult CarregarLista(int pagina)
+        {
+            var model = new ProjetoListagemViewModel();
+
+            using (var contexto = new ContextoDeDados())
+            {
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var quantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+                var projetosDaBase = projetoServico.Listar(pagina, quantidadePorPagina);
+
+                model = CriarListagemDeProjetos(contexto, projetosDaBase, pagina);
+            }
+
+            return PartialView("_ListagemDeProjetos", model);
+        }
+
+        private ProjetoListagemViewModel CriarListagemDeProjetos(ContextoDeDados contexto, ICollection<Projeto> projetos, int? pagina = null)
+        {
+            var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+            var model = new ProjetoListagemViewModel();
+
+            var projetosViewModel = new List<ProjetoListarViewModel>();
+
+            foreach (var projeto in projetos)
+            {
+                var projetoViewModel = gerarProjetoFormatado(projeto, contexto);
+                projetoViewModel.Id = projeto.Id;
+                projetoViewModel.Nome = projeto.Nome;
+                projetoViewModel.CriadorId = projeto.UsuarioId;
+                projetosViewModel.Add(projetoViewModel);
+            }
+
+            if (pagina.HasValue)
+            {
+                model.PaginaAtual = pagina.Value;
+            }
+            int quantidadeTotal = projetoServico.QuantidadeTotal();
+            model.Projetos = projetosViewModel;
+            model.QuantidadeTotal = quantidadeTotal;
+            model.QuantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+
+            return model;
+        }
 
         private List<ProjetoListarPilarViewModel> CalcularPercentual(List<PilarPontuacao> pilaresRestricao, List<PilarPontuacao> pilaresAtual, List<ProjetoListarPilarViewModel> modelo)
         {
