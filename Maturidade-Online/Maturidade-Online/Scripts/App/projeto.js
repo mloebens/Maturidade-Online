@@ -1,8 +1,7 @@
-
-﻿/* Ao iniciar a página, carregar o 'select2' */
+/* Ao iniciar a página, carregar o 'select2' e os botões */
 $(function () {
-  $("#opcoes").select2();
-  maturidadeOnline.Iniciar();
+    $("#opcoes").select2();
+    maturidadeOnline.Iniciar();
 });
 
 let $divGrafico = $('#grafico');
@@ -14,25 +13,39 @@ maturidadeOnline = {}
 
 
 maturidadeOnline.Iniciar = function () {
-  maturidadeOnline.bindsDeBotoes();
+    maturidadeOnline.bindsDeBotoes();
 }
 
+
 maturidadeOnline.bindsDeBotoes = function () {
-  $('.btn-excluir').click(function (event) {
-    event.preventDefault();
-    $('#modal-excluir').modal('show')
-    $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
-  });
+
+    $('.btn-excluir').click(function (event) {
+        event.preventDefault();
+        $('#modal-excluir').modal('show')
+        $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
+    });
 }
 
 /* Função para trazer lista de subtópicos quando há alteração na seleção das Características */
+var opcoesMarcadas;
 $opcoes.change(function () {
     let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
+
+    opcoesMarcadas = $('input:checked').map(function () {
+        return $(this).val();
+    }).get();
+
     const urlGet = '/Subtopico/PesquisarSubtopicos';
     jQuery.ajaxSettings.traditional = true;
     $.get(urlGet, { idsCaracteristicas })
         .done(response => {
             $listagemSubtopicos.html(response);
+
+            /* Verificar os subtópicos marcados anteriormente e marcá-los novamente */
+            for (let i = 0; i < opcoesMarcadas.length; i++) {
+                $(":checkbox[value = " + opcoesMarcadas[i] + "]").prop("checked", "true");
+            }
+
         }).fail(function (resposta) {
             console.log(resposta)
         });
@@ -49,6 +62,11 @@ $botaoGrafico.click(function (event) {
 
     /* Verificar as características selecionadas - CARACTERISTICAS */
     let idsCaracteristicas = $("#opcoes").select2('data').map(c => parseInt(c.id));
+
+    if (dados.length === 0 && idsCaracteristicas.length === 0) {
+        alert("Selecione uma característica!");
+        return;
+    }
 
     /* Início do Ajax */
     jQuery.ajaxSettings.traditional = true;
@@ -69,7 +87,7 @@ $botaoGrafico.click(function (event) {
                 labels: labels,
                 datasets: [
                     {
-                        label: "Projeto",
+                        label: "",
                         backgroundColor: "rgba(179,181,198,0.2)",
                         borderColor: "rgba(179,181,198,1)",
                         pointBackgroundColor: "rgba(179,181,198,1)",
@@ -86,7 +104,10 @@ $botaoGrafico.click(function (event) {
                 type: 'radar',
                 data: dadosTabela
             });
+
         }).fail(function (resposta) {
             console.log(resposta)
         });
+    $('#modal-grafico').modal('show');
+
 })

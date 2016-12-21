@@ -152,13 +152,20 @@ namespace Maturidade_Online.Controllers
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
 
                 /* Conversão de idsCaracterísticas[] para uma lista de características */
-                var caracteristicaBanco = caracteristicaServico.Listar();
-                var listaCaracteristica = caracteristicaBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
+                var listaCaracteristica = new List<Caracteristica>();
+                if (idsCaracteristicas != null)
+                {
+                    var caracteristicaBanco = caracteristicaServico.Listar();
+                    listaCaracteristica = caracteristicaBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
+                }
 
                 /* Conversão de dados[] para uma lista de subtópicos */
-                var subtopicoBanco = subtopicoServico.Listar();
-                var listaSubtopico = subtopicoBanco.Where(s => dados.Any(c => c == s.Id)).ToList();
-
+                var listaSubtopico = new List<Subtopico>();
+                if (dados != null)
+                {
+                    var subtopicoBanco = subtopicoServico.Listar();
+                    listaSubtopico = subtopicoBanco.Where(s => dados.Any(c => c == s.Id)).ToList();
+                }
                 /* Crio um novo projeto com as informações acima */
                 var projeto = new Projeto { Subtopicos = listaSubtopico, Caracteristicas = listaCaracteristica };
 
