@@ -15,6 +15,15 @@ body {
     color: white;
 }
 
+input.btn:hover, input.btn:focus {
+    color: #b98a00;
+    text-decoration: none;
+}
+.btn-padrao:focus {
+    outline-color: orange;
+}
+
+
 
 /* Login */
 

@@ -47,7 +47,7 @@
                                 <a class="btn btn-xs btn-default" href="~/Subtopico/Manter/@item.Id">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
-                                <a class="btn btn-xs btn-danger" href="~/Subtopico/Excluir/@item.Id">
+                                <a class="btn btn-xs btn-danger btn-excluir" href="~/Subtopico/Excluir/@item.Id">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
                             </div>
@@ -58,3 +58,4 @@
         </table>
     </div>
 </div>
+@Html.Partial("_ModalExcluir")

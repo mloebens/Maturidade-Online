@@ -1,3 +1,4 @@
+  MaturidadeOnline.Inicializar();
 ﻿/* Ao iniciar a página, carregar o 'select2' */
 $(function () {
     $("#opcoes").select2();
@@ -7,6 +8,21 @@ let $divGrafico = $('#grafico');
 let $botaoGrafico = $("#botao-grafico");
 let $listagemSubtopicos = $('#container-subtopicos-dados');
 let $opcoes = $('#opcoes');
+
+MaturidadeOnline = {}
+
+
+MaturidadeOnline.Inicializar = function () {
+  MaturidadeOnline.bindsDeBotoes();
+}
+
+MaturidadeOnline.bindsDeBotoes = function () {
+  $('.btn-excluir').click(function (event) {
+    event.preventDefault();
+    $('#modal-excluir').modal('show')
+    $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
+  });
+}
 
 /* Função para trazer lista de subtópicos quando há alteração na seleção das Características */
 $opcoes.change(function () {

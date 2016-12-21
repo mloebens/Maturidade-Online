@@ -13,7 +13,7 @@ namespace Maturidade_Online.Models
         public int? Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [MaxLength(50)]
         [Display(Name = "Título")]
         public string Titulo { get; set; }
         public ICollection<Subtopico> Subtopicos { get; set; }

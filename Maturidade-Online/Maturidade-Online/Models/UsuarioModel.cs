@@ -9,6 +9,8 @@ namespace Maturidade_Online.Models
     public class UsuarioModel
     {
         [Required]
+        [EmailAddress]
+        [MaxLength(50)]
         public string Email { get; set; }
         [Required]
         public string Senha { get; set; }
