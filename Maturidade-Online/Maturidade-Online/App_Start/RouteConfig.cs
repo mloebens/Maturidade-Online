@@ -16,7 +16,7 @@ namespace Maturidade_Online
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Usuario", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

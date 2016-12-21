@@ -17,7 +17,7 @@ namespace Maturidade_Online.Models
         {
             this.Email = email;
             this.Id = id;
-            this.Permissao = Permissao;
+            this.Permissao = permissao;
         }
 
     }

@@ -52,7 +52,7 @@ namespace Maturidade_Online.Dominio
         {
             var usuarioDaBase = usuarioRepositorio.BuscarPorEmail(usuarioLogado);
             var projetoDaBase = projetoRepositorio.BuscarPorId(projeto);
-            var usuarioPodeEditar = usuarioDaBase.Id == projetoDaBase.UsuarioId || usuarioDaBase.Permissao == Permissao.ADMINISTRADOR;
+            var usuarioPodeEditar = usuarioDaBase.Id == projetoDaBase.UsuarioId || "ADMINISTRADOR".Equals(usuarioDaBase.Permissao.Nome);
             if (!usuarioPodeEditar)
             {
                 throw new UsuarioException("Você não possuí permissão para realizar esta operação!");

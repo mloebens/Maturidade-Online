@@ -21,17 +21,13 @@ namespace Maturidade_Online.Filter
                                                    .Where(p => !String.IsNullOrEmpty(p))
                                                    .ToArray();
 
-            foreach (string permissao in permissoesRequidas)
+
+            if (permissoesRequidas.Any())
             {
-                if (!permissao.Any(p => p.Equals(usuario.Permissao)))
-                {
-                    return false;
-                }
+                return permissoesRequidas.Any(p => p.Equals(usuario.Permissao.Nome));
             }
 
-
-
-            return true; 
+            return true;
         }
 
         //Redirecionar para pagina de autenticação caso não autenticado
@@ -40,7 +36,7 @@ namespace Maturidade_Online.Filter
             if (!contextoFiltro.HttpContext.User.Identity.IsAuthenticated)
             {
                 contextoFiltro.Result = new RedirectToRouteResult(new
-                    RouteValueDictionary(new { controller = "Login" }));
+                    RouteValueDictionary(new { controller = "Usuario" }));
             }
         }
 

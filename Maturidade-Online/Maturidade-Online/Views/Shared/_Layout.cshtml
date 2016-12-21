@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var usuarioLogado = Maturidade_Online.Servicos.ServicoDeAutenticacao.UsuarioLogado;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -28,18 +32,22 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Projeto", "Listar", "Projeto")</li>
                 </ul>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Pilar", "Listar", "Pilar")</li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Subtópico", "Listar", "Subtopico")</li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Característica", "Listar", "Caracteristica")</li>
-                </ul>
+                @{if ("ADMINISTRADOR".Equals(usuarioLogado.Permissao.Nome))
+                    {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Pilar", "Listar", "Pilar")</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Subtópico", "Listar", "Subtopico")</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Característica", "Listar", "Caracteristica")</li>
+                    </ul>
+                        }
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Logout", "Deslogar", "Login")</li>
+
+                    }                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Logout", "Deslogar", "Usuario")</li>
                 </ul>
             </div>
         </div>

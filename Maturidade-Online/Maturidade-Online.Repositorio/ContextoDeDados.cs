@@ -20,6 +20,7 @@ namespace Maturidade_Online.Repositorio
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Caracteristica> Caracteristica { get; set; }
         public DbSet<Projeto> Projeto { get; set; }
+        public DbSet<Permissao> Permissao { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

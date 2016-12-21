@@ -1,0 +1,56 @@
+﻿@model Maturidade_Online.Models.UsuarioModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@using (Html.BeginForm("Logar", "Usuario", FormMethod.Post, new { @class = "form-horizontal div-margin-top" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+   
+
+
+        @if (ViewData["MensagemErro"] != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Erro!</strong> @ViewData["MensagemErro"]
+            </div>
+        }
+      
+
+        <div id="panel-login" class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Login</div>
+            </div>
+
+            <div class="panel-body">
+                <div class="col-md-12 login-item">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.TextBoxFor(model => model.Email, new { maxlength = 50, @class = "form-control", placeholder = "Email" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div class="col-md-12 login-item">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.PasswordFor(model => model.Senha, new { maxlength = 50, @class = "form-control", placeholder = "Senha" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.ValidationMessageFor(model => model.Senha)
+                    </div>
+                </div>
+
+                <div class="col-sm-12 login-item">
+                    <input type="submit" class="btn btn-sm btn-block btn-padrao" value="Entrar" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

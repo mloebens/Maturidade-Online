@@ -1,10 +1,14 @@
-﻿namespace Maturidade_Online.Dominio
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Maturidade_Online.Dominio
 {
-    public enum Permissao
+    public class Permissao
     {
-
-        ADMINISTRADOR,
-        USUARIO
-
+        public int Id { get; set; }
+        public String Nome { get; set; }
     }
 }

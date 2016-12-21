@@ -17,7 +17,7 @@ namespace Maturidade_Online.Repositorio
 
         public Usuario BuscarPorEmail(Usuario usuario)
         {
-            return contexto.Usuario.FirstOrDefault(u => u.Email.Equals(usuario.Email));
+            return contexto.Usuario.Include("Permissao").FirstOrDefault(u => u.Email.Equals(usuario.Email));
         }
 
     }

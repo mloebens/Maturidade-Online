@@ -17,9 +17,19 @@ namespace Maturidade_Online.Repositorio.Migrations
         protected override void Seed(Maturidade_Online.Repositorio.ContextoDeDados context)
         {
 
-            Usuario usuario1 = new Usuario { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
-            Usuario usuario2 = new Usuario { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = Permissao.ADMINISTRADOR, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
-            Usuario usuario3 = new Usuario { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = Permissao.USUARIO, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Permissao administrador = new Permissao(){ Id = 1, Nome = "ADMINISTRADOR"};
+            Permissao usuario = new Permissao() { Id = 1, Nome = "USUARIO" };
+
+            context.Permissao.AddOrUpdate(
+               p => p.Nome,
+               administrador,
+               usuario
+               );
+
+
+            Usuario usuario1 = new Usuario { Nome = "Victor", Email = "victor.eduardo@cwi.com.br", Permissao = administrador, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Usuario usuario2 = new Usuario { Nome = "Maicon", Email = "maicon.loebens@cwi.com.br", Permissao = administrador, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
+            Usuario usuario3 = new Usuario { Nome = "Normal", Email = "usuario@normal.com.br", Permissao = usuario, Senha = "6f1d81c734062fe646d96eb97dfd1d9c" };
 
             context.Usuario.AddOrUpdate(
                 p => p.Nome,
