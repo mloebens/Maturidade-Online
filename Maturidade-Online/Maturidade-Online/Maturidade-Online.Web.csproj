@@ -307,7 +307,6 @@
     <Content Include="Views\Subtopico\Subtopico.cshtml" />
     <Content Include="Views\Caracteristica\ListarCaracteristicas.cshtml" />
     <Content Include="Views\Caracteristica\Caracteristica.cshtml" />
-    <Content Include="Views\Shared\_Grafico.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_ModalExcluir.cshtml" />
     <Content Include="Views\Caracteristica\_ListagemDeCaracteristicas.cshtml" />

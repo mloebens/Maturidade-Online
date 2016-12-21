@@ -1,5 +1,4 @@
-
-﻿/* Ao iniciar a página, carregar o 'select2' */
+/* Ao iniciar a página, carregar o 'select2' */
 $(function () {
   $("#opcoes").select2();
   maturidadeOnline.Iniciar();
@@ -12,6 +11,9 @@ let $opcoes = $('#opcoes');
 
 maturidadeOnline = {}
 
+//MaturidadeOnline.Inicializar = function () {
+//  MaturidadeOnline.bindsDeBotoes();
+//}
 
 maturidadeOnline.Iniciar = function () {
   maturidadeOnline.bindsDeBotoes();
