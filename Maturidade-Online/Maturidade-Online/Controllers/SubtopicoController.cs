@@ -8,6 +8,7 @@ using Maturidade_Online.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -47,7 +48,7 @@ namespace Maturidade_Online.Controllers
             return View("Subtopico", subtopicoViewModel);
         }
 
-        [Autorizador(Roles = "ADMINISTRADOR")]
+        [Autorizador]
         [ValidateAntiForgeryToken]
         public ActionResult Salvar(SubtopicoViewModel subtopicoViewModel)
         {
@@ -116,9 +117,10 @@ namespace Maturidade_Online.Controllers
 
 
         // Partial View
-        [Autorizador(Roles = "ADMINISTRADOR")]
+        [Autorizador]
         public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
         {
+
             if (idsCaracteristicas == null) return PartialView("_Subtopicos");
 
             using (var contexto = new ContextoDeDados())
