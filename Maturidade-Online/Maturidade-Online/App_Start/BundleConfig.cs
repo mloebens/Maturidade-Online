@@ -34,6 +34,9 @@ namespace Maturidade_Online
             
             bundles.Add(new ScriptBundle("~/bundles/projeto").Include(
                         "~/Scripts/App/projeto.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/paginacao").Include(
+           "~/Scripts/App/paginacao.js"));
         }
     }
 }

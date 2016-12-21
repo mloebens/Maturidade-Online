@@ -116,10 +116,7 @@ span.select2.select2-container.select2-container--default {
 
 /* Caracteristica - Listar */
 
-.tags {
-    display: inline-block;
-    background-color: orange;
-    padding: 5px 10px;
-    border-radius: 15px;
-    margin: 3px;
+#listar-caracteristica td {
+    width: 30%;
+
 }

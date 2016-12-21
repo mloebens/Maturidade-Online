@@ -205,6 +205,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\App\paginacao.js" />
     <Content Include="Scripts\App\projeto.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -310,6 +311,7 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_ModalExcluir.cshtml" />
     <Content Include="Views\Caracteristica\_ListagemDeCaracteristicas.cshtml" />
+    <Content Include="Views\Shared\_PaginacaoBotoes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,10 @@
 ﻿@model Maturidade_Online.Models.CaracteristicaListagemViewModel
 
-<table class="table table-striped table-hover">
+@{
+    string ultimaPaginaAttr = Model.UltimaPagina ? "true" : "";
+}
+
+<table id="listar-caracteristica" class="table table-striped table-hover" data-ultima-pagina="@ultimaPaginaAttr">
     <tr>
         <th>
             @Html.DisplayName("Nome")
@@ -38,11 +42,3 @@
     }
 
 </table>
-<div class="text-center">
-    <button class="btn btn-default" id="btn-voltar-pagina">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </button>
-    <button class="btn btn-default" id="btn-avancar-pagina">
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </button>
-</div>

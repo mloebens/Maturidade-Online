@@ -14,24 +14,12 @@
             <span>Nova Caracteristica</span>
         </a>
     </div>
-    <div class="panel-body" id="container-caracteristica">
+    <div class="panel-body" id="container-lista">
     </div>
 </div>
 @Html.Partial("_ModalExcluir")
+@Html.Partial("_PaginacaoBotoes")
 
-@section scripts {
-    <script>
-        $.ajax({
-            url: 'CarregarCaracteristicas',
-            type: 'GET',
-            data: {
-                pagina: 0
-            }
-        })
-        .then(function (resultado) {
-            $('#container-caracteristica').html(resultado);
-            //itemMagicoIndex.atualizarBotoesDeNavegacao();
-        });
-    </script>
-
-}
+    @section scripts {
+        @Scripts.Render("~/bundles/paginacao")
+    }

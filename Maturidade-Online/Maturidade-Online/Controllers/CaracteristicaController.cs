@@ -120,8 +120,8 @@ namespace Maturidade_Online.Controllers
         }
 
 
-        //[Autorizador(Roles = "ADMINISTRADOR")]
-        public PartialViewResult CarregarCaracteristicas(int pagina)
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public PartialViewResult CarregarLista(int pagina)
         {
             var model = new CaracteristicaListagemViewModel();
 
