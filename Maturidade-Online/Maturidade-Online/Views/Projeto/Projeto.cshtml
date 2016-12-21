@@ -46,7 +46,6 @@
 
 
     <div id="container-subtopicos-dados" class="panel panel-default">
-
     </div>
 
 
@@ -61,103 +60,13 @@
     <div class="form-group">
         @Html.ActionLink("Voltar", "Listar", "Projeto", "", new { @class = "btn btn-sm btn-default pull-right" })
     </div>
-
     
-
     <div class="form-group col-md-6">
         <canvas id="myChart"></canvas>
     </div>
-
 }
 
 @section scripts {
-    <script type="text/javascript">
-        //<![CDATA[
-        // Instanciar SELECT2 ao carregar página
-        $(document).ready(function () {
-            $("#opcoes").select2();
-        });
-
-        // Função para trazer lista de subtópicos quando há alteração na seleção das Características
-        var $listagemSubtopicos = $('#container-subtopicos-dados');
-        $("#opcoes").change(function () {
-            let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
-            const urlGet = '@Url.Action("PesquisarSubtopicos", "Subtopico")';
-            jQuery.ajaxSettings.traditional = true;
-            $.get(urlGet, { idsCaracteristicas })
-                .done(response => {
-                    $listagemSubtopicos.html(response);
-                }).fail(function (resposta) {
-                    console.log(resposta)
-                });
-
-        })
-
-        // Função para criar o gráfico quando clicado no botão
-        var $divGrafico = $('#grafico');
-        @*var $botaoGrafico = $("#botao-grafico");
-        $botaoGrafico.click(function (event) {
-            event.preventDefault();
-            var labels = [];
-            @foreach(var label in Model.PilaresPontuacao)
-            {
-                @:labels.push("@label.Titulo");
-                                                                                                                                                }
-            console.log(labels);
-
-            // Inicio captação IDs
-
-            var dados = $('input:checked').map(function () {
-                return $(this).val();
-                //return $(this).attr('data-pontuacao');
-            }).get();
-            console.log('dados', dados);
-            // Fim captação IDs*@
-
-
-            //Ajax
-
-            @*const urlGet = '@Url.Action("ArrayParaGrafico", "Projeto")';
-            $.get(urlGet, { dados })
-                .done(response => {
-                    var resultado = response.toArray();
-                    console.log(response).toArray();
-                }).fail(function (resposta) {
-                    console.log(resposta)
-                });
-
-            //Fim Ajax
-
-
-            var data = [];
-            @foreach(var data in Model.PilaresPontuacao)
-            {
-                @:data.push("@data.PontuacaoTotal");
-                                                                                                                                                }
-            console.log(data);
-
-            var dadosTabela = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Projeto",
-                        backgroundColor: "rgba(179,181,198,0.2)",
-                        borderColor: "rgba(179,181,198,1)",
-                        pointBackgroundColor: "rgba(179,181,198,1)",
-                        pointBorderColor: "#fff",
-                        pointHoverBackgroundColor: "#fff",
-                        pointHoverBorderColor: "rgba(179,181,198,1)",
-                        data: dados
-                    }]
-            };
-
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'radar',
-                data: dadosTabela
-            });
-        })*@
-
-    </script>
+    <script src="~/Scripts/App/projeto.js"></script>
 }
 
