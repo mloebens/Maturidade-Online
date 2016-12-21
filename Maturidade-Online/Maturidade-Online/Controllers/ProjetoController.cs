@@ -128,7 +128,7 @@ namespace Maturidade_Online.Controllers
                 }
             }
 
-            return View("Projeto");
+            return RedirectToAction("Listar");
         }
 
         [Autorizador]
