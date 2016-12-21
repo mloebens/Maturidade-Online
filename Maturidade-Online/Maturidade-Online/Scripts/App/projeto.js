@@ -1,7 +1,8 @@
-  MaturidadeOnline.Inicializar();
+
 ﻿/* Ao iniciar a página, carregar o 'select2' */
 $(function () {
-    $("#opcoes").select2();
+  $("#opcoes").select2();
+  maturidadeOnline.Iniciar();
 });
 
 let $divGrafico = $('#grafico');
@@ -9,14 +10,14 @@ let $botaoGrafico = $("#botao-grafico");
 let $listagemSubtopicos = $('#container-subtopicos-dados');
 let $opcoes = $('#opcoes');
 
-MaturidadeOnline = {}
+maturidadeOnline = {}
 
 
-MaturidadeOnline.Inicializar = function () {
-  MaturidadeOnline.bindsDeBotoes();
+maturidadeOnline.Iniciar = function () {
+  maturidadeOnline.bindsDeBotoes();
 }
 
-MaturidadeOnline.bindsDeBotoes = function () {
+maturidadeOnline.bindsDeBotoes = function () {
   $('.btn-excluir').click(function (event) {
     event.preventDefault();
     $('#modal-excluir').modal('show')
