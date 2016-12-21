@@ -40,8 +40,23 @@ paginacao.registrarBindsDeBotoes = function () {
   $('.btn-excluir').click(function (event) {
     event.preventDefault();
     $('#modal-excluir').modal('show')
-    $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
   });
+}
+
+paginacao.bindDaModalExcluir = function(){
+  $('#modal-link-excluir').click(function (event) {
+    event.preventDefault();
+    let url = $('.btn-excluir').prop('href');
+    paginacao.excluirRegistro(url);
+  });
+}
+
+paginacao.excluirRegistro = function (url) {
+  $.post(url)
+    .then(function () {
+      paginacao.CarregarLista();
+      $('#modal-excluir').modal('hide');
+    });
 }
 
 paginacao.configurarBotoesDeNavegacao = function () {
@@ -55,4 +70,5 @@ paginacao.iniciar = function () {
 
   paginacao.configurarBotoesDeNavegacao();
   paginacao.CarregarLista();
+  paginacao.bindDaModalExcluir();
 }
