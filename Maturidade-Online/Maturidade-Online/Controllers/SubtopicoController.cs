@@ -150,17 +150,17 @@ namespace Maturidade_Online.Controllers
             return PartialView("_ListagemDeSubtopicos", model);
         }
 
-        private SubtopicoListagemViewModel CriarListagemDeCaracteristicas(ContextoDeDados contexto, ICollection<Subtopico> caracteristicas, int? pagina = null)
+        private SubtopicoListagemViewModel CriarListagemDeCaracteristicas(ContextoDeDados contexto, ICollection<Subtopico> subtopico, int? pagina = null)
         {
-            var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+            var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
             var model = new SubtopicoListagemViewModel();
-            model.Subtopicos = Mapper.Map<IEnumerable<Subtopico>, List<SubtopicoViewModel>>(caracteristicas);
+            model.Subtopicos = Mapper.Map<IEnumerable<Subtopico>, List<SubtopicoViewModel>>(subtopico);
 
             if (pagina.HasValue)
             {
                 model.PaginaAtual = pagina.Value;
             }
-            int quantidadeTotal = caracteristicaServico.QuantidadeTotal();
+            int quantidadeTotal = subtopicoServico.QuantidadeTotal();
             model.QuantidadeTotal = quantidadeTotal;
             model.QuantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
 

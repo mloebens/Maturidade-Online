@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LojaDeItens.Dominio.Configuracao;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
@@ -14,6 +15,8 @@ namespace Maturidade_Online.Controllers
 {
     public class PilarController : Controller
     {
+        private IServicoDeConfiguracao configuracaoServico = ServicoDeDependencia.MontarConfiguracaoServico();
+
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Index()
         {
@@ -88,24 +91,9 @@ namespace Maturidade_Online.Controllers
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
-            var pilarViewModel = new List<PilarViewModel>();
-
-            using (var contexto = new ContextoDeDados())
-            {
-                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                var listaDePilares = pilarServico.Listar();
-                pilarViewModel = Mapper.Map<IEnumerable<Pilar>, List<PilarViewModel>>(listaDePilares);
-
-                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                foreach (var pilar in pilarViewModel)
-                {
-                    pilar.Subtopicos = subtopicoServico.Listar(new Pilar { Id = pilar.Id.Value });
-                }
-
-                return View("ListarPilares", pilarViewModel);
-            }
-
+            return View("ListarPilares");
         }
+
 
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Excluir(int id)
@@ -137,8 +125,49 @@ namespace Maturidade_Online.Controllers
 
                 return PartialView("_Pilares", lista);
             }
+        }
 
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public PartialViewResult CarregarLista(int pagina)
+        {
+            var model = new PilarListagemViewModel();
 
+            using (var contexto = new ContextoDeDados())
+            {
+                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+                var quantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+                var pilaresDaBase = pilarServico.Listar(pagina, quantidadePorPagina);
+
+                model = CriarListagemDeCaracteristicas(contexto, pilaresDaBase, pagina);
+            }
+
+            return PartialView("_ListagemDePilares", model);
+        }
+
+        private PilarListagemViewModel CriarListagemDeCaracteristicas(ContextoDeDados contexto, ICollection<Pilar> pilares, int? pagina = null)
+        {
+            //var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+            var model = new PilarListagemViewModel();
+            var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+            var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
+
+            model.Pilares = Mapper.Map<IEnumerable<Pilar>, List<PilarViewModel>>(pilares);
+
+            foreach (var pilar in model.Pilares)
+            {
+                pilar.Subtopicos = subtopicoServico.Listar(new Pilar { Id = pilar.Id.Value });
+            }
+
+            if (pagina.HasValue)
+            {
+                model.PaginaAtual = pagina.Value;
+            }
+
+            int quantidadeTotal = pilarServico.QuantidadeTotal();
+            model.QuantidadeTotal = quantidadeTotal;
+            model.QuantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+
+            return model;
         }
     }
 }

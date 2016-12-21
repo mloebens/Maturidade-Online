@@ -1,13 +1,34 @@
 /* Ao iniciar a página, carregar o 'select2' e os botões */
 $(function () {
   $("#opcoes").select2();
+
+  $.ajaxPrefilter((options, _, jqXHR) => {
+    maturidadeOnline.toggleLoader();
+    jqXHR.done(() => {
+      maturidadeOnline.toggleLoader();
+    });
+  });
+
+
 });
+
+maturidadeOnline = {}
+
+maturidadeOnline.toggleLoader = () => {
+  ['.loader', 'body'].forEach(seletor => $(seletor).toggle());
+};
+
+
+
 
 let $divGrafico = $('#grafico');
 let $botaoGrafico = $("#botao-grafico");
 let $listagemSubtopicos = $('#container-subtopicos-dados');
 let $opcoes = $('#opcoes');
 let $loading = $('.modal');
+
+
+
 
 
 /* Função para trazer lista de subtópicos quando há alteração na seleção das Características */

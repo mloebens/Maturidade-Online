@@ -1,3 +1,4 @@
+using LojaDeItens.Dominio.Configuracao;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Repositorio.Abstrato;
 using System;
@@ -15,8 +16,6 @@ namespace Maturidade_Online.Repositorio
         {
         }
 
-      
-
         public Pilar BuscarPorId(Pilar pilar)
         {
             return contexto.Pilar
@@ -30,6 +29,16 @@ namespace Maturidade_Online.Repositorio
         {
             contexto.Configuration.ProxyCreationEnabled = false;
             return contexto.Database.SqlQuery<PilarPontuacao>("SELECT p.id, p.titulo, SUM(s.Pontuacao) as PontuacaoTotal FROM Subtopico s INNER JOIN pilar p ON p.id = s.PilarId group by p.id, p.Titulo order by p.titulo").ToList();
+        }
+
+        public ICollection<Pilar> Listar(Paginacao paginacao)
+        {
+            return contexto.Pilar.OrderBy(_ => _.Titulo).Skip((paginacao.PaginaDesejada * paginacao.QuantidadePorPagina)).Take(paginacao.QuantidadePorPagina).ToList();
+        }
+
+        public int QuantidadeTotal()
+        {
+            return contexto.Pilar.ToList().Count;
         }
     }
 }

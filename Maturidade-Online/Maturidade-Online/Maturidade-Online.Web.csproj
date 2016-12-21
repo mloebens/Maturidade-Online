@@ -177,6 +177,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PilarListagemViewModel.cs" />
     <Compile Include="Models\SubtopicoListagemViewModel.cs" />
     <Compile Include="Models\ProjetoListagemViewModel.cs" />
     <Compile Include="Models\CaracteristicaListagemViewModel.cs" />
@@ -317,6 +318,7 @@
     <Content Include="Views\Projeto\_ListagemDeProjetos.cshtml" />
     <Content Include="Views\Subtopico\_ListagemDeSubtopicos.cshtml" />
     <Content Include="Views\Shared\_ModalGrafico.cshtml" />
+    <Content Include="Views\Pilar\_ListagemDePilares.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

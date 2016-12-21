@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Abstrato;
+﻿using LojaDeItens.Dominio.Configuracao;
+using Maturidade_Online.Dominio.Abstrato;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Maturidade_Online.Dominio
     {
         ICollection<PilarPontuacao> ListarPontuacaoTotal();
         Pilar BuscarPorId(Pilar pilar);
+        int QuantidadeTotal();
+        ICollection<Pilar> Listar(Paginacao paginacao);
     }
 }

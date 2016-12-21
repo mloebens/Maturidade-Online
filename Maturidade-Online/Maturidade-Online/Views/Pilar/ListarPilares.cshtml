@@ -13,52 +13,13 @@
         </a>
     </div>
     <div class="panel-body">
-        <div class="table-responsive">
-            <table id="listar-pilares" class="table">
-                <colgroup>
-                    <col class="col-sm-9">
-                    <col class="col-sm-2">
-                    <col class="col-sm-1">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayName("Pilar")
-                        </th>
-                        <th class="text-right">
-                            @Html.DisplayName("Pontuação")
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var pilar in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(_ => pilar.Titulo)
-                            </td>
-                            <td class="text-right">
-                                @pilar.Subtopicos.Sum(_ => _.Pontuacao)
-                            </td>
-
-                            <td class="text-right">
-                                <div class="btn-group btn-group-xs">
-                                    <a class="btn btn-xs btn-default" href="~/Pilar/Manter/@pilar.Id">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-                                    <a class="btn btn-xs btn-danger btn-excluir" href="~/Pilar/Excluir/@pilar.Id">
-                                        <span class="glyphicon glyphicon-trash"></span>
-                                    </a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div class="table-responsive" id="container-lista">       
         </div>
     </div>
 </div>
 
 @Html.Partial("_ModalExcluir")
+
+@section scripts {
+    @Scripts.Render("~/bundles/paginacao")
+}
