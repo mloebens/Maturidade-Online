@@ -1,4 +1,6 @@
-﻿using Maturidade_Online.Dominio;
+﻿using LojaDeItens.Dominio.Configuracao;
+using LojaDeItens.Web.Servicos;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Infraestrutura;
 using Maturidade_Online.Repositorio;
 using System;
@@ -52,6 +54,11 @@ namespace Maturidade_Online.Servicos
                     new ProjetoRepositorio(contexto),
                     new UsuarioRepositorio(contexto));
             return projetoServico;
+        }
+
+        public static IServicoDeConfiguracao MontarConfiguracaoServico()
+        {
+            return new ServicoDeConfiguracao();
         }
 
     }

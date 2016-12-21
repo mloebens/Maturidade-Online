@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LojaDeItens.Dominio.Configuracao;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -33,9 +34,9 @@ namespace Maturidade_Online.Dominio
             }
         }
 
-        public void Remover(Caracteristica pilar)
+        public void Remover(Caracteristica caracteristica)
         {
-            caracteristicaRepositorio.Remover(pilar);
+            caracteristicaRepositorio.Remover(caracteristica);
         }
 
         public ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas)
@@ -52,5 +53,24 @@ namespace Maturidade_Online.Dominio
         {
             return caracteristicaRepositorio.Listar(projeto);
         }
+
+        public ICollection<Caracteristica> Listar(int pagina, int quantidadePorPagina)
+        {
+
+            var paginacao = new Paginacao()
+            {
+                PaginaDesejada = pagina,
+                QuantidadePorPagina = quantidadePorPagina
+            };
+
+            return this.caracteristicaRepositorio.Listar(paginacao);
+        }
+
+        public int QuantidadeTotal()
+        {
+            return this.caracteristicaRepositorio.QuantidadeTotal();
+        }
+
+
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Data.Entity;
+using LojaDeItens.Dominio.Configuracao;
 
 namespace Maturidade_Online.Repositorio
 {
@@ -68,6 +69,16 @@ namespace Maturidade_Online.Repositorio
         {
             return contexto.Caracteristica.Where(s => s.Projetos.Any(c => c.Id == projeto.Id)).ToList();
 
+        }
+
+        public ICollection<Caracteristica> Listar(Paginacao paginacao)
+        {
+            return contexto.Caracteristica.OrderBy(_ => _.Nome).Skip((paginacao.PaginaDesejada * paginacao.QuantidadePorPagina)).Take(paginacao.QuantidadePorPagina).ToList();
+        }
+
+        public int QuantidadeTotal()
+        {
+            return contexto.Caracteristica.ToList().Count;
         }
     }
 }

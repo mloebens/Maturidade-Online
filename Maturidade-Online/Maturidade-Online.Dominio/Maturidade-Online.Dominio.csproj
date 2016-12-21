@@ -52,6 +52,8 @@
     <Compile Include="Caracteristica\Caracteristica.cs" />
     <Compile Include="Caracteristica\CaracteristicaServico.cs" />
     <Compile Include="Caracteristica\ICaracteristicaRepositorio.cs" />
+    <Compile Include="Configuracao\IServicoDeConfiguracao.cs" />
+    <Compile Include="Configuracao\Paginacao.cs" />
     <Compile Include="Infraestrutura\IServicoDeCriptografia.cs" />
     <Compile Include="Pilar\IPilarRepositorio.cs" />
     <Compile Include="Abstrato\IRepositorio.cs" />

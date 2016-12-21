@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Abstrato;
+﻿using LojaDeItens.Dominio.Configuracao;
+using Maturidade_Online.Dominio.Abstrato;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,11 @@ namespace Maturidade_Online.Dominio
     public interface ICaracteristicaRepositorio : IRepositorio<Caracteristica>
     {
         ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas);
-        Caracteristica BuscarPorId(Caracteristica caracteristica);
         ICollection<Caracteristica> Listar(Projeto projeto);
+
+        ICollection<Caracteristica> Listar(Paginacao paginacao);
+        Caracteristica BuscarPorId(Caracteristica caracteristica);
+
+        int QuantidadeTotal();
     }
 }

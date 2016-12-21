@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LojaDeItens.Dominio.Configuracao;
+using LojaDeItens.Web.Servicos;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
@@ -14,6 +16,9 @@ namespace Maturidade_Online.Controllers
 {
     public class CaracteristicaController : Controller
     {
+
+        private IServicoDeConfiguracao configuracaoServico = ServicoDeDependencia.MontarConfiguracaoServico();
+
 
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Index()
@@ -110,15 +115,45 @@ namespace Maturidade_Online.Controllers
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
-            var caracteristicaViewModel = new List<CaracteristicaViewModel>();
-            
+
+            return View("ListarCaracteristicas");
+        }
+
+
+        //[Autorizador(Roles = "ADMINISTRADOR")]
+        public PartialViewResult CarregarCaracteristicas(int pagina)
+        {
+            var model = new CaracteristicaListagemViewModel();
+
             using (var contexto = new ContextoDeDados())
             {
                 var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
-                var caracteristicasDaBase = caracteristicaServico.Listar();
-                caracteristicaViewModel = Mapper.Map<IEnumerable<Caracteristica>, List<CaracteristicaViewModel>>(caracteristicasDaBase);
+                var quantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+                var caracteristicasDaBase = caracteristicaServico.Listar(pagina, quantidadePorPagina);
+
+                model = CriarListagemDeCaracteristicas(contexto, caracteristicasDaBase, pagina);
             }
-            return View("ListarCaracteristicas", caracteristicaViewModel);
+
+            return PartialView("_ListagemDeCaracteristicas", model);
         }
+
+        private CaracteristicaListagemViewModel CriarListagemDeCaracteristicas(ContextoDeDados contexto, ICollection<Caracteristica> caracteristicas, int? pagina = null)
+        {
+            var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+            var model = new CaracteristicaListagemViewModel();
+            model.Caracteristicas = Mapper.Map<IEnumerable<Caracteristica>, List<CaracteristicaViewModel>>(caracteristicas);
+
+            if (pagina.HasValue)
+            {
+                model.PaginaAtual = pagina.Value;
+            }
+            int quantidadeTotal = caracteristicaServico.QuantidadeTotal();
+            model.QuantidadeTotal = quantidadeTotal;
+            model.QuantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+
+            return model;
+        }
+
+
     }
 }

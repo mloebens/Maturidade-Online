@@ -36,7 +36,7 @@ namespace Maturidade_Online.Filter
             if (!contextoFiltro.HttpContext.User.Identity.IsAuthenticated)
             {
                 contextoFiltro.Result = new RedirectToRouteResult(new
-                    RouteValueDictionary(new { controller = "Usuario" }));
+                    RouteValueDictionary(new { controller = "Usuario", Action = "Login" }));
             }
         }
 
