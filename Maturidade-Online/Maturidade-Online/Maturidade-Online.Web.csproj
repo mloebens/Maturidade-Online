@@ -306,6 +306,7 @@
     <Content Include="Views\Caracteristica\Caracteristica.cshtml" />
     <Content Include="Views\Shared\_Grafico.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_ModalExcluir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

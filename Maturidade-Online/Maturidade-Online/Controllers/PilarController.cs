@@ -15,6 +15,12 @@ namespace Maturidade_Online.Controllers
     public class PilarController : Controller
     {
         [Autorizador(Roles = "ADMINISTRADOR")]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Listar");
+        }
+
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
             var pilarViewModel = new PilarViewModel();
@@ -111,10 +117,8 @@ namespace Maturidade_Online.Controllers
                 pilar = pilarServico.BuscarPorId(pilar);
 
                 pilarServico.Remover(pilar);
-
             }
-
-            return RedirectToAction("ListarPilares");
+            return RedirectToAction("Listar");
         }
 
 

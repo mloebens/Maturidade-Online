@@ -16,6 +16,12 @@ namespace Maturidade_Online.Controllers
     {
 
         [Autorizador(Roles = "ADMINISTRADOR")]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Listar");
+        }
+
+        [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
             var caracteristicaViewModel = new CaracteristicaViewModel();
@@ -84,8 +90,21 @@ namespace Maturidade_Online.Controllers
         }
 
 
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public ActionResult Excluir(int id)
+        {
+            using (var contexto = new ContextoDeDados())
+            {
+                var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+                var caracteristica = new Caracteristica() { Id = id };
+                caracteristica = caracteristicaServico.BuscarPorId(caracteristica);
 
+                caracteristicaServico.Remover(caracteristica);
 
+            }
+
+            return RedirectToAction("Listar");
+        }
 
 
         [Autorizador(Roles = "ADMINISTRADOR")]

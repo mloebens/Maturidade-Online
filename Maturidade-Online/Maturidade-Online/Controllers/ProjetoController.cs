@@ -15,6 +15,13 @@ namespace Maturidade_Online.Controllers
 {
     public class ProjetoController : Controller
     {
+
+        [Autorizador]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Listar");
+        }
+
         [Autorizador]
         public ActionResult Manter(int? id)
         {

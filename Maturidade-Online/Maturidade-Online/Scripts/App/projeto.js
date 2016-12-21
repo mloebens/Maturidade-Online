@@ -1,7 +1,25 @@
 ﻿$(document).ready(function () {
-    $("#opcoes").select2();
+  $("#opcoes").select2();
+
+  
+  MaturidadeOnline.Inicializar();
 });
 
+
+MaturidadeOnline = {}
+
+
+MaturidadeOnline.Inicializar = function () {
+  MaturidadeOnline.bindsDeBotoes();
+}
+
+MaturidadeOnline.bindsDeBotoes = function () {
+  $('.btn-excluir').click(function (event) {
+    event.preventDefault();
+    $('#modal-excluir').modal('show')
+    $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
+  });
+}
 
 var $listagemSubtopicos = $('#container-subtopicos-dados');
 

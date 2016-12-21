@@ -22,9 +22,12 @@
                 <thead>
                     <tr>
                         <th>Projeto</th>
-                        @foreach (var pilar in ViewBag.pilaresPontuacaoTotal)
+                        @if (ViewBag.pilaresPontuacaoTotal != null)
                         {
-                            <th class="text-center">@pilar.Titulo</th>
+                            foreach (var pilar in ViewBag.pilaresPontuacaoTotal)
+                            {
+                                <th class="text-center">@pilar.Titulo</th>
+                            }
                         }
                         <th></th>
                     </tr>
@@ -52,7 +55,7 @@
                                             <a class="btn btn-xs btn-default" href="~/Projeto/Manter/@projeto.Id">
                                                 <span class="glyphicon glyphicon-pencil"></span>
                                             </a>
-                                            <a class="btn btn-xs btn-danger" href="~/Projeto/Excluir/@projeto.Id">
+                                            <a class="btn btn-xs btn-danger btn-excluir" href="~/Projeto/Excluir/@projeto.Id">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </div>
@@ -60,7 +63,6 @@
                                 }
 
                             </td>
-
                         </tr>
                                     }
                 </tbody>
@@ -69,4 +71,4 @@
         </div>
     </div>
 </div>
-
+@Html.Partial("_ModalExcluir")

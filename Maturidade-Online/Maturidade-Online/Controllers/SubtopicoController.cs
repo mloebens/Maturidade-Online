@@ -14,6 +14,13 @@ namespace Maturidade_Online.Controllers
 {
     public class SubtopicoController : Controller
     {
+
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public ActionResult Index()
+        {
+            return RedirectToAction("Listar");
+        }
+
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Manter(int? id)
         {
