@@ -4,9 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <legend>@(Model.Id.HasValue && Model.Id.Value > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
-</div>
+<legend>@(Model.Id.HasValue && Model.Id.Value > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
 
 <div class="alerta-erro">
     @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
@@ -44,25 +42,25 @@
         </div>
     </div>
 
-
-    <div id="container-subtopicos-dados" class="panel panel-default">
-    </div>
-
-
     <div class="form-group">
-        <input type="submit" class="btn btn-sm btn-sucess pull-right" value="Atualizar Gráfico" id="botao-grafico" />
+        <div class="btn-group btn-group-sm pull-right">
+            <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success" value="Salvar">Salvar</button>
+            @Html.ActionLink("Voltar", "Listar", "Projeto", null, new { @class = "btn btn-warning btn-sm" })
+            <button type="submit" class="btn btn-sm btn-sucess" value="Atualizar Gráfico" id="botao-grafico">
+                <span class="glyphicon glyphicon-signal"></span> Gerar Gráfico
+            </button>
+        </div>
     </div>
 
-    <div class="form-group btn-group btn-group-sm pull-right">
-        <button id="cadastrar-pilar" type="submit" class="btn btn-sm btn-success" value="Salvar">Salvar</button>
-        @Html.ActionLink("Voltar", "Listar", "Projeto", null, new { @class = "btn btn-warning btn-sm" })
+    <div id="container-subtopicos-dados" class="form-group panel panel-default">
     </div>
 
-
-    <div class="form-group col-md-6">
-        <canvas id="myChart"></canvas>
-    </div>
 }
+
+<div class="modal"></div>
+
+
+@Html.Partial("_ModalGrafico")
 
 @section scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>

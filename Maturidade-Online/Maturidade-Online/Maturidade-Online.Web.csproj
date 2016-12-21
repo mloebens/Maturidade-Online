@@ -177,6 +177,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SubtopicoListagemViewModel.cs" />
+    <Compile Include="Models\ProjetoListagemViewModel.cs" />
     <Compile Include="Models\CaracteristicaListagemViewModel.cs" />
     <Compile Include="Models\CaracteristicaViewModel.cs" />
     <Compile Include="Models\ProjetoListarPilarViewModel.cs" />
@@ -311,6 +313,9 @@
     <Content Include="Views\Shared\_ModalExcluir.cshtml" />
     <Content Include="Views\Caracteristica\_ListagemDeCaracteristicas.cshtml" />
     <Content Include="Views\Shared\_PaginacaoBotoes.cshtml" />
+    <Content Include="Views\Projeto\_ListagemDeProjetos.cshtml" />
+    <Content Include="Views\Subtopico\_ListagemDeSubtopicos.cshtml" />
+    <Content Include="Views\Shared\_ModalGrafico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

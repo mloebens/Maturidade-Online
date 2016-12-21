@@ -1,0 +1,54 @@
+﻿@model Maturidade_Online.Models.SubtopicoListagemViewModel
+@{
+    var usuario = Maturidade_Online.Servicos.ServicoDeAutenticacao.UsuarioLogado;
+    string ultimaPaginaAttr = Model.UltimaPagina ? "true" : "";
+}
+
+<table id="tabela-subtopicos" class="table table-striped table-hover" data-ultima-pagina="@ultimaPaginaAttr">
+    <colgroup>
+        <col class="col-sm-7">
+        <col class="col-sm-3">
+        <col class="col-sm-2">
+        <col class="col-sm-1">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Nome")
+            </th>
+            <th>
+                @Html.DisplayName("Pilar")
+            </th>
+            <th class="text-right">
+                @Html.DisplayName("Pontuação")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Subtopicos)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pilar.Titulo)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Pontuacao)
+                </td>
+                <td class="text-right">
+                    <div class="btn-group btn-group-xs">
+                        <a class="btn btn-xs btn-default" href="~/Subtopico/Manter/@item.Id">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a class="btn btn-xs btn-danger btn-excluir" href="~/Subtopico/Excluir/@item.Id">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

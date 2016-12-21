@@ -19,7 +19,6 @@ namespace Maturidade_Online.Controllers
 
         private IServicoDeConfiguracao configuracaoServico = ServicoDeDependencia.MontarConfiguracaoServico();
 
-
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Index()
         {
