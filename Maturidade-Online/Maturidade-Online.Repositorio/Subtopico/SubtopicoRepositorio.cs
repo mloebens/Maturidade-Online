@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio;
+﻿using LojaDeItens.Dominio.Configuracao;
+using Maturidade_Online.Dominio;
 using Maturidade_Online.Repositorio.Abstrato;
 using System;
 using System.Collections.Generic;
@@ -64,6 +65,16 @@ namespace Maturidade_Online.Repositorio
         public ICollection<Subtopico> Listar(Pilar pilar)
         {
             return contexto.Subtopico.Where(s => s.PilarId == pilar.Id).ToList();
+        }
+
+        public ICollection<Subtopico> Listar(Paginacao paginacao)
+        {
+            return contexto.Subtopico.Include("Pilar").OrderBy(_ => _.Nome).Skip((paginacao.PaginaDesejada * paginacao.QuantidadePorPagina)).Take(paginacao.QuantidadePorPagina).ToList();
+        }
+
+        public int QuantidadeTotal()
+        {
+            return contexto.Subtopico.ToList().Count;
         }
     }
 }

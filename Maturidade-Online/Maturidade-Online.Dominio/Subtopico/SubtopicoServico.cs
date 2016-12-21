@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LojaDeItens.Dominio.Configuracao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,21 @@ namespace Maturidade_Online.Dominio
         public ICollection<Subtopico> Listar(Pilar pilar)
         {
             return subtopicoRepositorio.Listar(pilar);
+        }
+
+        public ICollection<Subtopico> Listar(int pagina, int quantidadePorPagina)
+        {
+            var paginacao = new Paginacao()
+            {
+                PaginaDesejada = pagina,
+                QuantidadePorPagina = quantidadePorPagina
+            };
+            return this.subtopicoRepositorio.Listar(paginacao);
+        }
+
+        public int QuantidadeTotal()
+        {
+            return this.subtopicoRepositorio.QuantidadeTotal();
         }
     }
 }
