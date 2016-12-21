@@ -8,6 +8,9 @@ namespace Maturidade_Online
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+            var cdnChartJs = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js";
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -26,15 +29,14 @@ namespace Maturidade_Online
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
-            bundles.Add(new ScriptBundle("~/bundles/select2").Include(
-                        "~/Scripts/select2.js"));
 
             bundles.Add(new StyleBundle("~/Content/select2css").Include(
                         "~/Content/css/select2.min.css"));
-            
-            bundles.Add(new ScriptBundle("~/bundles/projeto").Include(
-                        "~/Scripts/App/projeto.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/projeto", cdnChartJs).Include(
+                        "~/Scripts/select2.js",
+                        "~/Scripts/App/projeto.js"
+                        ));
             bundles.Add(new ScriptBundle("~/bundles/paginacao").Include(
            "~/Scripts/App/paginacao.js"));
         }

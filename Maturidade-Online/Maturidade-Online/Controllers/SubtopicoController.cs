@@ -48,7 +48,7 @@ namespace Maturidade_Online.Controllers
             return View("Subtopico", subtopicoViewModel);
         }
 
-        [Autorizador]
+        [Autorizador(Roles = "ADMINISTRADOR")]
         [ValidateAntiForgeryToken]
         public ActionResult Salvar(SubtopicoViewModel subtopicoViewModel)
         {

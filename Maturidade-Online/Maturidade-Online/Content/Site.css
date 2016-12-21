@@ -138,7 +138,7 @@ span.select2.select2-container.select2-container--default {
 }
 
 /* Loading */
-.modal {
+.loader {
     display:    none;
     position:   fixed;
     z-index:    1000;
@@ -156,6 +156,6 @@ body.loading {
     overflow: hidden;   
 }
 
-body.loading .modal {
+body.loading .loader {
     display: block;
 }

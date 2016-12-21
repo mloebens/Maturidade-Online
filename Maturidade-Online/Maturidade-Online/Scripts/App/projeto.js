@@ -1,15 +1,6 @@
 /* Ao iniciar a página, carregar o 'select2' e os botões */
 $(function () {
-  $("#opcoes").select2();
-
-  $.ajaxPrefilter((options, _, jqXHR) => {
-    maturidadeOnline.toggleLoader();
-    jqXHR.done(() => {
-      maturidadeOnline.toggleLoader();
-    });
-  });
-
-
+    $("#opcoes").select2();
 });
 
 maturidadeOnline = {}
@@ -25,7 +16,7 @@ let $divGrafico = $('#grafico');
 let $botaoGrafico = $("#botao-grafico");
 let $listagemSubtopicos = $('#container-subtopicos-dados');
 let $opcoes = $('#opcoes');
-let $loading = $('.modal');
+let $loading = $('.loader');
 
 
 
@@ -112,9 +103,11 @@ $botaoGrafico.click(function (event) {
                 data: dadosTabela
             });
 
+            $('#modal-grafico').modal('show');
+
+
         }).fail(function (resposta) {
             console.log(resposta)
         });
-    $('#modal-grafico').modal('show');
 
 })
