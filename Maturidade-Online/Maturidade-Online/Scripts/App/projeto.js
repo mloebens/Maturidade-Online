@@ -7,7 +7,7 @@ let $divGrafico = $('#grafico');
 let $botaoGrafico = $("#botao-grafico");
 let $listagemSubtopicos = $('#container-subtopicos-dados');
 let $opcoes = $('#opcoes');
-
+let $loading = $('.modal');
 
 
 /* Função para trazer lista de subtópicos quando há alteração na seleção das Características */
@@ -19,6 +19,8 @@ $opcoes.change(function () {
         return $(this).val();
     }).get();
 
+
+    $loading.show();
     const urlGet = '/Subtopico/PesquisarSubtopicos';
     jQuery.ajaxSettings.traditional = true;
     $.get(urlGet, { idsCaracteristicas })
@@ -29,7 +31,7 @@ $opcoes.change(function () {
             for (let i = 0; i < opcoesMarcadas.length; i++) {
                 $(":checkbox[value = " + opcoesMarcadas[i] + "]").prop("checked", "true");
             }
-
+            $loading.hide();
         }).fail(function (resposta) {
             console.log(resposta)
         });
