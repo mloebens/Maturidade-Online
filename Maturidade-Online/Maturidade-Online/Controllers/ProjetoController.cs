@@ -58,22 +58,23 @@ namespace Maturidade_Online.Controllers
             {
                 using (var contexto = new ContextoDeDados())
                 {
-                    //Converter Caracteristica
+                    /* Converter Caracteristica */
                     var caracteristicaService = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
                     var caracteristicaBanco = caracteristicaService.Listar();
                     var listaCaracteristica = caracteristicaBanco.Where(s => projetoModel.IdsCaracteristicas.Any(c => c == s.Id)).ToList();
 
-                    //Converter Subtópico
+                    /* Converter Subtópico */
                     var subtopicoService = ServicoDeDependencia.MontarSubtopicoServico(contexto);
                     var subtopicoBanco = subtopicoService.Listar();
                     var listaSubtopico = subtopicoBanco.Where(s => projetoModel.IdsSubtopicos.Any(c => c == s.Id)).ToList();
 
-                    //Adicionar no projeto
+                    /* Adicionar no projeto */
                     var projeto = new Projeto();
                     if (projetoModel.Id.HasValue)
                     {
                         projeto.Id = projetoModel.Id.Value;
                     }
+
                     projeto.Nome = projetoModel.Nome;
                     projeto.Caracteristicas = listaCaracteristica;
                     projeto.Subtopicos = listaSubtopico;
@@ -127,39 +128,6 @@ namespace Maturidade_Online.Controllers
 
             return View("Projeto");
         }
-        /*
-                public ActionResult GerarGrafico()
-                {
-                    var projetosViewModel = new ProjetoListarViewModel();
-
-                    using (var contexto = new ContextoDeDados())
-                    {
-
-                        var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
-                        var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                        var pilaresPontuacoesTotais = pilarServico.ListarPontuacaoTotal();
-
-
-                        var pilaresBanco = pilarServico.Listar();
-
-                        var listaDePilarViewModel = new List<ProjetoListarPilarViewModel>();
-
-                        foreach (var pilar in pilaresPontuacoesTotais)
-                        {
-                            var pilarViewModel = new ProjetoListarPilarViewModel();
-                            pilarViewModel.Titulo = pilar.Titulo;
-                            pilarViewModel.Pontuacao = pilar.PontuacaoTotal;
-
-                            listaDePilarViewModel.Add(pilarViewModel);
-                        }
-
-
-                        return PartialView("_Grafico", listaDePilarViewModel);
-                    }
-
-                }
-
-            */
 
         [Autorizador]
         public ActionResult Listar()
@@ -184,6 +152,42 @@ namespace Maturidade_Online.Controllers
             return View("ListarProjeto", projetosViewModel);
         }
 
+        [Autorizador]
+        public JsonResult ArrayParaGrafico(int[] dados, int[] idsCaracteristicas)
+        {
+            var projetosViewModel = new List<ProjetoListarViewModel>();
+
+            using (var contexto = new ContextoDeDados())
+            {
+                /* Comando necessário para utilzar retorno de Array JSON */
+                contexto.Configuration.LazyLoadingEnabled = false;
+
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+
+                /* Conversão de idsCaracterísticas[] para uma lista de características */
+                var caracteristicaBanco = caracteristicaServico.Listar();
+                var listaCaracteristica = caracteristicaBanco.Where(s => idsCaracteristicas.Any(c => c == s.Id)).ToList();
+
+                /* Conversão de dados[] para uma lista de subtópicos */
+                var subtopicoBanco = subtopicoServico.Listar();
+                var listaSubtopico = subtopicoBanco.Where(s => dados.Any(c => c == s.Id)).ToList();
+
+                /* Crio um novo projeto com as informações acima */
+                var projeto = new Projeto { Subtopicos = listaSubtopico, Caracteristicas = listaCaracteristica };
+
+                /* Carregar informações pelo método e setar informações para o ProjetoViewModel */
+                var projetoViewModel = gerarProjetoFormatado(projeto, contexto);
+                projetoViewModel.Id = projeto.Id;
+                projetoViewModel.Nome = projeto.Nome;
+                projetoViewModel.CriadorId = projeto.UsuarioId;
+                projetosViewModel.Add(projetoViewModel);
+
+            }
+
+            return Json(projetosViewModel, JsonRequestBehavior.AllowGet);
+        }
 
 
         private List<ProjetoListarPilarViewModel> CalcularPercentual(List<PilarPontuacao> pilaresRestricao, List<PilarPontuacao> pilaresAtual, List<ProjetoListarPilarViewModel> modelo)
@@ -211,27 +215,6 @@ namespace Maturidade_Online.Controllers
             return pilaresViewModel;
         }
 
-      public JsonResult ArrayParaGrafico(int[] dados)
-        {
-            var subtopicos = dados.Select(c => new Subtopico() { Id = c }).ToList();
-
-            using (var contexto = new ContextoDeDados())
-            {
-                var pilarServico = ServicoDeDependencia.MontarPilarServico(contexto);
-                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                var lista = new List<Subtopico>();
-                foreach (var subtopico in subtopicos)
-                {
-                    var subtopicoBase = subtopicoServico.BuscarPorId(subtopico);
-                    lista.Add(subtopicoBase);
-                }
-
-                return Json(lista, JsonRequestBehavior.AllowGet);
-            }
-
-        }
-
-        
 
         private List<PilarPontuacao> AgrupadorDePilar(ICollection<Caracteristica> caracteristicas)
         {
@@ -307,6 +290,5 @@ namespace Maturidade_Online.Controllers
 
             return projetoViewModel;
         }
-
     }
 }
