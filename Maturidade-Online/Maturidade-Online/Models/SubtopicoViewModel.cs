@@ -13,8 +13,10 @@ namespace Maturidade_Online.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
+        [MaxLength(60)]
         public string Nome { get; set; }
 
+        [MaxLength(4000)]
         [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
