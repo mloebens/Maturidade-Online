@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LojaDeItens.Dominio.Configuracao;
 using Maturidade_Online.Dominio;
 using Maturidade_Online.Filter;
 using Maturidade_Online.Models;
@@ -14,6 +15,8 @@ namespace Maturidade_Online.Controllers
 {
     public class SubtopicoController : Controller
     {
+
+        private IServicoDeConfiguracao configuracaoServico = ServicoDeDependencia.MontarConfiguracaoServico();
 
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Index()
@@ -107,17 +110,7 @@ namespace Maturidade_Online.Controllers
         [Autorizador(Roles = "ADMINISTRADOR")]
         public ActionResult Listar()
         {
-
-            var subtopicoViewModel = new List<SubtopicoViewModel>();
-
-            using (var contexto = new ContextoDeDados())
-            {
-                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                var subtopicosDaBase = subtopicoServico.Listar();
-                subtopicoViewModel  = Mapper.Map<IEnumerable<Subtopico>, List<SubtopicoViewModel>>(subtopicosDaBase);
-            }
-
-            return View("ListarSubtopicos", subtopicoViewModel);
+            return View("ListarSubtopicos");
         }
 
 
@@ -136,6 +129,40 @@ namespace Maturidade_Online.Controllers
 
                 return PartialView("_Subtopicos", subtopicosDaBase);
             }
+        }
+
+        [Autorizador(Roles = "ADMINISTRADOR")]
+        public PartialViewResult CarregarLista(int pagina)
+        {
+            var model = new SubtopicoListagemViewModel();
+
+            using (var contexto = new ContextoDeDados())
+            {
+                var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
+                var quantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+                var subtopicoDaBase = subtopicoServico.Listar(pagina, quantidadePorPagina);
+
+                model = CriarListagemDeCaracteristicas(contexto, subtopicoDaBase, pagina);
+            }
+
+            return PartialView("_ListagemDeSubtopicos", model);
+        }
+
+        private SubtopicoListagemViewModel CriarListagemDeCaracteristicas(ContextoDeDados contexto, ICollection<Subtopico> caracteristicas, int? pagina = null)
+        {
+            var caracteristicaServico = ServicoDeDependencia.MontarCaracteristicaServico(contexto);
+            var model = new SubtopicoListagemViewModel();
+            model.Subtopicos = Mapper.Map<IEnumerable<Subtopico>, List<SubtopicoViewModel>>(caracteristicas);
+
+            if (pagina.HasValue)
+            {
+                model.PaginaAtual = pagina.Value;
+            }
+            int quantidadeTotal = caracteristicaServico.QuantidadeTotal();
+            model.QuantidadeTotal = quantidadeTotal;
+            model.QuantidadePorPagina = configuracaoServico.QuantidadeDeCaracteristicasPorPagina;
+
+            return model;
         }
     }
 }

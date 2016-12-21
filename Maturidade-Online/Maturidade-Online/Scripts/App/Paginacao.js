@@ -15,7 +15,7 @@ paginacao.CarregarLista = function () {
    )
    .then(function (resultado) {
      $('#container-lista').html(resultado);
-     paginacao.atualizarBotoesDeNavegacao();
+     paginacao.registrarBindsDeBotoes();
    });
 }
 
@@ -31,11 +31,17 @@ paginacao.avancarPagina = function () {
   paginacao.CarregarLista();
 }
 
-paginacao.atualizarBotoesDeNavegacao = function () {
+paginacao.registrarBindsDeBotoes = function () {
   paginacao.$btnVoltarPagina.attr('disabled', paginacao.paginaAtual === 0);
 
   var ultimaPagina = !!$('.table').data("ultima-pagina");
   paginacao.$btnAvancarPagina.attr('disabled', ultimaPagina);
+
+  $('.btn-excluir').click(function (event) {
+    event.preventDefault();
+    $('#modal-excluir').modal('show')
+    $('#modal-link-excluir').prop('href', $('.btn-excluir').prop('href'));
+  });
 }
 
 paginacao.configurarBotoesDeNavegacao = function () {

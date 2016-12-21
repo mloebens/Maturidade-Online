@@ -174,7 +174,7 @@ namespace Maturidade_Online.Controllers
             return Json(projetosViewModel, JsonRequestBehavior.AllowGet);
         }
 
-        [Autorizador(Roles = "ADMINISTRADOR")]
+        [Autorizador]
         public PartialViewResult CarregarLista(int pagina)
         {
             var model = new ProjetoListagemViewModel();

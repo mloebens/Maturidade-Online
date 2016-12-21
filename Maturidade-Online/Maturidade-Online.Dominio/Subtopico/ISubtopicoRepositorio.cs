@@ -1,4 +1,5 @@
-﻿using Maturidade_Online.Dominio.Abstrato;
+﻿using LojaDeItens.Dominio.Configuracao;
+using Maturidade_Online.Dominio.Abstrato;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,11 @@ namespace Maturidade_Online.Dominio
         ICollection<Subtopico> Listar(Caracteristica caracteristica);
         ICollection<Subtopico> Listar(Projeto projeto);
         ICollection<Subtopico> Listar(Pilar pilar);
+        ICollection<Subtopico> Listar(Paginacao paginacao);
         ICollection<Subtopico> ListarComPilar(ICollection<Caracteristica> caracteristica);
         ICollection<Subtopico> ListarPorPilar(int id);
         Subtopico BuscarPorId(Subtopico subtopico);
+        int QuantidadeTotal();
+        
     }
 }

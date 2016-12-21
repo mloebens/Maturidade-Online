@@ -6,8 +6,8 @@
 <legend>Pilares</legend>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Pilares</strong>
-        <a href="/Pilar/Manter" class="btn btn-xs btn-success pull-right">
+        @Html.Partial("_PaginacaoBotoes")
+        <a href="/Pilar/Manter" class="btn btn-success pull-right">
             <i class="fa fa-plus" aria-hidden="true"></i>
             <span>Novo Pilar</span>
         </a>
@@ -15,12 +15,17 @@
     <div class="panel-body">
         <div class="table-responsive">
             <table id="listar-pilares" class="table">
+                <colgroup>
+                    <col class="col-sm-9">
+                    <col class="col-sm-2">
+                    <col class="col-sm-1">
+                </colgroup>
                 <thead>
                     <tr>
                         <th>
                             @Html.DisplayName("Pilar")
                         </th>
-                        <th class="text-center">
+                        <th class="text-right">
                             @Html.DisplayName("Pontuação")
                         </th>
                         <th></th>
@@ -33,7 +38,7 @@
                             <td>
                                 @Html.DisplayFor(_ => pilar.Titulo)
                             </td>
-                            <td class="text-center">
+                            <td class="text-right">
                                 @pilar.Subtopicos.Sum(_ => _.Pontuacao)
                             </td>
 
