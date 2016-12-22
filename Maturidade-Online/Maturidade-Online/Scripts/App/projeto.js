@@ -10,31 +10,44 @@ let $opcoes = $('#opcoes');
 let $loading = $('.modal');
 
 
+projeto = {}
+
+projeto.carregarSubtopicos = function () {
+  let idsCaracteristicas = $("#opcoes").select2('data').map(c => parseInt(c.id));
+
+  opcoesMarcadas = $('input:checked').map(function () {
+    return $(this).val();
+  }).get();
+
+
+  $loading.show();
+  const urlGet = '/Subtopico/PesquisarSubtopicos';
+  jQuery.ajaxSettings.traditional = true;
+  $.get(urlGet, {
+    IdsCaracteristicas: idsCaracteristicas,
+    IdProjeto: $('#Id').val()
+
+    })
+      .done(response => {
+        $listagemSubtopicos.html(response);
+
+        /* Verificar os subtópicos marcados anteriormente e marcá-los novamente */
+        for (let i = 0; i < opcoesMarcadas.length; i++) {
+          $(":checkbox[value = " + opcoesMarcadas[i] + "]").prop("checked", "true");
+        }
+        $loading.hide();
+      }).fail(function (resposta) {
+        console.log(resposta)
+      });
+}
+
+
+
+
 /* Função para trazer lista de subtópicos quando há alteração na seleção das Características */
 var opcoesMarcadas;
 $opcoes.change(function () {
-    let idsCaracteristicas = $(this).select2('data').map(c => parseInt(c.id));
-
-    opcoesMarcadas = $('input:checked').map(function () {
-        return $(this).val();
-    }).get();
-
-
-    $loading.show();
-    const urlGet = '/Subtopico/PesquisarSubtopicos';
-    jQuery.ajaxSettings.traditional = true;
-    $.get(urlGet, { idsCaracteristicas })
-        .done(response => {
-            $listagemSubtopicos.html(response);
-
-            /* Verificar os subtópicos marcados anteriormente e marcá-los novamente */
-            for (let i = 0; i < opcoesMarcadas.length; i++) {
-                $(":checkbox[value = " + opcoesMarcadas[i] + "]").prop("checked", "true");
-            }
-            $loading.hide();
-        }).fail(function (resposta) {
-            console.log(resposta)
-        });
+  projeto.carregarSubtopicos();
 })
 
 /* Função para criar o gráfico quando clicado no botão */

@@ -4,8 +4,6 @@
     ViewBag.Title = "Subtópico";
 }
 
-
-
 <div>
     <legend>@(Model.Id > 0 ? "Editar" : "Cadastrar" ) @ViewBag.Title</legend>
 </div>
@@ -63,6 +61,7 @@
 
 
 @section Scripts {
+    @Scripts.Render("~/bundles/projeto");
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {

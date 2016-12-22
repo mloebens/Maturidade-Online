@@ -35,7 +35,15 @@
             <select id="opcoes" name="@Html.NameFor(m => m.IdsCaracteristicas)" class="js-example-basic-multiple js-states form-control" multiple>
                 @foreach (var caracteristica in Model.ListaDeCaracteristicas)
                 {
-                    <option value="@caracteristica.Id">@caracteristica.Nome</option>
+                    if (Model.Caracteristicas != null)
+                    {
+                        <option @(Model.Caracteristicas.Any(_ => _.Id == caracteristica.Id) ? "selected" : "" ) value="@caracteristica.Id">@caracteristica.Nome</option>
+                    }
+                    else
+                    {
+                        <option value="@caracteristica.Id">@caracteristica.Nome</option>
+                    }
+
                 }
             </select>
             @Html.ValidationMessageFor(model => model.IdsCaracteristicas)
@@ -65,5 +73,11 @@
 @section scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
     @Scripts.Render("~/bundles/projeto");
+
+    <script>
+        $(function () {
+            projeto.carregarSubtopicos();
+        });
+    </script>
 }
 

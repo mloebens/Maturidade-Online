@@ -118,18 +118,22 @@ namespace Maturidade_Online.Controllers
 
         // Partial View
         [Autorizador]
-        public ActionResult PesquisarSubtopicos(int[] idsCaracteristicas)
+        public ActionResult PesquisarSubtopicos(PesquisarSubtopicosViewModel model)
         {
 
-            if (idsCaracteristicas == null) return PartialView("_Subtopicos");
+            if (model.idsCaracteristicas == null) return PartialView("_Subtopicos");
 
             using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
-                var caracteristicas = idsCaracteristicas.Select(c => new Caracteristica() { Id = c }).ToList();
+                var projetoServico = ServicoDeDependencia.MontarProjetoServico(contexto);
+                var caracteristicas = model.idsCaracteristicas.Select(c => new Caracteristica() { Id = c }).ToList();
                 var subtopicosDaBase = subtopicoServico.ListarComPilar(caracteristicas);
+                var projetoDaBase = projetoServico.BuscarPorId(new Projeto { Id = model.IdProjeto });
 
-                return PartialView("_Subtopicos", subtopicosDaBase);
+                var modelReposta = new PesquisarSubtopicosRespostaViewModel() { Projeto = projetoDaBase, listaDeSubtopicos = subtopicosDaBase };
+
+                return PartialView("_Subtopicos", modelReposta);
             }
         }
 

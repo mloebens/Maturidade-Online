@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Maturidade_Online.Dominio.Subtopico>
+﻿@model Maturidade_Online.Models.PesquisarSubtopicosRespostaViewModel
 
 @if (Model != null)
 {
@@ -13,18 +13,23 @@
         </thead>
         <tbody>
 
-            @foreach (var subtopico in Model)
+            @foreach (var subtopico in Model.listaDeSubtopicos)
             {
                 <tr id="subtopico">
                     <td>@subtopico.Pilar.Titulo</td>
                     <td class="text-center">@subtopico.Nome</td>
                     <td class="text-center">
-                        <input data-pontuacao="@subtopico.Pontuacao" id="ids-subtopicos" type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
+                        @if (Model.Projeto != null)
+                        {
+                            <input data-pontuacao="@subtopico.Pontuacao" id="ids-subtopicos" type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" @(Model.Projeto.Subtopicos.Any(_ => _.Id == subtopico.Id)?"checked":"") />
+                        }
+                        else
+                        {
+                            <input data-pontuacao="@subtopico.Pontuacao" id="ids-subtopicos" type="checkbox" value="@subtopico.Id" name="IdsSubtopicos" />
+                        }
                     </td>
                 </tr>
             }
-            
-
         </tbody>
     </table>
 }

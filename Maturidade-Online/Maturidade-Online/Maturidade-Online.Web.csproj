@@ -177,6 +177,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PesquisarSubtopicosRespostaViewModel.cs" />
+    <Compile Include="Models\PesquisarSubtopicosViewModel.cs" />
     <Compile Include="Models\PilarListagemViewModel.cs" />
     <Compile Include="Models\SubtopicoListagemViewModel.cs" />
     <Compile Include="Models\ProjetoListagemViewModel.cs" />

@@ -17,6 +17,8 @@ namespace Maturidade_Online.Models
         [Required]
         [StringLength(50)]
         public string Nome { get; set; }
+        public IEnumerable<Subtopico> Subtopicos { get; set; }
+        public IEnumerable<Caracteristica> Caracteristicas { get; set; }
 
         [Required]
         public IEnumerable<int> IdsCaracteristicas { get; set; }
@@ -29,5 +31,7 @@ namespace Maturidade_Online.Models
         [DisplayName("Lista de Características")]
         public IEnumerable<Caracteristica> ListaDeCaracteristicas { get; set; }
         public IEnumerable<Subtopico> ListaDeSubtopicos { get; set; }
+
+
     }
 }
