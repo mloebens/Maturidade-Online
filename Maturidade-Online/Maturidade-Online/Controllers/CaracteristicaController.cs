@@ -9,6 +9,7 @@ using Maturidade_Online.Servicos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,7 +33,7 @@ namespace Maturidade_Online.Controllers
             using (var contexto = new ContextoDeDados())
             {
                 var subtopicoServico = ServicoDeDependencia.MontarSubtopicoServico(contexto);
- 
+
 
                 if (id.HasValue && id.Value > 0)
                 {
@@ -95,7 +96,7 @@ namespace Maturidade_Online.Controllers
 
 
         [Autorizador(Roles = "ADMINISTRADOR")]
-        public ActionResult Excluir(int id)
+        public JsonResult Excluir(int id)
         {
             using (var contexto = new ContextoDeDados())
             {
@@ -103,11 +104,16 @@ namespace Maturidade_Online.Controllers
                 var caracteristica = new Caracteristica() { Id = id };
                 caracteristica = caracteristicaServico.BuscarPorId(caracteristica);
 
-                caracteristicaServico.Remover(caracteristica);
-
+                try
+                {
+                    caracteristicaServico.Remover(caracteristica);
+                } catch (CaracteristicaException e)
+                {
+                    Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    return Json(new { success = false, message = e.Message }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { success = true}, JsonRequestBehavior.AllowGet);
             }
-
-            return RedirectToAction("Listar");
         }
 
 

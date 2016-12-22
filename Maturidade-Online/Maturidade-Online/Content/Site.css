@@ -11,7 +11,8 @@ body {
     display: inline-block;
 }
 
-#modal-excluir .modal-header {
+#modal-excluir .modal-header,
+#modal-erro .modal-header {
     background-color: #d9534f;
     color: white;
 }

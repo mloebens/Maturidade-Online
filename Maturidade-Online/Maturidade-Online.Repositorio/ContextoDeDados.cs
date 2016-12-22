@@ -1,7 +1,9 @@
 ﻿using Maturidade_Online.Dominio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
@@ -25,6 +27,57 @@ namespace Maturidade_Online.Repositorio
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Pilar>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Permissao>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Usuario>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Projeto>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Projeto>()
+                .Property(e => e.UsuarioId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+
+            modelBuilder.Entity<Subtopico>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Subtopico>()
+                .Property(e => e.PilarId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+            modelBuilder.Entity<Caracteristica>()
+                .Property(e => e.Id)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute()));
+
+
+
             base.OnModelCreating(modelBuilder);
         }
     }

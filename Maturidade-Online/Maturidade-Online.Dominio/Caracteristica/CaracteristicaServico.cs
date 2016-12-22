@@ -36,7 +36,16 @@ namespace Maturidade_Online.Dominio
 
         public void Remover(Caracteristica caracteristica)
         {
-            caracteristicaRepositorio.Remover(caracteristica);
+            var caracteristicaDaBase = caracteristicaRepositorio.BuscarPorId(caracteristica);
+
+            if (caracteristicaDaBase.Projetos != null)
+            {
+                throw new CaracteristicaException("Não é posssivel excluir uma caracteristica já vinculada a um projeto.");
+            }
+            else
+            {
+                caracteristicaRepositorio.Remover(caracteristica);
+            }
         }
 
         public ICollection<Caracteristica> Listar(ICollection<Caracteristica> caracteristicas)

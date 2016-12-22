@@ -63,6 +63,12 @@ paginacao.excluirRegistro = function (url) {
     .then(function () {
       paginacao.CarregarLista();
       $('#modal-excluir').modal('hide');
+    })
+    .fail(function (resultado) {
+      $('#modal-excluir').modal('hide');
+      $('.mensagem').text(JSON.parse(resultado.responseText).message);
+      $('#modal-erro').modal('show');
+
     });
 }
 

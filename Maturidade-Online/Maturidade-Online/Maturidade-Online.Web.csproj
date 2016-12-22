@@ -320,6 +320,7 @@
     <Content Include="Views\Subtopico\_ListagemDeSubtopicos.cshtml" />
     <Content Include="Views\Shared\_ModalGrafico.cshtml" />
     <Content Include="Views\Pilar\_ListagemDePilares.cshtml" />
+    <Content Include="Views\Shared\_ModalErro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
