@@ -36,6 +36,13 @@ paginacao.registrarBindsDeBotoes = function () {
 
   var ultimaPagina = !!$('.table').data("ultima-pagina");
   paginacao.$btnAvancarPagina.attr('disabled', ultimaPagina);
+  paginacao.$btnDescricao = $('.descricao');
+
+  if (paginacao.$btnDescricao.click(function (event) {
+      event.preventDefault();
+      $('[data-toggle="popover"]').popover();
+  }));
+
 
   $('.btn-excluir').click(function (event) {
     event.preventDefault();

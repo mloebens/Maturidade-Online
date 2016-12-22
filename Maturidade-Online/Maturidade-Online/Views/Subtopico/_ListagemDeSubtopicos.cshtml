@@ -3,7 +3,6 @@
     var usuario = Maturidade_Online.Servicos.ServicoDeAutenticacao.UsuarioLogado;
     string ultimaPaginaAttr = Model.UltimaPagina ? "true" : "";
 }
-
 <table id="tabela-subtopicos" class="table table-striped table-hover" data-ultima-pagina="@ultimaPaginaAttr">
     <colgroup>
         <col class="col-sm-7">
@@ -30,6 +29,9 @@
             {
             <tr>
                 <td>
+                    <button tabindex="0" type="button" data-trigger="focus" role="button" class="btn btn-xs btn-default descricao" data-toggle="popover" data-title="Descrição" data-content="@item.Descricao">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </button>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
